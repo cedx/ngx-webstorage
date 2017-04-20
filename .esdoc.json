@@ -1,0 +1,14 @@
+{
+  "title": "Web Storage for Angular",
+
+  "source": "src",
+  "destination": "doc/api",
+
+  "manual": {
+    "changelog": ["CHANGELOG.md"]
+  },
+  "test": {
+    "source": "test",
+    "type": "mocha"
+  }
+}

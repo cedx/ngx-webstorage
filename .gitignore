@@ -1,0 +1,11 @@
+/.c9/
+/.idea/
+/.nyc_output/
+/doc/api/
+/lib/
+/node_modules/
+/var/
+
+/*.iml
+/**/.DS_Store
+/npm-debug.log
