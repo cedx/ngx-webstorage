@@ -1,0 +1,53 @@
+{
+  "description": "Web Storage for Angular.",
+  "homepage": "https://github.com/cedx/ngx-storage",
+  "name": "@cedx/ngx-storage",
+
+  "author": "Cédric Belin <cedric@belin.io>",
+  "bugs": "https://github.com/cedx/ngx-storage/issues",
+  "license": "Apache-2.0",
+  "repository": "cedx/ngx-storage",
+  "version": "0.1.0",
+
+  "main": "./lib/index",
+  "module": "./src/index",
+
+  "dependencies": {
+    "@angular/common": "^4.0.2",
+    "@angular/core": "^4.0.2",
+    "@angular/platform-browser": "^4.0.2",
+    "rxjs": "^5.3.0",
+    "zone.js": "^0.8.5"
+  },
+  "devDependencies": {
+    "@cedx/coveralls": "^0.5.0",
+    "@cedx/gulp-david": "^6.1.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "esdoc": "^0.5.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^3.0.1",
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "keywords": [
+    "angular",
+    "local",
+    "service",
+    "session",
+    "storage",
+    "web"
+  ],
+  "scripts": {
+    "coverage": "coveralls --file=var/lcov.info",
+    "prepublish": "gulp build",
+    "test": "nyc --report-dir=var --reporter=lcovonly mocha --compilers=js:babel-register --recursive --require=babel-polyfill"
+  }
+}
