@@ -27,6 +27,7 @@
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "del": "^2.2.2",
+    "dom-storage": "^2.0.2",
     "esdoc": "^0.5.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
