@@ -76,19 +76,16 @@ export class DOMStorage {
    * @return {object} The deserialized value of the storage item, or the default value if the item is not found.
    */
   getObject(key, defaultValue = null) {
-    let value = this.get(key, null);
+    let value = this.get(key);
     return typeof value == 'string' ? JSON.parse(value) : defaultValue;
   }
 
   /**
    * Removes the value associated to the specified key.
    * @param {string} key The key to seek for.
-   * @return {string} The value associated with the key before it was removed, or a `null` reference if the key was not found.
    */
   remove(key) {
-    let value = this.get(key);
     this._backend.removeItem(key);
-    return value;
   }
 
   /**
