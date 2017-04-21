@@ -30,6 +30,7 @@ describe('DOMStorage', () => {
       let iterator = storage[Symbol.iterator]();
       let next = iterator.next();
       expect(next.done).to.be.false;
+      expect(next.value).to.be.an('array');
       expect(next.value[0]).to.equal('foo');
       expect(next.value[1]).to.equal('bar');
 
@@ -115,12 +116,12 @@ describe('DOMStorage', () => {
     it('should properly get the storage entries', () => {
       let storage = new DOMStorage(backend);
       expect(storage.get('foo')).to.be.null;
-      expect(storage.get('foo', 123)).to.equal(123);
+      expect(storage.get('foo', '123')).to.equal('123');
 
       backend.setItem('foo', 'bar');
       expect(storage.get('foo')).to.equal('bar');
 
-      backend.setItem('foo', 123);
+      backend.setItem('foo', '123');
       expect(storage.get('foo')).to.equal('123');
     });
   });
@@ -130,7 +131,25 @@ describe('DOMStorage', () => {
    */
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
-      // TODO
+      let storage = new DOMStorage(backend);
+      expect(storage.getObject('foo')).to.be.null;
+      expect(storage.getObject('foo', {key: 'value'})).to.deep.equal({key: 'value'});
+
+      backend.setItem('foo', '123');
+      expect(storage.getObject('foo')).to.equal(123);
+
+      backend.setItem('foo', '"bar"');
+      expect(storage.getObject('foo')).to.equal('bar');
+
+      backend.setItem('foo', '{"key": "value"}');
+      expect(storage.getObject('foo')).to.be.an('object')
+        .and.have.property('key').that.equal('value');
+    });
+
+    it('should throw an error if the value can\'t be deserialized', () => {
+      let storage = new DOMStorage(backend);
+      backend.setItem('foo', 'bar');
+      expect(() => storage.getObject('foo')).to.throw(SyntaxError);
     });
   });
 
@@ -165,7 +184,7 @@ describe('DOMStorage', () => {
       storage.set('foo', 'bar');
       expect(backend.getItem('foo')).to.equal('bar');
 
-      storage.set('foo', 123);
+      storage.set('foo', '123');
       expect(backend.getItem('foo')).to.equal('123');
     });
   });
@@ -175,7 +194,17 @@ describe('DOMStorage', () => {
    */
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
-      // TODO
+      let storage = new DOMStorage(backend);
+      expect(backend.getItem('foo')).to.be.null;
+
+      storage.setObject('foo', 123);
+      expect(backend.getItem('foo')).to.equal('123');
+
+      storage.setObject('foo', 'bar');
+      expect(backend.getItem('foo')).to.equal('"bar"');
+
+      storage.setObject('foo', {key: 'value'});
+      expect(backend.getItem('foo')).to.equal('{"key":"value"}');
     });
   });
 });
