@@ -13,11 +13,11 @@
   "module": "./src/index",
 
   "dependencies": {
-    "@angular/common": "^4.0.2",
-    "@angular/core": "^4.0.2",
-    "@angular/platform-browser": "^4.0.2",
+    "@angular/common": "^4.0.3",
+    "@angular/core": "^4.0.3",
+    "@angular/platform-browser": "^4.0.3",
     "rxjs": "^5.3.0",
-    "zone.js": "^0.8.5"
+    "zone.js": "^0.8.7"
   },
   "devDependencies": {
     "@cedx/coveralls": "^0.5.0",
