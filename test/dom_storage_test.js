@@ -139,6 +139,15 @@ describe('DOMStorage', () => {
   });
 
   /**
+   * @test {DOMStorage#remove}
+   */
+  describe('#remove()', () => {
+    it('should properly remote the storage entries', () => {
+      // TODO
+    });
+  });
+
+  /**
    * @test {DOMStorage#set}
    */
   describe('#set()', () => {
