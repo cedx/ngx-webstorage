@@ -51,12 +51,9 @@ describe('DOMStorage', () => {
    */
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
-      // TODO
-      /*
       let storage = new DOMStorage(backend);
       let iterator = storage[Symbol.iterator]();
       expect(iterator.next().done).to.be.true;
-      */
     });
 
     it('should return a value iterator if storage is not empty', () => {
@@ -108,7 +105,10 @@ describe('DOMStorage', () => {
 
     it('should return `true` if the specified key is contained', () => {
       backend.setItem('foo', 'bar');
-      expect(new DOMStorage(backend).containsKey('foo')).to.be.true;
+
+      let storage = new DOMStorage(backend);
+      expect(storage.containsKey('foo')).to.be.true;
+      expect(storage.containsKey('bar')).to.be.false;
     });
   });
 
@@ -143,7 +143,18 @@ describe('DOMStorage', () => {
    */
   describe('#remove()', () => {
     it('should properly remote the storage entries', () => {
-      // TODO
+      backend.setItem('foo', 'bar');
+      backend.setItem('bar', 'baz');
+
+      let storage = new DOMStorage(backend);
+      expect(backend.getItem('foo')).to.equal('bar');
+
+      storage.remove('foo');
+      expect(backend.getItem('foo')).to.be.null;
+      expect(backend.getItem('bar')).to.equal('baz');
+
+      storage.remove('bar');
+      expect(backend.getItem('bar')).to.be.null;
     });
   });
 
