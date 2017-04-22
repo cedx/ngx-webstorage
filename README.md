@@ -21,7 +21,8 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {StorageModule} from '@cedx/ngx-storage';
 import {AppComponent} from './app_component';
- 
+
+// The root module.
 export class AppModule {
   
   // The class decorators.
@@ -41,6 +42,7 @@ Then, they will be available in the constructor of the component classes:
 import {Component} from '@angular/core';
 import {LocalStorage, SessionStorage} from '@cedx/ngx-storage';
 
+// The main component.
 export class AppComponent {
   
   // The class decorators.
