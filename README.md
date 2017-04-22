@@ -67,9 +67,24 @@ export class AppComponent {
 }
 ```
 
+### Iteration
+The provided classes are iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (e.g. the key and the value):
+
+```javascript
+localStorage.set('foo', 'bar');
+localStorage.set('anotherKey', 'anotherValue');
+
+for (let entry of localStorage) {
+  console.log(entry);
+  // Round 1: ["foo", "bar"]
+  // Round 2: ["anotherKey", "anotherValue"] 
+}
+```
+
+### Programming interface
 These two services share the same API:
 
-### `.keys`
+#### `.keys`
 Returns the list of all the keys of the associated storage:
 
 ```javascript
@@ -79,7 +94,7 @@ localStorage.set('foo', 'bar');
 console.log(localStorage.keys); // ["foo"]
 ```
 
-### `.length`
+#### `.length`
 Returns the number of entries in the associated storage:
 
 ```javascript
@@ -89,7 +104,7 @@ localStorage.set('foo', 'bar');
 console.log(localStorage.length); // 1
 ```
 
-### `.clear()`
+#### `.clear()`
 Removes all entries from the associated storage:
 
 ```javascript
@@ -100,7 +115,7 @@ localStorage.clear();
 console.log(localStorage.length); // 0
 ```
 
-### `.containsKey(key: string)`
+#### `.containsKey(key: string)`
 Returns a boolean value indicating whether the associated storage contains the specified key:
 
 ```javascript
@@ -110,7 +125,7 @@ localStorage.set('foo', 'bar');
 console.log(localStorage.containsKey('foo')); // true
 ```
 
-### `.get(key: string, defaultValue: any = null): string`
+#### `.get(key: string, defaultValue: any = null): string`
 Returns the value associated to the specified key:
 
 ```javascript
@@ -125,7 +140,7 @@ console.log(localStorage.get('unknownKey')); // null
 console.log(localStorage.get('unknownKey', 'foo')); // "foo"
 ```
 
-### `.getObject(key: string, defaultValue: any = null): any`
+#### `.getObject(key: string, defaultValue: any = null): any`
 Deserializes and returns the value associated to the specified key:
 
 ```javascript
@@ -142,7 +157,7 @@ console.log(localStorage.get('unknownKey')); // null
 console.log(localStorage.get('unknownKey', false)); // false
 ```
 
-### `.remove(key: string)`
+#### `.remove(key: string)`
 Removes the value associated to the specified key:
 
 ```javascript
@@ -153,7 +168,7 @@ localStorage.remove('foo');
 console.log(localStorage.containsKey('foo')); // false
 ```
 
-### `.set(key: string, value: string)`
+#### `.set(key: string, value: string)`
 Associates a given value to the specified key:
 
 ```javascript
@@ -163,7 +178,7 @@ localStorage.set('foo', 'bar');
 console.log(localStorage.get('foo')); // "bar"
 ```
 
-### `.setObject(key: string, value: any)`
+#### `.setObject(key: string, value: any)`
 Serializes and associates a given value to the specified key:
 
 ```javascript
