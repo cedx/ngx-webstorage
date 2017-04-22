@@ -84,7 +84,7 @@ for (let entry of localStorage) {
 ```
 
 ### Programming interface
-These two services share the same API:
+The two services share the same API:
 
 #### `.keys: string[]`
 Returns the list of all the keys of the associated storage:
