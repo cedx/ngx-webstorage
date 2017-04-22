@@ -43,7 +43,7 @@ export class DOMStorage {
   }
 
   /**
-   * Removes all entries from the storage.
+   * Removes all entries from this storage.
    */
   clear() {
     this._backend.clear();

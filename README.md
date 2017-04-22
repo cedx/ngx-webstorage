@@ -11,6 +11,170 @@ From a command prompt, run:
 $ npm install --save @cedx/ngx-storage
 ```
 
+## Usage
+This package provides two [@Injectable](https://angular.io/docs/js/latest/api/core/index/Injectable-decorator.html) services dedicated to the Web Storage: `LocalStorage` and `SessionStorage`.
+
+They need to be registered with the dependency injector by importing their module, the `StorageModule` class:
+
+```javascript
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {StorageModule} from '@cedx/ngx-storage';
+import {AppComponent} from './app_component';
+ 
+export class AppModule {
+  
+  // The class decorators.
+  static get annotations() {
+    return [new NgModule({
+      bootstrap: [AppComponent],
+      declarations: [AppComponent],
+      imports: [BrowserModule, StorageModule]
+    })];
+  }
+}
+```
+
+Then, they will be available in the constructor of the component classes:
+
+```javascript
+import {Component} from '@angular/core';
+import {LocalStorage, SessionStorage} from '@cedx/ngx-storage';
+
+export class AppComponent {
+  
+  // The class decorators.
+  static get annotations() {
+    return [new Component({
+      selector: 'my-application',
+      template: '<h1>Hello World!</h1>'
+    })];
+  }
+
+  // The constructor parameters.
+  static get parameters() {
+    return [LocalStorage, SessionStorage];
+  }
+
+  // Initializes a new instance of the class.
+  constructor(localStorage, sessionStorage) {
+    localStorage.get('foo');
+    localStorage.getObject('bar');
+
+    sessionStorage.set('foo', 'bar');
+    sessionStorage.setObject('foo', {bar: 'baz'});
+  }
+}
+```
+
+These two services share the same API:
+
+### `.keys`
+Returns the list of all the keys of the associated storage:
+
+```javascript
+console.log(localStorage.keys); // []
+
+localStorage.set('foo', 'bar');
+console.log(localStorage.keys); // ["foo"]
+```
+
+### `.length`
+Returns the number of entries in the associated storage:
+
+```javascript
+console.log(localStorage.length); // 0
+
+localStorage.set('foo', 'bar');
+console.log(localStorage.length); // 1
+```
+
+### `.clear()`
+Removes all entries from the associated storage:
+
+```javascript
+localStorage.set('foo', 'bar');
+console.log(localStorage.length); // 1
+
+localStorage.clear();
+console.log(localStorage.length); // 0
+```
+
+### `.containsKey(key: string)`
+Returns a boolean value indicating whether the associated storage contains the specified key:
+
+```javascript
+console.log(localStorage.containsKey('foo')); // false
+
+localStorage.set('foo', 'bar');
+console.log(localStorage.containsKey('foo')); // true
+```
+
+### `.get(key: string, defaultValue: any = null): string`
+Returns the value associated to the specified key:
+
+```javascript
+localStorage.set('foo', 'bar');
+console.log(localStorage.get('foo')); // "bar"
+```
+
+Returns the `defaultValue` parameter if the key is not found:
+
+```javascript
+console.log(localStorage.get('unknownKey')); // null
+console.log(localStorage.get('unknownKey', 'foo')); // "foo"
+```
+
+### `.getObject(key: string, defaultValue: any = null): any`
+Deserializes and returns the value associated to the specified key:
+
+```javascript
+localStorage.setObject('foo', {bar: 'baz'});
+console.log(localStorage.getObject('foo')); // {bar: "baz"}
+```
+
+> The value is deserialized using the [`JSON.parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) method.
+
+Returns the `defaultValue` parameter if the key is not found:
+
+```javascript
+console.log(localStorage.get('unknownKey')); // null
+console.log(localStorage.get('unknownKey', false)); // false
+```
+
+### `.remove(key: string)`
+Removes the value associated to the specified key:
+
+```javascript
+localStorage.set('foo', 'bar');
+console.log(localStorage.containsKey('foo')); // true
+
+localStorage.remove('foo');
+console.log(localStorage.containsKey('foo')); // false
+```
+
+### `.set(key: string, value: string)`
+Associates a given value to the specified key:
+
+```javascript
+console.log(localStorage.get('foo')); // null
+
+localStorage.set('foo', 'bar');
+console.log(localStorage.get('foo')); // "bar"
+```
+
+### `.setObject(key: string, value: any)`
+Serializes and associates a given value to the specified key:
+
+```javascript
+console.log(localStorage.getObject('foo')); // null
+
+localStorage.setObject('foo', {bar: 'baz'});
+console.log(localStorage.getObject('foo')); // {bar: "baz"}
+```
+
+> The value is serialized using the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
+
 ## See also
 - [API reference](https://cedx.github.io/ngx-storage)
 - [Code coverage](https://coveralls.io/github/cedx/ngx-storage)
