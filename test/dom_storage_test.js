@@ -13,36 +13,6 @@ describe('DOMStorage', () => {
   beforeEach(() => backend = new StorageBackend(null, {strict: true}));
 
   /**
-   * @test {DOMStorage#[Symbol.iterator]}
-   */
-  describe('#[Symbol.iterator]()', () => {
-    it('should return a done iterator if storage is empty', () => {
-      let storage = new DOMStorage(backend);
-      let iterator = storage[Symbol.iterator]();
-      expect(iterator.next().done).to.be.true;
-    });
-
-    it('should return a value iterator if storage is not empty', () => {
-      let storage = new DOMStorage(backend);
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
-
-      let iterator = storage[Symbol.iterator]();
-      let next = iterator.next();
-      expect(next.done).to.be.false;
-      expect(next.value).to.be.an('array');
-      expect(next.value[0]).to.equal('foo');
-      expect(next.value[1]).to.equal('bar');
-
-      next = iterator.next();
-      expect(next.done).to.be.false;
-      expect(next.value[0]).to.equal('bar');
-      expect(next.value[1]).to.equal('baz');
-      expect(iterator.next().done).to.be.true;
-    });
-  });
-
-  /**
    * @test {DOMStorage#keys}
    */
   describe('#keys', () => {
@@ -73,6 +43,36 @@ describe('DOMStorage', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
       expect(new DOMStorage(backend)).to.have.lengthOf(2);
+    });
+  });
+
+  /**
+   * @test {DOMStorage#Symbol.iterator}
+   */
+  describe('#[Symbol.iterator]()', () => {
+    it('should return a done iterator if storage is empty', () => {
+      let storage = new DOMStorage(backend);
+      let iterator = storage[Symbol.iterator]();
+      expect(iterator.next().done).to.be.true;
+    });
+
+    it('should return a value iterator if storage is not empty', () => {
+      let storage = new DOMStorage(backend);
+      backend.setItem('foo', 'bar');
+      backend.setItem('bar', 'baz');
+
+      let iterator = storage[Symbol.iterator]();
+      let next = iterator.next();
+      expect(next.done).to.be.false;
+      expect(next.value).to.be.an('array');
+      expect(next.value[0]).to.equal('foo');
+      expect(next.value[1]).to.equal('bar');
+
+      next = iterator.next();
+      expect(next.done).to.be.false;
+      expect(next.value[0]).to.equal('bar');
+      expect(next.value[1]).to.equal('baz');
+      expect(iterator.next().done).to.be.true;
     });
   });
 

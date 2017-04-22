@@ -18,13 +18,6 @@ export class DOMStorage {
   }
 
   /**
-   * Returns a new iterator that allows iterating the entries of this storage.
-   */
-  *[Symbol.iterator]() {
-    for (let key of this.keys) yield [key, this.get(key)];
-  }
-
-  /**
    * The keys of this storage.
    * @type {string[]}
    */
@@ -40,6 +33,13 @@ export class DOMStorage {
    */
   get length() {
     return this._backend.length;
+  }
+
+  /**
+   * Returns a new iterator that allows iterating the entries of this storage.
+   */
+  *[Symbol.iterator]() {
+    for (let key of this.keys) yield [key, this.get(key)];
   }
 
   /**
