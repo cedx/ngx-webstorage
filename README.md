@@ -86,7 +86,7 @@ for (let entry of localStorage) {
 ### Programming interface
 These two services share the same API:
 
-#### `.keys`
+#### `.keys: string[]`
 Returns the list of all the keys of the associated storage:
 
 ```javascript
@@ -96,7 +96,7 @@ localStorage.set('foo', 'bar');
 console.log(localStorage.keys); // ["foo"]
 ```
 
-#### `.length`
+#### `.length: number`
 Returns the number of entries in the associated storage:
 
 ```javascript
@@ -117,7 +117,7 @@ localStorage.clear();
 console.log(localStorage.length); // 0
 ```
 
-#### `.containsKey(key: string)`
+#### `.containsKey(key: string): boolean`
 Returns a boolean value indicating whether the associated storage contains the specified key:
 
 ```javascript
