@@ -73,7 +73,7 @@ export class DOMStorage {
    * Gets the deserialized value associated to the specified key.
    * @param {string} key The key to seek for.
    * @param {*} defaultValue The default item value if it does not exist.
-   * @return {object} The deserialized value of the storage item, or the default value if the item is not found.
+   * @return {*} The deserialized value of the storage item, or the default value if the item is not found.
    */
   getObject(key, defaultValue = null) {
     let value = this.get(key);
@@ -100,7 +100,7 @@ export class DOMStorage {
   /**
    * Serializes and associates a given value to the specified key.
    * @param {string} key The key to seek for.
-   * @param {object} value The item value.
+   * @param {*} value The item value.
    */
   setObject(key, value) {
     this.set(key, JSON.stringify(value));
