@@ -1,5 +1,8 @@
 # Changelog
-This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-storage) project.
+This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
+
+## Version 0.3.0
+- Renamed the package to `ngx-webstorage` due to a trademark issue. 
 
 ## Version 0.2.0
 - Breaking change: removed the `LocalStorage` and `SessionStorage` classes.

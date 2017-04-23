@@ -1,5 +1,5 @@
 # Web Storage for Angular
-![Release](https://img.shields.io/npm/v/@cedx/ngx-storage.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-storage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-storage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-storage/badge.svg) ![Build](https://travis-ci.org/cedx/ngx-storage.svg)
+![Release](https://img.shields.io/npm/v/@cedx/ngx-webstorage.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-webstorage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-webstorage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-webstorage/badge.svg) ![Build](https://travis-ci.org/cedx/ngx-webstorage.svg)
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
@@ -8,7 +8,7 @@
 From a command prompt, run:
 
 ```shell
-$ npm install --save @cedx/ngx-storage
+$ npm install --save @cedx/ngx-webstorage
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ These tokens are backed by the `Storage` class which provides access to the unde
 ```javascript
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {StorageModule} from '@cedx/ngx-storage';
+import {StorageModule} from '@cedx/ngx-webstorage';
 import {AppComponent} from './app_component';
 
 // The root module.
@@ -40,7 +40,7 @@ Then, they will be available in the constructor of the component classes:
 
 ```javascript
 import {Component} from '@angular/core';
-import {LocalStorage, SessionStorage} from '@cedx/ngx-storage';
+import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
 
 // The main component.
 export class AppComponent {
@@ -193,9 +193,9 @@ console.log(localStorage.getObject('foo')); // {bar: "baz"}
 > The value is serialized using the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 
 ## See also
-- [API reference](https://cedx.github.io/ngx-storage)
-- [Code coverage](https://coveralls.io/github/cedx/ngx-storage)
-- [Continuous integration](https://travis-ci.org/cedx/ngx-storage)
+- [API reference](https://cedx.github.io/ngx-webstorage)
+- [Code coverage](https://coveralls.io/github/cedx/ngx-webstorage)
+- [Continuous integration](https://travis-ci.org/cedx/ngx-webstorage)
 
 ## License
-[Web Storage for Angular](https://github.com/cedx/ngx-storage) is distributed under the Apache License, version 2.0.
+[Web Storage for Angular](https://github.com/cedx/ngx-webstorage) is distributed under the Apache License, version 2.0.
