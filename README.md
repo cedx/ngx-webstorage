@@ -12,9 +12,9 @@ $ npm install --save @cedx/ngx-storage
 ```
 
 ## Usage
-This package provides two [@Injectable](https://angular.io/docs/js/latest/api/core/index/Injectable-decorator.html) services dedicated to the Web Storage: `LocalStorage` and `SessionStorage`.
+This package provides two [injection tokens](https://angular.io/docs/js/latest/api/core/index/InjectionToken-class.html) dedicated to the Web Storage: `LocalStorage` and `SessionStorage`.
 
-They need to be registered with the dependency injector by importing their module, the `StorageModule` class:
+These tokens are backed by the `Storage` class which provides access to the underlying Web APIs. They need to be registered with the dependency injector by importing their module, the `StorageModule` class:
 
 ```javascript
 import {NgModule} from '@angular/core';
@@ -70,7 +70,7 @@ export class AppComponent {
 ```
 
 ### Iteration
-The provided classes are iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (e.g. the key and the value):
+The `Storage` class is iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (e.g. the key and the value):
 
 ```javascript
 localStorage.set('foo', 'bar');
@@ -84,7 +84,7 @@ for (let entry of localStorage) {
 ```
 
 ### Programming interface
-The two services share the same API:
+The `Storage` class has the following API:
 
 #### `.keys: string[]`
 Returns the list of all the keys of the associated storage:
@@ -115,16 +115,6 @@ console.log(localStorage.length); // 1
 
 localStorage.clear();
 console.log(localStorage.length); // 0
-```
-
-#### `.containsKey(key: string): boolean`
-Returns a boolean value indicating whether the associated storage contains the specified key:
-
-```javascript
-console.log(localStorage.containsKey('foo')); // false
-
-localStorage.set('foo', 'bar');
-console.log(localStorage.containsKey('foo')); // true
 ```
 
 #### `.get(key: string, defaultValue: any = null): string`
@@ -159,15 +149,25 @@ console.log(localStorage.get('unknownKey')); // null
 console.log(localStorage.get('unknownKey', false)); // false
 ```
 
+#### `.has(key: string): boolean`
+Returns a boolean value indicating whether the associated storage contains the specified key:
+
+```javascript
+console.log(localStorage.has('foo')); // false
+
+localStorage.set('foo', 'bar');
+console.log(localStorage.has('foo')); // true
+```
+
 #### `.remove(key: string)`
 Removes the value associated to the specified key:
 
 ```javascript
 localStorage.set('foo', 'bar');
-console.log(localStorage.containsKey('foo')); // true
+console.log(localStorage.has('foo')); // true
 
 localStorage.remove('foo');
-console.log(localStorage.containsKey('foo')); // false
+console.log(localStorage.has('foo')); // false
 ```
 
 #### `.set(key: string, value: string)`
