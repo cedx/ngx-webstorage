@@ -1,8 +1,8 @@
 /**
- * Provides access to the DOM storage.
+ * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
  */
-export class DOMStorage {
+export class WebStorage {
 
   /**
    * Initializes a new instance of the class.

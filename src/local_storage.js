@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {WINDOW} from './di_tokens';
-import {DOMStorage} from './dom_storage';
+import {WebStorage} from './web_storage';
 
 /**
  * Provides access to the local storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
  */
-export class LocalStorage extends DOMStorage {
+export class LocalStorage extends WebStorage {
 
   /**
    * The class decorators.
