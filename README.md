@@ -1,5 +1,5 @@
 # Web Storage for Angular
-![Release](https://img.shields.io/npm/v/@cedx/ngx-storage.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Dependencies](https://david-dm.org/cedx/ngx-storage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-storage/badge.svg) ![Build](https://travis-ci.org/cedx/ngx-storage.svg)
+![Release](https://img.shields.io/npm/v/@cedx/ngx-storage.svg) ![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-storage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-storage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-storage/badge.svg) ![Build](https://travis-ci.org/cedx/ngx-storage.svg)
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
