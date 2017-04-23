@@ -1,7 +1,13 @@
 import {InjectionToken} from '@angular/core';
 
 /**
- * An injection token representing the browser's window.
+ * An injection token representing the local storage.
  * @type {InjectionToken}
  */
-export const WINDOW = new InjectionToken('host.window');
+export const LocalStorage = new InjectionToken('LocalStorage');
+
+/**
+ * An injection token representing the session storage.
+ * @type {InjectionToken}
+ */
+export const SessionStorage = new InjectionToken('SessionStorage');

@@ -4,6 +4,8 @@ This file contains highlights of what changes on each version of the [Web Storag
 ## Version 0.2.0
 - Breaking change: renamed the `DOMStorage` class to `WebStorage`.
 - Breaking change: removed the `LocalStorage` and `SessionStorage` classes.
+- Breaking change: removed the `WINDOW` injection token.
+- Added the `LocalStorage` and `SessionStorage` injection tokens.
 - Updated the dependencies.
 
 ## Version 0.1.0
