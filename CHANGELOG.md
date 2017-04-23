@@ -5,6 +5,7 @@ This file contains highlights of what changes on each version of the [Web Storag
 - Breaking change: removed the `LocalStorage` and `SessionStorage` classes.
 - Breaking change: removed the `WINDOW` injection token.
 - Breaking change: renamed the `DOMStorage` class to `Storage`.
+- Breaking change: renamed the `Storage#containsKey` method to `has`.
 - Added the `LocalStorage` and `SessionStorage` injection tokens.
 - Updated the dependencies.
 

@@ -93,22 +93,6 @@ describe('Storage', () => {
   });
 
   /**
-   * @test {WebStorage#containsKey}
-   */
-  describe('#containsKey()', () => {
-    it('should return `false` if the specified key is not contained', () => {
-      expect(new WebStorage(backend).containsKey('foo')).to.be.false;
-    });
-
-    it('should return `true` if the specified key is contained', () => {
-      backend.setItem('foo', 'bar');
-
-      let storage = new WebStorage(backend);
-      expect(storage.containsKey('foo')).to.be.true;
-      expect(storage.containsKey('bar')).to.be.false;
-    });
-  });
-
    * @test {Storage#get}
    */
   describe('#get()', () => {
@@ -153,7 +137,24 @@ describe('Storage', () => {
   });
 
   /**
-   * @test {WebStorage#remove}
+   * @test {Storage#has}
+   */
+  describe('#has()', () => {
+    it('should return `false` if the specified key is not contained', () => {
+      expect(new Storage(backend).has('foo')).to.be.false;
+    });
+
+    it('should return `true` if the specified key is contained', () => {
+      backend.setItem('foo', 'bar');
+
+      let storage = new Storage(backend);
+      expect(storage.has('foo')).to.be.true;
+      expect(storage.has('bar')).to.be.false;
+    });
+  });
+
+  /**
+   * @test {Storage#remove}
    */
   describe('#remove()', () => {
     it('should properly remote the storage entries', () => {

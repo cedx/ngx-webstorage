@@ -50,15 +50,6 @@ export class Storage {
   }
 
   /**
-   * Gets a value indicating whether this storage contains the specified key.
-   * @param {string} key The key to seek for.
-   * @return {boolean} `true` if this storage contains the specified key, otherwise `false`.
-   */
-  containsKey(key) {
-    return this.keys.includes(key);
-  }
-
-  /**
    * Gets the value associated to the specified key.
    * @param {string} key The key to seek for.
    * @param {*} defaultValue The default item value if it does not exist.
@@ -78,6 +69,15 @@ export class Storage {
   getObject(key, defaultValue = null) {
     let value = this.get(key);
     return typeof value == 'string' ? JSON.parse(value) : defaultValue;
+  }
+
+  /**
+   * Gets a value indicating whether this storage contains the specified key.
+   * @param {string} key The key to seek for.
+   * @return {boolean} `true` if this storage contains the specified key, otherwise `false`.
+   */
+  has(key) {
+    return this.keys.includes(key);
   }
 
   /**
