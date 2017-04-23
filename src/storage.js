@@ -2,7 +2,7 @@
  * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
  */
-export class WebStorage {
+export class Storage {
 
   /**
    * Initializes a new instance of the class.

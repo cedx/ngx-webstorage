@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 
-import {LocalStorage} from './local_storage';
-import {SessionStorage} from './session_storage';
-import {WINDOW} from './di_tokens';
+import {LocalStorage, SessionStorage} from './di_tokens';
+import {Storage} from './storage';
 
 /**
  * The Web Storage module.
@@ -16,9 +15,8 @@ export class StorageModule {
   static get annotations() {
     return [new NgModule({
       providers: [
-        LocalStorage,
-        SessionStorage,
-        {provide: WINDOW, useValue: window}
+        {provide: LocalStorage, useValue: new Storage(window.localStorage)},
+        {provide: SessionStorage, useValue: new Storage(window.sessionStorage)}
       ]
     })];
   }

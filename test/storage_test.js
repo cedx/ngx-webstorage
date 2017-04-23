@@ -3,28 +3,28 @@
 import {expect} from 'chai';
 import StorageBackend from 'dom-storage';
 import {beforeEach, describe, it} from 'mocha';
-import {WebStorage} from '../src/index';
+import {Storage} from '../src/index';
 
 /**
- * @test {WebStorage}
+ * @test {Storage}
  */
-describe('WebStorage', () => {
+describe('Storage', () => {
   let backend;
   beforeEach(() => backend = new StorageBackend(null, {strict: true}));
 
   /**
-   * @test {WebStorage#keys}
+   * @test {Storage#keys}
    */
   describe('#keys', () => {
     it('should return an empty array for an empty storage', () => {
-      expect(new WebStorage(backend).keys).to.be.empty;
+      expect(new Storage(backend).keys).to.be.empty;
     });
 
     it('should return the list of keys for a non-empty storage', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
 
-      let keys = new WebStorage(backend).keys;
+      let keys = new Storage(backend).keys;
       expect(keys).to.have.lengthOf(2);
       expect(keys[0]).to.equal('foo');
       expect(keys[1]).to.equal('bar');
@@ -32,32 +32,32 @@ describe('WebStorage', () => {
   });
 
   /**
-   * @test {WebStorage#length}
+   * @test {Storage#length}
    */
   describe('#length', () => {
     it('should return zero for an empty storage', () => {
-      expect(new WebStorage(backend)).to.have.lengthOf(0);
+      expect(new Storage(backend)).to.have.lengthOf(0);
     });
 
     it('should return the number of entries for a non-empty storage', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
-      expect(new WebStorage(backend)).to.have.lengthOf(2);
+      expect(new Storage(backend)).to.have.lengthOf(2);
     });
   });
 
   /**
-   * @test {WebStorage#Symbol.iterator}
+   * @test {Storage#Symbol.iterator}
    */
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       let iterator = storage[Symbol.iterator]();
       expect(iterator.next().done).to.be.true;
     });
 
     it('should return a value iterator if storage is not empty', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
 
@@ -77,14 +77,14 @@ describe('WebStorage', () => {
   });
 
   /**
-   * @test {WebStorage#clear()}
+   * @test {Storage#clear}
    */
   describe('#clear()', () => {
     it('should remove all storage entries', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
 
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       expect(storage).to.have.lengthOf(2);
 
       storage.clear();
@@ -109,12 +109,11 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * @test {WebStorage#get}
+   * @test {Storage#get}
    */
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       expect(storage.get('foo')).to.be.null;
       expect(storage.get('foo', '123')).to.equal('123');
 
@@ -127,11 +126,11 @@ describe('WebStorage', () => {
   });
 
   /**
-   * @test {WebStorage#getObject}
+   * @test {Storage#getObject}
    */
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       expect(storage.getObject('foo')).to.be.null;
       expect(storage.getObject('foo', {key: 'value'})).to.deep.equal({key: 'value'});
 
@@ -147,7 +146,7 @@ describe('WebStorage', () => {
     });
 
     it('should throw an error if the value can\'t be deserialized', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       backend.setItem('foo', 'bar');
       expect(() => storage.getObject('foo')).to.throw(SyntaxError);
     });
@@ -161,7 +160,7 @@ describe('WebStorage', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
 
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       expect(backend.getItem('foo')).to.equal('bar');
 
       storage.remove('foo');
@@ -174,11 +173,11 @@ describe('WebStorage', () => {
   });
 
   /**
-   * @test {WebStorage#set}
+   * @test {Storage#set}
    */
   describe('#set()', () => {
     it('should properly set the storage entries', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       expect(backend.getItem('foo')).to.be.null;
 
       storage.set('foo', 'bar');
@@ -190,11 +189,11 @@ describe('WebStorage', () => {
   });
 
   /**
-   * @test {WebStorage#setObject}
+   * @test {Storage#setObject}
    */
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
-      let storage = new WebStorage(backend);
+      let storage = new Storage(backend);
       expect(backend.getItem('foo')).to.be.null;
 
       storage.setObject('foo', 123);
