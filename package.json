@@ -1,13 +1,13 @@
 {
   "description": "Web Storage services for Angular.",
-  "homepage": "https://github.com/cedx/ngx-storage",
-  "name": "@cedx/ngx-storage",
+  "homepage": "https://github.com/cedx/ngx-webstorage",
+  "name": "@cedx/ngx-webstorage",
 
   "author": "Cédric Belin <cedric@belin.io>",
-  "bugs": "https://github.com/cedx/ngx-storage/issues",
+  "bugs": "https://github.com/cedx/ngx-webstorage/issues",
   "license": "Apache-2.0",
-  "repository": "cedx/ngx-storage",
-  "version": "0.2.0",
+  "repository": "cedx/ngx-webstorage",
+  "version": "0.3.0",
 
   "main": "./lib/index",
   "module": "./src/index",
