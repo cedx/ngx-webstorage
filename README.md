@@ -211,15 +211,18 @@ localStorage.onChanges.subscribe(changes => console.log(changes[0]));
 localStorage.set('foo', 'bar');
 // Prints: {key: "foo", currentValue: "bar", previousValue: null}
 
+localStorage.set('foo', 'baz');
+// Prints: {key: "foo", currentValue: "baz", previousValue: "bar"}
+
 localStorage.remove('foo');
-// Prints: {key: "foo", currentValue: null, previousValue: "bar"}
+// Prints: {key: "foo", currentValue: null, previousValue: "baz"}
 ```
 
 The values contained in the `currentValue` and `previousValue` properties of the `KeyValueChangeRecord` instances are the raw storage values. If you use the `Storage#setObject` method to change a key, you will get the serialized string value, not the original value passed to the method:
 
 ```javascript
 localStorage.setObject('foo', {bar: 'baz'});
-// Prints: {key: "foo", currentValue: "{\"bar\": \"baz\"}", previousValue: "bar"}
+// Prints: {key: "foo", currentValue: "{\"bar\": \"baz\"}", previousValue: null}
 ```
 
 ## See also
