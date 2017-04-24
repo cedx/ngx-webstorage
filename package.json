@@ -7,7 +7,7 @@
   "bugs": "https://github.com/cedx/ngx-webstorage/issues",
   "license": "Apache-2.0",
   "repository": "cedx/ngx-webstorage",
-  "version": "0.3.0",
+  "version": "0.4.0",
 
   "main": "./lib/index",
   "module": "./src/index",
@@ -31,7 +31,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
     "mocha": "^3.2.0",
-    "nyc": "^10.2.2"
+    "nyc": "^10.2.0"
   },
   "engines": {
     "node": ">=7.6.0"

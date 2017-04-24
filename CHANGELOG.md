@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
 
+## Version 0.4.0
+- Added the `onChanges` event stream to the `Storage` class.
+
 ## Version 0.3.0
 - Renamed the package to `ngx-webstorage` due to a trademark issue. 
 
