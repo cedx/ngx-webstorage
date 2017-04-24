@@ -1,3 +1,5 @@
+import {Subject} from 'rxjs/Subject';
+
 /**
  * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
@@ -15,6 +17,12 @@ export class Storage {
      * @type {Storage}
      */
     this._backend = backend;
+
+    /**
+     * The handler of "changes" events.
+     * @type {Subject<KeyValueChangeRecord>}
+     */
+    this._onChanges = new Subject();
   }
 
   /**
@@ -36,6 +44,14 @@ export class Storage {
   }
 
   /**
+   * The stream of "changes" events.
+   * @type {Observable<KeyValueChangeRecord[]>}
+   */
+  get onChanges() {
+    return this._onChanges.asObservable();
+  }
+
+  /**
    * Returns a new iterator that allows iterating the entries of this storage.
    */
   *[Symbol.iterator]() {
@@ -46,7 +62,9 @@ export class Storage {
    * Removes all entries from this storage.
    */
   clear() {
+    let changes = this.keys.map(key => ({currentValue: null, key, previousValue: this.get(key)}));
     this._backend.clear();
+    this._onChanges.next(changes);
   }
 
   /**
@@ -85,7 +103,9 @@ export class Storage {
    * @param {string} key The key to seek for.
    */
   remove(key) {
+    let previousValue = this.get(key);
     this._backend.removeItem(key);
+    this._onChanges.next([{currentValue: null, key, previousValue}]);
   }
 
   /**
@@ -94,7 +114,9 @@ export class Storage {
    * @param {string} value The item value.
    */
   set(key, value) {
+    let previousValue = this.get(key);
     this._backend.setItem(key, value);
+    this._onChanges.next([{currentValue: value, key, previousValue}]);
   }
 
   /**
