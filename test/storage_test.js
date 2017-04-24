@@ -10,7 +10,9 @@ import {Storage} from '../src/index';
  */
 describe('Storage', () => {
   let backend;
-  beforeEach(() => backend = new StorageBackend(null, {strict: true}));
+  beforeEach('reset the storage backend', () =>
+    backend = new StorageBackend(null, {strict: true})
+  );
 
   /**
    * @test {Storage#keys}
