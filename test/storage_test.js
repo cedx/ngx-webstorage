@@ -2,7 +2,7 @@
 
 import {expect} from 'chai';
 import StorageBackend from 'dom-storage';
-import {beforeEach, describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, it} from 'mocha';
 import {Storage} from '../src/index';
 
 /**
@@ -45,6 +45,97 @@ describe('Storage', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
       expect(new Storage(backend)).to.have.lengthOf(2);
+    });
+  });
+
+  /**
+   * @test {Storage#onChanges}
+   */
+  describe('#onChanges', () => {
+    let subscription;
+    afterEach('cancel the subscription', () =>
+      subscription.unsubscribe()
+    );
+
+    it('should trigger an event when a value is added', done => {
+      let storage = new Storage(backend);
+      subscription = storage.onChanges.subscribe(changes => {
+        expect(changes).to.be.an('array').and.have.lengthOf(1);
+
+        let record = changes[0];
+        expect(record).to.be.an('object');
+        expect(record).to.have.property('key').that.equal('foo');
+        expect(record).to.have.property('currentValue').that.equal('bar');
+        expect(record).to.have.property('previousValue').that.is.null;
+
+        done();
+      });
+
+      storage.set('foo', 'bar');
+    });
+
+    it('should trigger an event when a value is updated', done => {
+      backend.setItem('foo', 'bar');
+
+      let storage = new Storage(backend);
+      subscription = storage.onChanges.subscribe(changes => {
+        expect(changes).to.be.an('array').and.have.lengthOf(1);
+
+        let record = changes[0];
+        expect(record).to.be.an('object');
+        expect(record).to.have.property('key').that.equal('foo');
+        expect(record).to.have.property('currentValue').that.equal('baz');
+        expect(record).to.have.property('previousValue').that.equal('bar');
+
+        done();
+      });
+
+      storage.set('foo', 'baz');
+    });
+
+    it('should trigger an event when a value is removed', done => {
+      backend.setItem('foo', 'bar');
+
+      let storage = new Storage(backend);
+      subscription = storage.onChanges.subscribe(changes => {
+        expect(changes).to.be.an('array').and.have.lengthOf(1);
+
+        let record = changes[0];
+        expect(record).to.be.an('object');
+        expect(record).to.have.property('key').that.equal('foo');
+        expect(record).to.have.property('currentValue').that.is.null;
+        expect(record).to.have.property('previousValue').that.equal('bar');
+
+        done();
+      });
+
+      storage.remove('foo');
+    });
+
+    it('should trigger an event when the storage is cleared', done => {
+      backend.setItem('foo', 'bar');
+      backend.setItem('bar', 'baz');
+
+      let storage = new Storage(backend);
+      subscription = storage.onChanges.subscribe(changes => {
+        expect(changes).to.be.an('array').and.have.lengthOf(2);
+
+        let record = changes[0];
+        expect(record).to.be.an('object');
+        expect(record).to.have.property('key').that.equal('foo');
+        expect(record).to.have.property('currentValue').that.is.null;
+        expect(record).to.have.property('previousValue').that.equal('bar');
+
+        record = changes[1];
+        expect(record).to.be.an('object');
+        expect(record).to.have.property('key').that.equal('bar');
+        expect(record).to.have.property('currentValue').that.is.null;
+        expect(record).to.have.property('previousValue').that.equal('baz');
+
+        done();
+      });
+
+      storage.clear();
     });
   });
 
