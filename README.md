@@ -203,15 +203,19 @@ localStorage.onChanges.subscribe(
 );
 ```
 
-The changes are expressed as an array of [`KeyValueChangeRecord`](https://angular.io/docs/js/latest/api/core/index/KeyValueChangeRecord-interface.html) instances:
+The changes are expressed as an array of [`KeyValueChangeRecord`](https://angular.io/docs/js/latest/api/core/index/KeyValueChangeRecord-interface.html) instances, where a `null` reference indicates an absence of value:
 
 ```javascript
 localStorage.onChanges.subscribe(changes => console.log(changes[0]));
+
 localStorage.set('foo', 'bar');
-// Prints: {key: "foo", currentValue: "bar"}
+// Prints: {key: "foo", currentValue: "bar", previousValue: null}
+
+localStorage.remove('foo');
+// Prints: {key: "foo", currentValue: null, previousValue: "bar"}
 ```
 
-The values contained in the `currentValue` and `previousValue` properties of the `KeyValueChangeRecord` instances are the raw values: if you use the `Storage#setObject` method to change a key, you will get the serialized value, not the original value passed to the method:
+The values contained in the `currentValue` and `previousValue` properties of the `KeyValueChangeRecord` instances are the raw storage values. If you use the `Storage#setObject` method to change a key, you will get the serialized string value, not the original value passed to the method:
 
 ```javascript
 localStorage.setObject('foo', {bar: 'baz'});
