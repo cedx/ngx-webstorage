@@ -69,20 +69,6 @@ export class AppComponent {
 }
 ```
 
-### Iteration
-The `Storage` class is iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (e.g. the key and the value):
-
-```javascript
-localStorage.set('foo', 'bar');
-localStorage.set('anotherKey', 'anotherValue');
-
-for (let entry of localStorage) {
-  console.log(entry);
-  // Round 1: ["foo", "bar"]
-  // Round 2: ["anotherKey", "anotherValue"] 
-}
-```
-
 ### Programming interface
 The `Storage` class has the following API:
 
@@ -191,6 +177,46 @@ console.log(localStorage.getObject('foo')); // {bar: "baz"}
 ```
 
 > The value is serialized using the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
+
+### Iteration
+The `Storage` class is iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (e.g. the key and the value):
+
+```javascript
+localStorage.set('foo', 'bar');
+localStorage.set('anotherKey', 'anotherValue');
+
+for (let entry of localStorage) {
+  console.log(entry);
+  // Round 1: ["foo", "bar"]
+  // Round 2: ["anotherKey", "anotherValue"] 
+}
+```
+
+### Events
+Every time one or several values are changed (added, removed or updated) through the `Storage` class, a `changes` event is triggered.
+
+This event is exposed as an [Observable](http://reactivex.io/intro.html), you can subscribe to it using the `onChanges` property:
+
+```javascript
+localStorage.onChanges.subscribe(
+  changes => console.log(changes)
+);
+```
+
+The changes are expressed as an array of [`KeyValueChangeRecord`](https://angular.io/docs/js/latest/api/core/index/KeyValueChangeRecord-interface.html) instances:
+
+```javascript
+localStorage.onChanges.subscribe(changes => console.log(changes[0]));
+localStorage.set('foo', 'bar');
+// Prints: {key: "foo", currentValue: "bar"}
+```
+
+The values contained in the `currentValue` and `previousValue` properties of the `KeyValueChangeRecord` instances are the raw values: if you use the `Storage#setObject` method to change a key, you will get the serialized value, not the original value passed to the method:
+
+```javascript
+localStorage.setObject('foo', {bar: 'baz'});
+// Prints: {key: "foo", currentValue: "{\"bar\": \"baz\"}", previousValue: "bar"}
+```
 
 ## See also
 - [API reference](https://cedx.github.io/ngx-webstorage)
