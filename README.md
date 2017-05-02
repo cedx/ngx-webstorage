@@ -3,7 +3,6 @@
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
-
 ## Installing via [npm](https://www.npmjs.com)
 From a command prompt, run:
 
