@@ -13,8 +13,8 @@
   "module": "./src/index",
 
   "dependencies": {
-    "@angular/core": "^4.1.1",
-    "rxjs": "^5.3.1",
+    "@angular/core": "^4.1.2",
+    "rxjs": "^5.4.0",
     "zone.js": "^0.8.10"
   },
   "devDependencies": {
