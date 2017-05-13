@@ -22,7 +22,7 @@ export class Storage {
      * The handler of "changes" events.
      * @type {Subject<KeyValueChangeRecord>}
      */
-    this._onChanges = new Subject();
+    this._onChanges = new Subject;
   }
 
   /**
