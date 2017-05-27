@@ -23,7 +23,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.5.1",
     "babel-register": "^6.24.1",
-    "chai": "^3.5.0",
+    "chai": "^4.0.0",
     "del": "^2.2.2",
     "dom-storage": "^2.0.2",
     "esdoc": "^0.5.2",
