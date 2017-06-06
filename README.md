@@ -130,8 +130,8 @@ console.log(localStorage.getObject('foo')); // {bar: "baz"}
 Returns the `defaultValue` parameter if the key is not found:
 
 ```javascript
-console.log(localStorage.get('unknownKey')); // null
-console.log(localStorage.get('unknownKey', false)); // false
+console.log(localStorage.getObject('unknownKey')); // null
+console.log(localStorage.getObject('unknownKey', false)); // false
 ```
 
 #### `.has(key: string): boolean`
