@@ -10,8 +10,8 @@
   "repository": "cedx/ngx-webstorage",
   "version": "0.6.0",
   "dependencies": {
-    "@angular/core": "^4.1.3",
-    "rxjs": "^5.4.0",
+    "@angular/core": "^4.2.4",
+    "rxjs": "^5.4.1",
     "zone.js": "^0.8.12"
   },
   "devDependencies": {
