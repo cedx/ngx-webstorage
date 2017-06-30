@@ -24,6 +24,7 @@
     "del": "^3.0.0",
     "dom-storage": "^2.0.2",
     "esdoc": "^0.5.2",
+    "estraverse": "^4.2.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^4.0.0",
