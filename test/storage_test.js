@@ -225,7 +225,7 @@ describe('Storage', () => {
     it('should return the default value if the value can\'t be deserialized', () => {
       let storage = new Storage(backend);
       backend.setItem('foo', 'bar');
-      expect(() => storage.getObject('foo', 'defaultValue')).to.equal('defaultValue');
+      expect(storage.getObject('foo', 'defaultValue')).to.equal('defaultValue');
     });
   });
 
@@ -250,7 +250,7 @@ describe('Storage', () => {
    * @test {Storage#remove}
    */
   describe('#remove()', () => {
-    it('should properly remote the storage entries', () => {
+    it('should properly remove the storage entries', () => {
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
 
