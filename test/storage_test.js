@@ -222,10 +222,10 @@ describe('Storage', () => {
         .and.have.property('key').that.equal('value');
     });
 
-    it('should throw an error if the value can\'t be deserialized', () => {
+    it('should return the default value if the value can\'t be deserialized', () => {
       let storage = new Storage(backend);
       backend.setItem('foo', 'bar');
-      expect(() => storage.getObject('foo')).to.throw(SyntaxError);
+      expect(() => storage.getObject('foo', 'defaultValue')).to.equal('defaultValue');
     });
   });
 
