@@ -85,8 +85,14 @@ export class Storage {
    * @return {*} The deserialized value of the storage item, or the default value if the item is not found.
    */
   getObject(key, defaultValue = null) {
-    let value = this.get(key);
-    return typeof value == 'string' ? JSON.parse(value) : defaultValue;
+    try {
+      let value = this.get(key);
+      return typeof value == 'string' ? JSON.parse(value) : defaultValue;
+    }
+
+    catch (err) {
+      return defaultValue;
+    }
   }
 
   /**
