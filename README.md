@@ -35,7 +35,7 @@ export class AppModule {
 }
 ```
 
-> The `LocalStorage` and `SessionStorage` providers are intended for the application root module only.
+> The `StorageModule` provider is intended for the application root module only.
 
 Then, they will be available in the constructor of the component classes:
 
