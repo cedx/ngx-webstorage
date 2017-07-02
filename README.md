@@ -35,7 +35,7 @@ export class AppModule {
 }
 ```
 
-> The `StorageModule` provider is intended for the application root module only.
+> The `StorageModule` provider is intended for the application root module.
 
 Then, they will be available in the constructor of the component classes:
 
