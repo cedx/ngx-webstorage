@@ -204,7 +204,7 @@ localStorage.onChanges.subscribe(
 );
 ```
 
-The changes are expressed as an array of [`KeyValueChangeRecord`](https://angular.io/docs/js/latest/api/core/index/KeyValueChangeRecord-interface.html) instances, where a `null` reference indicates an absence of value:
+The changes are expressed as an array of [`KeyValueChangeRecord`](https://angular.io/api/core/KeyValueChangeRecord) instances, where a `null` reference indicates an absence of value:
 
 ```javascript
 localStorage.onChanges.subscribe(changes => console.log(changes[0]));
