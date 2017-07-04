@@ -11,8 +11,7 @@
   "version": "0.6.0",
   "dependencies": {
     "@angular/core": "^4.2.5",
-    "rxjs": "^5.4.1",
-    "zone.js": "^0.8.12"
+    "rxjs": "^5.4.1"
   },
   "devDependencies": {
     "@cedx/coveralls": "^1.0.2",
