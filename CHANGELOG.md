@@ -1,6 +1,10 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
 
+## Version 0.7.0
+- Errors from `Storage#getObject()` method are silently discarded.
+- Updated the package dependencies.
+
 ## Version 0.6.0
 - Raised the required [Node.js](https://nodejs.org) version.
 - Updated the package dependencies.
