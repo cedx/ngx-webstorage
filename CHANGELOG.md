@@ -2,11 +2,11 @@
 This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
 
 ## Version 1.1.0
-- Updated the dependencies.
+- Updated the package dependencies.
 
 ## Version 1.0.0
 - First stable release.
-- Updated the dependencies.
+- Updated the package dependencies.
 
 ## Version 0.7.0
 - Errors from `Storage#getObject()` method are silently discarded.
@@ -36,7 +36,7 @@ This file contains highlights of what changes on each version of the [Web Storag
 - Breaking change: renamed the `DOMStorage` class to `Storage`.
 - Breaking change: renamed the `Storage#containsKey` method to `has`.
 - Added the `LocalStorage` and `SessionStorage` injection tokens.
-- Updated the dependencies.
+- Updated the package dependencies.
 
 ## Version 0.1.0
 - Initial release.
