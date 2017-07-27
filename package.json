@@ -10,12 +10,12 @@
   "repository": "cedx/ngx-webstorage",
   "version": "1.0.0",
   "dependencies": {
-    "@angular/core": "^4.3.0",
+    "@angular/core": "^4.3.1",
     "rxjs": "^5.4.2"
   },
   "devDependencies": {
-    "@cedx/coveralls": "^2.0.0",
-    "@cedx/gulp-david": "^8.0.0",
+    "@cedx/coveralls": "^2.2.0",
+    "@cedx/gulp-david": "^8.1.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
@@ -28,8 +28,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^4.0.0",
     "mocha": "^3.4.2",
-    "nsp": "^2.6.3",
-    "nyc": "^11.0.3"
+    "nsp": "^2.7.0",
+    "nyc": "^11.1.0"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -46,7 +46,7 @@
     "web"
   ],
   "scripts": {
-    "coverage": "coveralls --file=var/lcov.info",
+    "coverage": "coveralls var/lcov.info",
     "prepare": "gulp build",
     "test": "nyc --report-dir=var --reporter=lcovonly mocha --compilers=js:babel-register --recursive --require=babel-polyfill"
   }
