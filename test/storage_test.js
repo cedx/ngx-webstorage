@@ -2,7 +2,6 @@
 
 import {expect} from 'chai';
 import StorageBackend from 'dom-storage';
-import {afterEach, beforeEach, describe, it} from 'mocha';
 import {Storage} from '../src/index';
 
 /**
