@@ -14,7 +14,7 @@
     "rxjs": "^5.4.2"
   },
   "devDependencies": {
-    "@cedx/coveralls": "^2.2.0",
+    "@cedx/coveralls": "^3.0.0",
     "@cedx/gulp-david": "^8.1.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
