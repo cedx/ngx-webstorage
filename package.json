@@ -40,6 +40,7 @@
     "local",
     "ngx",
     "observable",
+    "reactivex",
     "rxjs",
     "service",
     "session",
