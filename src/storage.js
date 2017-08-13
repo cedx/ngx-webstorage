@@ -26,6 +26,14 @@ export class Storage {
   }
 
   /**
+   * The class name.
+   * @type {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'Storage';
+  }
+
+  /**
    * The keys of this storage.
    * @type {string[]}
    */
