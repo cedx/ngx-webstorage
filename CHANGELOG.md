@@ -1,6 +1,8 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
 
+## Version 1.2.0
+
 ## Version 1.1.0
 - Updated the package dependencies.
 
