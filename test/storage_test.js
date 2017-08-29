@@ -1,8 +1,8 @@
 'use strict';
 
-import {expect} from 'chai';
-import StorageBackend from 'dom-storage';
-import {Storage} from '../src/index';
+const {expect} = require('chai');
+const StorageBackend = require('dom-storage');
+const {Storage} = require('../src');
 
 /**
  * @test {Storage}
