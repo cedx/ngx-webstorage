@@ -2,6 +2,10 @@
 This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
 
 ## Version 1.2.0
+- Added support for [Browserslist](http://browserl.ist) shared settings.
+- Added the [`#[Symbol.toStringTag]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property to the `Storage` class.
+- Moved [Angular](https://angular.io) and [RxJS](http://reactivex.io/rxjs) dependencies to peer ones.
+- Updated the package dependencies.
 
 ## Version 1.1.0
 - Updated the package dependencies.
