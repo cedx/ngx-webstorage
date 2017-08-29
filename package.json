@@ -8,12 +8,9 @@
   "module": "./src/index",
   "name": "@cedx/ngx-webstorage",
   "repository": "cedx/ngx-webstorage",
-  "dependencies": {
-    "@angular/core": "^4.3.6",
-    "rxjs": "^5.4.3"
-  },
   "version": "1.2.0",
   "devDependencies": {
+    "@angular/core": "^4.3.6",
     "@cedx/coveralls": "^3.1.0",
     "@cedx/gulp-david": "^9.0.0",
     "babel-polyfill": "^6.26.0",
@@ -29,7 +26,8 @@
     "gulp-eslint": "^4.0.0",
     "mocha": "^3.5.0",
     "nsp": "^2.7.0",
-    "nyc": "^11.1.0"
+    "nyc": "^11.1.0",
+    "rxjs": "^5.4.3"
   },
   "engines": {
     "node": ">=8.3.0"
@@ -46,6 +44,10 @@
     "storage",
     "web"
   ],
+  "peerDependencies": {
+    "@angular/core": ">=4.3.0",
+    "rxjs": ">=5.4.0"
+  },
   "scripts": {
     "coverage": "coveralls var/lcov.info",
     "prepare": "gulp build",
