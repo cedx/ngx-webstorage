@@ -15,7 +15,7 @@
     "@cedx/gulp-david": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.1",
     "del": "^3.0.0",
     "dom-storage": "^2.0.2",
@@ -27,7 +27,8 @@
     "mocha": "^3.5.0",
     "nsp": "^2.7.0",
     "nyc": "^11.1.0",
-    "rxjs": "^5.4.3"
+    "rxjs": "^5.4.3",
+    "zone.js": "^0.8.17"
   },
   "engines": {
     "node": ">=8.3.0"
