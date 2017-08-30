@@ -24,7 +24,11 @@ gulp.task('build', () => gulp.src('src/**/*.js')
 /**
  * Deletes all generated files and resets any saved state.
  */
-gulp.task('clean', () => del('var/**/*'));
+gulp.task('clean', () => del([
+  '.nyc_output',
+  'lib',
+  'var/**/*'
+]));
 
 /**
  * Sends the results of the code coverage.
