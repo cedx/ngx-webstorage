@@ -68,6 +68,7 @@ export class Storage {
 
   /**
    * Removes all entries from this storage.
+   * @emits {KeyValueChangeRecord[]} The "changes" event.
    */
   clear() {
     let changes = this.keys.map(key => ({currentValue: null, key, previousValue: this.get(key)}));
@@ -115,6 +116,7 @@ export class Storage {
   /**
    * Removes the value associated to the specified key.
    * @param {string} key The key to seek for.
+   * @emits {KeyValueChangeRecord[]} The "changes" event.
    */
   remove(key) {
     let previousValue = this.get(key);
@@ -126,6 +128,7 @@ export class Storage {
    * Associates a given value to the specified key.
    * @param {string} key The key to seek for.
    * @param {string} value The item value.
+   * @emits {KeyValueChangeRecord[]} The "changes" event.
    */
   set(key, value) {
     let previousValue = this.get(key);
@@ -137,6 +140,7 @@ export class Storage {
    * Serializes and associates a given value to the specified key.
    * @param {string} key The key to seek for.
    * @param {*} value The item value.
+   * @emits {KeyValueChangeRecord[]} The "changes" event.
    */
   setObject(key, value) {
     this.set(key, JSON.stringify(value));
