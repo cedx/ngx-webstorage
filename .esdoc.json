@@ -9,7 +9,7 @@
       "test": {"source": "test"},
       "brand": {
         "description": "Angular services for interacting with the Web Storage, implemented in JavaScript.",
-        "logo": "web/favicon.ico",
+        "logo": "www/favicon.ico",
         "title": "Web Storage for Angular"
       }
     }
