@@ -4,6 +4,7 @@
   "description": "Web Storage services for Angular.",
   "homepage": "https://github.com/cedx/ngx-webstorage",
   "license": "Apache-2.0",
+  "license": "MIT",
   "main": "./lib/index",
   "module": "./src/index",
   "name": "@cedx/ngx-webstorage",

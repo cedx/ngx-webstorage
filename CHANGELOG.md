@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
 
+## Version 1.3.0
+- Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
+
 ## Version 1.2.0
 - Added support for [Browserslist](http://browserl.ist) shared settings.
 - Added the [`#[Symbol.toStringTag]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property to the `Storage` class.

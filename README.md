@@ -232,4 +232,4 @@ localStorage.setObject('foo', {bar: 'baz'});
 - [Continuous integration](https://travis-ci.org/cedx/ngx-webstorage)
 
 ## License
-[Web Storage for Angular](https://github.com/cedx/ngx-webstorage) is distributed under the Apache License, version 2.0.
+[Web Storage for Angular](https://github.com/cedx/ngx-webstorage) is distributed under the MIT License.
