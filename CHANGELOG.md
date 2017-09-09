@@ -3,6 +3,7 @@ This file contains highlights of what changes on each version of the [Web Storag
 
 ## Version 1.3.0
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
+- Updated the package dependencies.
 
 ## Version 1.2.0
 - Added support for [Browserslist](http://browserl.ist) shared settings.
