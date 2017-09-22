@@ -1,31 +1,24 @@
-'use strict';
-
-const {expect} = require('chai');
-const StorageBackend = require('dom-storage');
-const {Storage} = require('../src');
+import {expect} from 'chai';
+import {Storage} from '../src';
 
 /**
  * @test {Storage}
  */
 describe('Storage', () => {
-  let backend;
-  beforeEach('reset the storage backend', () =>
-    backend = new StorageBackend(null, {strict: true})
-  );
 
   /**
    * @test {Storage#keys}
    */
   describe('#keys', () => {
     it('should return an empty array for an empty storage', () => {
-      expect(new Storage(backend).keys).to.be.empty;
+      expect(new Storage(sessionStorage).keys).to.be.empty;
     });
 
     it('should return the list of keys for a non-empty storage', () => {
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
+      sessionStorage.setItem('foo', 'bar');
+      sessionStorage.setItem('bar', 'baz');
 
-      let keys = new Storage(backend).keys;
+      let keys = new Storage(sessionStorage).keys;
       expect(keys).to.have.lengthOf(2);
       expect(keys[0]).to.equal('foo');
       expect(keys[1]).to.equal('bar');
@@ -37,13 +30,13 @@ describe('Storage', () => {
    */
   describe('#length', () => {
     it('should return zero for an empty storage', () => {
-      expect(new Storage(backend)).to.have.lengthOf(0);
+      expect(new Storage(sessionStorage)).to.have.lengthOf(0);
     });
 
     it('should return the number of entries for a non-empty storage', () => {
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
-      expect(new Storage(backend)).to.have.lengthOf(2);
+      sessionStorage.setItem('foo', 'bar');
+      sessionStorage.setItem('bar', 'baz');
+      expect(new Storage(sessionStorage)).to.have.lengthOf(2);
     });
   });
 
@@ -57,7 +50,7 @@ describe('Storage', () => {
     );
 
     it('should trigger an event when a value is added', done => {
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(1);
 
@@ -74,9 +67,9 @@ describe('Storage', () => {
     });
 
     it('should trigger an event when a value is updated', done => {
-      backend.setItem('foo', 'bar');
+      sessionStorage.setItem('foo', 'bar');
 
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(1);
 
@@ -93,9 +86,9 @@ describe('Storage', () => {
     });
 
     it('should trigger an event when a value is removed', done => {
-      backend.setItem('foo', 'bar');
+      sessionStorage.setItem('foo', 'bar');
 
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(1);
 
@@ -112,10 +105,10 @@ describe('Storage', () => {
     });
 
     it('should trigger an event when the storage is cleared', done => {
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
+      sessionStorage.setItem('foo', 'bar');
+      sessionStorage.setItem('bar', 'baz');
 
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(2);
 
@@ -143,15 +136,15 @@ describe('Storage', () => {
    */
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       let iterator = storage[Symbol.iterator]();
       expect(iterator.next().done).to.be.true;
     });
 
     it('should return a value iterator if storage is not empty', () => {
-      let storage = new Storage(backend);
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
+      let storage = new Storage(sessionStorage);
+      sessionStorage.setItem('foo', 'bar');
+      sessionStorage.setItem('bar', 'baz');
 
       let iterator = storage[Symbol.iterator]();
       let next = iterator.next();
@@ -173,10 +166,10 @@ describe('Storage', () => {
    */
   describe('#clear()', () => {
     it('should remove all storage entries', () => {
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
+      sessionStorage.setItem('foo', 'bar');
+      sessionStorage.setItem('bar', 'baz');
 
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       expect(storage).to.have.lengthOf(2);
 
       storage.clear();
@@ -189,14 +182,14 @@ describe('Storage', () => {
    */
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       expect(storage.get('foo')).to.be.null;
       expect(storage.get('foo', '123')).to.equal('123');
 
-      backend.setItem('foo', 'bar');
+      sessionStorage.setItem('foo', 'bar');
       expect(storage.get('foo')).to.equal('bar');
 
-      backend.setItem('foo', '123');
+      sessionStorage.setItem('foo', '123');
       expect(storage.get('foo')).to.equal('123');
     });
   });
@@ -206,24 +199,24 @@ describe('Storage', () => {
    */
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       expect(storage.getObject('foo')).to.be.null;
       expect(storage.getObject('foo', {key: 'value'})).to.deep.equal({key: 'value'});
 
-      backend.setItem('foo', '123');
+      sessionStorage.setItem('foo', '123');
       expect(storage.getObject('foo')).to.equal(123);
 
-      backend.setItem('foo', '"bar"');
+      sessionStorage.setItem('foo', '"bar"');
       expect(storage.getObject('foo')).to.equal('bar');
 
-      backend.setItem('foo', '{"key": "value"}');
+      sessionStorage.setItem('foo', '{"key": "value"}');
       expect(storage.getObject('foo')).to.be.an('object')
         .and.have.property('key').that.equal('value');
     });
 
     it('should return the default value if the value can\'t be deserialized', () => {
-      let storage = new Storage(backend);
-      backend.setItem('foo', 'bar');
+      let storage = new Storage(sessionStorage);
+      sessionStorage.setItem('foo', 'bar');
       expect(storage.getObject('foo', 'defaultValue')).to.equal('defaultValue');
     });
   });
@@ -233,13 +226,13 @@ describe('Storage', () => {
    */
   describe('#has()', () => {
     it('should return `false` if the specified key is not contained', () => {
-      expect(new Storage(backend).has('foo')).to.be.false;
+      expect(new Storage(sessionStorage).has('foo')).to.be.false;
     });
 
     it('should return `true` if the specified key is contained', () => {
-      backend.setItem('foo', 'bar');
+      sessionStorage.setItem('foo', 'bar');
 
-      let storage = new Storage(backend);
+      let storage = new Storage(sessionStorage);
       expect(storage.has('foo')).to.be.true;
       expect(storage.has('bar')).to.be.false;
     });
@@ -250,18 +243,18 @@ describe('Storage', () => {
    */
   describe('#remove()', () => {
     it('should properly remove the storage entries', () => {
-      backend.setItem('foo', 'bar');
-      backend.setItem('bar', 'baz');
+      sessionStorage.setItem('foo', 'bar');
+      sessionStorage.setItem('bar', 'baz');
 
-      let storage = new Storage(backend);
-      expect(backend.getItem('foo')).to.equal('bar');
+      let storage = new Storage(sessionStorage);
+      expect(sessionStorage.getItem('foo')).to.equal('bar');
 
       storage.remove('foo');
-      expect(backend.getItem('foo')).to.be.null;
-      expect(backend.getItem('bar')).to.equal('baz');
+      expect(sessionStorage.getItem('foo')).to.be.null;
+      expect(sessionStorage.getItem('bar')).to.equal('baz');
 
       storage.remove('bar');
-      expect(backend.getItem('bar')).to.be.null;
+      expect(sessionStorage.getItem('bar')).to.be.null;
     });
   });
 
@@ -270,14 +263,14 @@ describe('Storage', () => {
    */
   describe('#set()', () => {
     it('should properly set the storage entries', () => {
-      let storage = new Storage(backend);
-      expect(backend.getItem('foo')).to.be.null;
+      let storage = new Storage(sessionStorage);
+      expect(sessionStorage.getItem('foo')).to.be.null;
 
       storage.set('foo', 'bar');
-      expect(backend.getItem('foo')).to.equal('bar');
+      expect(sessionStorage.getItem('foo')).to.equal('bar');
 
       storage.set('foo', '123');
-      expect(backend.getItem('foo')).to.equal('123');
+      expect(sessionStorage.getItem('foo')).to.equal('123');
     });
   });
 
@@ -286,17 +279,17 @@ describe('Storage', () => {
    */
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
-      let storage = new Storage(backend);
-      expect(backend.getItem('foo')).to.be.null;
+      let storage = new Storage(sessionStorage);
+      expect(sessionStorage.getItem('foo')).to.be.null;
 
       storage.setObject('foo', 123);
-      expect(backend.getItem('foo')).to.equal('123');
+      expect(sessionStorage.getItem('foo')).to.equal('123');
 
       storage.setObject('foo', 'bar');
-      expect(backend.getItem('foo')).to.equal('"bar"');
+      expect(sessionStorage.getItem('foo')).to.equal('"bar"');
 
       storage.setObject('foo', {key: 'value'});
-      expect(backend.getItem('foo')).to.equal('{"key":"value"}');
+      expect(sessionStorage.getItem('foo')).to.equal('{"key":"value"}');
     });
   });
 });
