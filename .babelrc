@@ -1,5 +1,4 @@
 {
-  "comments": false,
   "presets": [
     ["env", {
       "targets": {"browsers": [
