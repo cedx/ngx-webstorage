@@ -33,7 +33,7 @@ gulp.task('clean', () => del([
 /**
  * Sends the results of the code coverage.
  */
-gulp.task('coverage', ['test'], () => _exec('node_modules/.bin/coveralls', ['var/lcov.info']));
+gulp.task('coverage', ['test:browser'], () => _exec('node_modules/.bin/coveralls', ['var/lcov.info']));
 
 /**
  * Checks the package dependencies.
@@ -69,14 +69,10 @@ gulp.task('lint', () => gulp.src(['*.js', 'src/**/*.js', 'test/**/*.js'])
 /**
  * Runs the unit tests.
  */
-gulp.task('test', () => _exec('node_modules/.bin/nyc', [
-  '--report-dir=var',
-  '--reporter=lcovonly',
-  normalize('node_modules/.bin/mocha'),
-  '--compilers=js:babel-register',
-  '--recursive',
-  '--require=babel-polyfill'
-]));
+gulp.task('test', () => {
+  if (process.platform == 'win32') process.env.FIREFOX_BIN = 'firefox.exe';
+  return _exec('node_modules/.bin/karma', ['start', '--single-run']);
+});
 
 /**
  * Spawns a new process using the specified command.
