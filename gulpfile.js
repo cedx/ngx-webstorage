@@ -33,7 +33,7 @@ gulp.task('clean', () => del([
 /**
  * Sends the results of the code coverage.
  */
-gulp.task('coverage', ['test:browser'], () => _exec('node_modules/.bin/coveralls', ['var/lcov.info']));
+gulp.task('coverage', ['test'], () => _exec('node_modules/.bin/coveralls', ['var/lcov.info']));
 
 /**
  * Checks the package dependencies.

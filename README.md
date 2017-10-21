@@ -1,5 +1,5 @@
 # Web Storage for Angular
-![Runtime](https://img.shields.io/badge/angular-%3E%3D4.3-brightgreen.svg) ![Release](https://img.shields.io/npm/v/@cedx/ngx-webstorage.svg) ![License](https://img.shields.io/npm/l/@cedx/ngx-webstorage.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-webstorage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-webstorage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-webstorage/badge.svg) ![Build](https://travis-ci.org/cedx/ngx-webstorage.svg)
+![Runtime](https://img.shields.io/badge/angular-%3E%3D4.4-brightgreen.svg) ![Release](https://img.shields.io/npm/v/@cedx/ngx-webstorage.svg) ![License](https://img.shields.io/npm/l/@cedx/ngx-webstorage.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-webstorage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-webstorage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-webstorage/badge.svg) ![Build](https://travis-ci.org/cedx/ngx-webstorage.svg)
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
@@ -23,7 +23,7 @@ import {AppComponent} from './app_component';
 
 // The root module.
 export class AppModule {
-  
+
   // The class decorators.
   static get annotations() {
     return [new NgModule({
@@ -45,7 +45,7 @@ import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
 
 // The main component.
 export class AppComponent {
-  
+
   // The class decorators.
   static get annotations() {
     return [new Component({
@@ -189,7 +189,7 @@ localStorage.set('anotherKey', 'anotherValue');
 for (let entry of localStorage) {
   console.log(entry);
   // Round 1: ["foo", "bar"]
-  // Round 2: ["anotherKey", "anotherValue"] 
+  // Round 2: ["anotherKey", "anotherValue"]
 }
 ```
 
