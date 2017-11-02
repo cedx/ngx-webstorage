@@ -1,13 +1,13 @@
 {
   "author": "Cédric Belin <cedric@belin.io>",
-  "bugs": "https://github.com/cedx/ngx-webstorage/issues",
+  "bugs": "https://github.com/cedx/ngx-webstorage.js/issues",
   "description": "Web Storage services for Angular.",
-  "homepage": "https://github.com/cedx/ngx-webstorage",
+  "homepage": "https://github.com/cedx/ngx-webstorage.js",
   "license": "MIT",
   "main": "./lib/index",
   "module": "./src/index",
   "name": "@cedx/ngx-webstorage",
-  "repository": "cedx/ngx-webstorage",
+  "repository": "cedx/ngx-webstorage.js",
   "version": "1.3.0",
   "devDependencies": {
     "@angular/core": "^4.4.6",
@@ -51,7 +51,6 @@
   },
   "scripts": {
     "coverage": "coveralls var/lcov.info",
-    "prepare": "gulp build",
     "test": "nyc mocha --recursive --require=babel-register"
   }
 }

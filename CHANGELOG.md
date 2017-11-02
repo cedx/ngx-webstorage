@@ -1,5 +1,5 @@
 # Changelog
-This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage) project.
+This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage.js) project.
 
 ## Version 1.3.0
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
