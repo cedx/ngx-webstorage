@@ -1,38 +1,20 @@
-'use strict';
-
-const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
-
 module.exports = config => config.set({
-  browsers: ['Firefox'],
-  frameworks: ['mocha'],
-  client: {
-    mocha: {opts: true}
+  browsers: ['ChromeHeadless'],
+  files: ['src/**/*.ts', 'test/**/*.ts'],
+  frameworks: ['mocha', 'karma-typescript'],
+  karmaTypescriptConfig: {
+    include: ['test/**/*.ts'],
+    reports: {lcovonly: {
+      directory: 'var',
+      filename: 'lcov.info',
+      subdirectory: () => ''
+    }},
+    tsconfig: 'tsconfig.json'
   },
-  coverageReporter: {
-    dir: 'var',
-    includeAllSources: true,
-    subdir: '.',
-    type: 'lcovonly'
-  },
-  files: [
-    {pattern: 'test/**/*.js', watched: false}
-  ],
   preprocessors: {
-    'src/**/*.js': ['coverage'],
-    'test/**/*.js': ['rollup']
+    'src/**/*.ts': ['karma-typescript', 'coverage'],
+    'test/**/*.ts': ['karma-typescript']
   },
-  reporters: [
-    'progress',
-    'coverage'
-  ],
-  rollupPreprocessor: {
-    format: 'iife',
-    name: 'webStorage',
-    plugins: [
-      nodeResolve(),
-      commonjs({namedExports: {chai: ['expect']}})
-    ],
-    sourcemap: 'inline'
-  }
+  reporters: ['progress', 'karma-typescript', 'coverage'],
+  singleRun: true
 });
