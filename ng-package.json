@@ -3,7 +3,7 @@
   "dest": "build",
   "lib": {
     "entryFile": "src/index.ts",
-    "flatModuleFile": "ngx-core",
+    "flatModuleFile": "ngx-webstorage",
     "languageLevel": ["dom", "es2018"]
   }
 }

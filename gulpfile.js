@@ -1,88 +1,100 @@
 'use strict';
-
-const {david} = require('@cedx/gulp-david');
 const {spawn} = require('child_process');
 const del = require('del');
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
-const {normalize} = require('path');
+const {promises} = require('fs');
+const {dest, parallel, series, src, task, watch} = require('gulp');
+const replace = require('gulp-replace');
+const {delimiter, normalize, resolve} = require('path');
+
+// Initialize the build system.
+const _path = 'PATH' in process.env ? process.env.PATH : '';
+const _vendor = resolve('node_modules/.bin');
+if (!_path.includes(_vendor)) process.env.PATH = `${_vendor}${delimiter}${_path}`;
 
 /**
- * Runs the default tasks.
+ * The file patterns providing the list of source files.
+ * @type {string[]}
  */
-gulp.task('default', ['build']);
+const sources = ['*.js', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
 
 /**
- * Builds the client scripts.
+ * Builds the project.
  */
-gulp.task('build', () => gulp.src('src/**/*.js')
-  .pipe(babel())
-  .pipe(gulp.dest('lib'))
-);
+task('build:esm', () => src(['build/esm2015/**/*.js', '!**/ngx-webstorage.js']).pipe(replace(/\/\/# sourceMappingURL=.*$/g, '')).pipe(dest('lib')));
+task('build:src', () => _exec('ng', ['build']));
+task('build:types', () => src(['build/**/*.d.ts', '!**/ngx-webstorage.d.ts']).pipe(dest('lib')));
+task('build', series('build:src', parallel('build:esm', 'build:types')));
 
 /**
- * Deletes all generated files and resets any saved state.
+ * Deletes all generated files and reset any saved state.
  */
-gulp.task('clean', () => del([
-  '.nyc_output',
-  'lib',
-  'var/**/*'
-]));
+task('clean', () => del(['.nyc_output', 'build', 'coverage', 'doc/api', 'lib', 'var/**/*', 'web']));
 
 /**
- * Sends the results of the code coverage.
+ * Uploads the results of the code coverage.
  */
-gulp.task('coverage', ['test'], () => _exec('node_modules/.bin/coveralls', ['var/lcov.info']));
-
-/**
- * Checks the package dependencies.
- */
-gulp.task('deps', ['deps:outdated', 'deps:security']);
-gulp.task('deps:outdated', () => gulp.src('package.json').pipe(david()));
-gulp.task('deps:security', () => _exec('node_modules/.bin/nsp', ['check']));
+task('coverage:fix', () => src('var/lcov.info').pipe(replace(/ngx-webstorage\.ts([/\\])src/g, 'ngx-webstorage.js$1src')).pipe(dest('var')));
+task('coverage:upload', () => _exec('coveralls', ['var/lcov.info']));
+task('coverage', series('coverage:fix', 'coverage:upload'));
 
 /**
  * Builds the documentation.
  */
-gulp.task('doc', async () => {
-  await del('doc/api');
-  return _exec('node_modules/.bin/esdoc');
+task('doc', async () => {
+  await promises.copyFile('CHANGELOG.md', 'doc/about/changelog.md');
+  await promises.copyFile('LICENSE.md', 'doc/about/license.md');
+  await _exec('typedoc');
+  return _exec('mkdocs', ['build']);
 });
 
 /**
  * Fixes the coding standards issues.
  */
-gulp.task('fix', () => gulp.src(['*.js', 'src/**/*.js', 'test/**/*.js'], {base: '.'})
-  .pipe(eslint({fix: true}))
-  .pipe(gulp.dest('.'))
-);
+task('fix', () => _exec('tslint', ['--fix', ...sources]));
 
 /**
- * Performs static analysis of source code.
+ * Performs the static analysis of source code.
  */
-gulp.task('lint', () => gulp.src(['*.js', 'src/**/*.js', 'test/**/*.js'])
-  .pipe(eslint())
-  .pipe(eslint.format())
-);
+task('lint', () => _exec('tslint', sources));
 
 /**
- * Runs the unit tests.
+ * Runs the test suites.
  */
-gulp.task('test', () => {
-  if (process.platform == 'win32') process.env.FIREFOX_BIN = 'firefox.exe';
-  return _exec('node_modules/.bin/karma', ['start', '--single-run']);
+task('test', () => _exec('karma', ['start']));
+
+/**
+ * Upgrades the project to the latest revision.
+ */
+task('upgrade', async () => {
+  await _exec('git', ['reset', '--hard']);
+  await _exec('git', ['fetch', '--all', '--prune']);
+  await _exec('git', ['pull', '--rebase']);
+  await _exec('npm', ['install', '--ignore-scripts']);
+  return _exec('npm', ['update', '--dev']);
 });
+
+/**
+ * Watches for file changes.
+ */
+task('watch', () => {
+  watch('src/**/*.ts', {ignoreInitial: false}, task('build'));
+  watch('test/**/*.ts', task('test'));
+});
+
+/**
+ * Runs the default tasks.
+ */
+task('default', task('build'));
 
 /**
  * Spawns a new process using the specified command.
  * @param {string} command The command to run.
  * @param {string[]} [args] The command arguments.
- * @param {object} [options] The settings to customize how the process is spawned.
- * @return {Promise} Completes when the command is finally terminated.
+ * @param {Partial<SpawnOptions>} [options] The settings to customize how the process is spawned.
+ * @return {Promise<void>} Completes when the command is finally terminated.
  */
-async function _exec(command, args = [], options = {shell: true, stdio: 'inherit'}) {
-  return new Promise((resolve, reject) => spawn(normalize(command), args, options)
-    .on('close', code => code ? reject(new Error(`${command}: ${code}`)) : resolve())
+function _exec(command, args = [], options = {}) {
+  return new Promise((fulfill, reject) => spawn(normalize(command), args, Object.assign({shell: true, stdio: 'inherit'}, options))
+    .on('close', code => code ? reject(new Error(`${command}: ${code}`)) : fulfill())
   );
 }
