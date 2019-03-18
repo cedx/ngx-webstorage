@@ -1,9 +1,20 @@
 /.*
 
-/doc/
+/build/
+/coverage/
+/doc/api/
+/share/
+/src/
 /test/
 /var/
-/www/
+/web/
 
+/*.code-workspace
 /*.iml
 /*.js
+/*.yaml
+/*.yml
+/angular.json
+/ng-package.json
+/tsconfig.json
+/lib/**/*.map
