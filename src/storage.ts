@@ -58,6 +58,7 @@ export class Storage {
 
   /**
    * Returns a new iterator that allows iterating the entries of this storage.
+   * @return An iterator for the entries of this storage.
    */
   *[Symbol.iterator]() {
     for (let key of this.keys) yield [key, this.get(key)];
