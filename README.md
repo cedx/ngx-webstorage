@@ -227,9 +227,9 @@ localStorage.setObject('foo', {bar: 'baz'});
 ```
 
 ## See also
-- [API reference](https://cedx.github.io/ngx-webstorage.js)
+- [API reference](https://dev.belin.io/ngx-webstorage.js/api)
 - [Code coverage](https://coveralls.io/github/cedx/ngx-webstorage.js)
 - [Continuous integration](https://travis-ci.org/cedx/ngx-webstorage.js)
 
 ## License
-[Web Storage for Angular](https://github.com/cedx/ngx-webstorage.js) is distributed under the MIT License.
+[Web Storage for Angular](https://dev.belin.io/ngx-webstorage.js) is distributed under the MIT License.

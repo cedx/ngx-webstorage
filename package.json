@@ -2,7 +2,7 @@
   "author": "Cédric Belin <cedric@belin.io>",
   "bugs": "https://github.com/cedx/ngx-webstorage.js/issues",
   "description": "Angular services for interacting with the Web Storage APIs.",
-  "homepage": "https://github.com/cedx/ngx-webstorage.js",
+  "homepage": "https://dev.belin.io/ngx-webstorage.js",
   "license": "MIT",
   "main": "lib/index.js",
   "name": "@cedx/ngx-webstorage",

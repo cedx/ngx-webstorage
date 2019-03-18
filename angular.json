@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "defaultProject": "library",
+  "version": 1,
+  "projects": {
+    "library": {
+      "prefix": "ngx",
+      "projectType": "library",
+      "root": "",
+      "sourceRoot": "src",
+      "schematics": {
+        "@schematics/angular:component": {"style": "scss"}
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "project": "ng-package.json",
+            "tsConfig": "src/tsconfig.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "karmaConfig": "karma.conf.js",
+            "main": "test/index.ts",
+            "tsConfig": "src/tsconfig.json"
+          }
+        }
+      }
+    }
+  }
+}
