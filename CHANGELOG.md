@@ -1,5 +1,15 @@
 # Changelog
-This file contains highlights of what changes on each version of the [Web Storage for Angular](https://github.com/cedx/ngx-webstorage.js) project.
+
+## Version 2.0.0
+- Breaking change: dropped the [CommonJS](https://nodejs.org/api/modules.html) modules in favor of [ECMAScript](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) ones.
+- Breaking change: ported the source code to [TypeScript](https://www.typescriptlang.org).
+- Breaking change: renamed the `StorageModule` module to `NgxWebStorage`.
+- Added a user guide based on [MkDocs](http://www.mkdocs.org).
+- Replaced [ESDoc](https://esdoc.org) documentation generator by [TypeDoc](https://typedoc.org).
+- Replaced [ESLint](https://eslint.org) static analyzer by [TSLint](https://palantir.github.io/tslint).
+- Removed the dependency on [Babel](https://babeljs.io) compiler.
+- Updated the build system to [Gulp](https://gulpjs.com) version 4.
+- Updated the package dependencies.
 
 ## Version 1.3.0
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
