@@ -1,10 +1,15 @@
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 
 /**
  * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
  */
 export class Storage {
+
+  /**
+   * The class name.
+   */
+  readonly [Symbol.toStringTag]: string = 'Storage';
 
   /**
    * Initializes a new instance of the class.
@@ -23,14 +28,6 @@ export class Storage {
      * @type {Subject<KeyValueChangeRecord>}
      */
     this._onChanges = new Subject;
-  }
-
-  /**
-   * The class name.
-   * @type {string}
-   */
-  get [Symbol.toStringTag]() {
-    return 'Storage';
   }
 
   /**
