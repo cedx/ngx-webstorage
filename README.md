@@ -11,7 +11,7 @@ $ npm install --save @cedx/ngx-webstorage
 ```
 
 ## Usage
-This package provides two [injection tokens](https://angular.io/docs/js/latest/api/core/index/InjectionToken-class.html) dedicated to the Web Storage: `LocalStorage` and `SessionStorage`.
+This package provides two [injection tokens](https://angular.io/docs/js/latest/api/core/index/InjectionToken-class.html) dedicated to the Web Storage: `localStorage` and `sessionStorage`.
 
 These tokens are backed by the `Storage` class which provides access to the underlying Web APIs. They need to be registered with the dependency injector by importing their module, the `StorageModule` class:
 
@@ -41,7 +41,7 @@ Then, they will be available in the constructor of the component classes:
 
 ```javascript
 import {Component} from '@angular/core';
-import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
+import {localStorage, sessionStorage} from '@cedx/ngx-webstorage';
 
 // The main component.
 export class AppComponent {
@@ -56,7 +56,7 @@ export class AppComponent {
 
   // The constructor parameters.
   static get parameters() {
-    return [LocalStorage, SessionStorage];
+    return [localStorage, sessionStorage];
   }
 
   // Initializes a new instance of the class.

@@ -1,4 +1,4 @@
-export * from './di_tokens';
 export * from './map';
-export * from './module';
+export * from './ng_module';
 export * from './storage';
+export * from './tokens';
