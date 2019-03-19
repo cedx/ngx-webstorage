@@ -20,9 +20,9 @@ const sources = ['*.js', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
 /**
  * Builds the project.
  */
-task('build:esm', () => src(['build/esm2015/**/*.js', '!**/ngx-webstorage.js']).pipe(replace(/\/\/# sourceMappingURL=.*$/g, '')).pipe(dest('lib')));
+task('build:esm', () => src(['build/esm2015/**/*.js']).pipe(replace(/\/\/# sourceMappingURL=.*$/g, '')).pipe(dest('lib')));
 task('build:src', () => _exec('ng', ['build']));
-task('build:types', () => src(['build/**/*.d.ts', '!**/ngx-webstorage.d.ts']).pipe(dest('lib')));
+task('build:types', () => src(['build/**/*.d.ts', 'build/*.metadata.json']).pipe(dest('lib')));
 task('build', series('build:src', parallel('build:esm', 'build:types')));
 
 /**

@@ -1,13 +1,14 @@
 {
   "author": "Cédric Belin <cedric@belin.io>",
   "bugs": "https://github.com/cedx/ngx-webstorage.js/issues",
-  "description": "Angular services for interacting with the Web Storage APIs.",
+  "description": "Angular services for interacting with the Web Storage.",
   "homepage": "https://dev.belin.io/ngx-webstorage.js",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/ngx-webstorage.js",
+  "metadata": "lib/ngx-webstorage.metadata.json",
   "name": "@cedx/ngx-webstorage",
   "repository": "github:cedx/ngx-webstorage.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/ngx-webstorage.d.ts",
   "version": "2.0.0",
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.6",
