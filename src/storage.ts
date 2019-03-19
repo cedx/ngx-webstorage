@@ -129,11 +129,41 @@ export abstract class BaseStorage {
 
   /**
    * Serializes and associates a given value to the specified key.
-   * @param {string} key The key to seek for.
-   * @param {*} value The item value.
-   * @emits {KeyValueChangeRecord[]} The "changes" event.
+   * @param key The key to seek for.
+   * @param value The item value.
+   * @return This instance.
    */
-  setObject(key, value) {
-    this.set(key, JSON.stringify(value));
+  setObject(key: string, value: any): this {
+    return this.set(key, JSON.stringify(value));
+  }
+}
+
+/**
+ * Provides access to the local storage.
+ */
+@Injectable({providedIn: 'root'})
+export class LocalStorage extends BaseStorage {
+
+  /**
+   * Creates a new storage service.
+   * @param document The current HTML document.
+   */
+  constructor(@Inject(DOCUMENT) document: Document) {
+    super(document.defaultView!.localStorage);
+  }
+}
+
+/**
+ * Provides access to the session storage.
+ */
+@Injectable({providedIn: 'root'})
+export class SessionStorage extends BaseStorage {
+
+  /**
+   * Creates a new storage service.
+   * @param document The current HTML document.
+   */
+  constructor(@Inject(DOCUMENT) document: Document) {
+    super(document.defaultView!.sessionStorage);
   }
 }
