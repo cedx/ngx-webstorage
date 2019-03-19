@@ -1,11 +1,11 @@
 # Installation
 
 ## Requirements
-Before installing **Core Library for Angular**, you need to make sure you have [Node.js](https://nodejs.org)
+Before installing **Web Storage for Angular**, you need to make sure you have [Node.js](https://nodejs.org)
 and [npm](https://www.npmjs.com), the Node.js package manager, up and running.
 
 !!! warning
-    Core Library for Angular requires Node.js >= **10.15.0**.
+    Web Storage for Angular requires Node.js >= **10.15.0**.
 
 You can verify if you're already good to go with the following commands:
 
@@ -27,14 +27,14 @@ npm --version
 From a command prompt, run:
 
 ```shell
-npm install @cedx/ngx-core
+npm install @cedx/ngx-webstorage
 ```
 
 ### 2. Import it
 Now in your [TypeScript](https://www.typescriptlang.org) code, you can use:
 
 ```ts
-import {NgxCoreModule} from '@cedx/ngx-core';
+import {NgxWebStorage} from '@cedx/ngx-webstorage';
 ```
 
 !!! info

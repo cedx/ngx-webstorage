@@ -1,16 +1,16 @@
-site_name: Core Library for Angular
+site_name: Web Storage for Angular
 site_description: General purpose library for Angular applications, implemented in TypeScript.
 site_author: Cédric Belin - cedric@belin.io
-site_url: https://dev.belin.io/ngx-core.js
+site_url: https://dev.belin.io/ngx-webstorage.js
 
 docs_dir: doc
 site_dir: web
 
 repo_name: GitHub
-repo_url: https://github.com/cedx/ngx-core.js
+repo_url: https://github.com/cedx/ngx-webstorage.js
 edit_uri: ''
 
-copyright: Copyright &copy; 2016 - 2019 Cédric Belin
+copyright: Copyright &copy; 2017 - 2019 Cédric Belin
 google_analytics:
   - !!python/object/apply:os.getenv [GOOGLE_ANALYTICS_ID]
   - auto
