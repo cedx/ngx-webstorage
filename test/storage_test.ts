@@ -1,5 +1,7 @@
+/* tslint:disable: no-unused-expression */
 import {expect} from 'chai';
-import {Storage} from '../src';
+import {Subscription} from 'rxjs';
+import {SessionStorage} from '../src';
 
 /**
  * @test {Storage}
@@ -11,14 +13,14 @@ describe('Storage', () => {
    */
   describe('#keys', () => {
     it('should return an empty array for an empty storage', () => {
-      expect(new Storage(sessionStorage).keys).to.be.empty;
+      expect(new SessionStorage(window.document).keys).to.be.empty;
     });
 
     it('should return the list of keys for a non-empty storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      let keys = new Storage(sessionStorage).keys;
+      const keys = new SessionStorage(window.document).keys;
       expect(keys).to.have.lengthOf(2);
       expect(keys[0]).to.equal('foo');
       expect(keys[1]).to.equal('bar');
@@ -30,13 +32,13 @@ describe('Storage', () => {
    */
   describe('#length', () => {
     it('should return zero for an empty storage', () => {
-      expect(new Storage(sessionStorage)).to.have.lengthOf(0);
+      expect(new SessionStorage(window.document)).to.have.lengthOf(0);
     });
 
     it('should return the number of entries for a non-empty storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
-      expect(new Storage(sessionStorage)).to.have.lengthOf(2);
+      expect(new SessionStorage(window.document)).to.have.lengthOf(2);
     });
   });
 
@@ -44,17 +46,17 @@ describe('Storage', () => {
    * @test {Storage#onChanges}
    */
   describe('#onChanges', () => {
-    let subscription;
+    let subscription: Subscription;
     afterEach('cancel the subscription', () =>
       subscription.unsubscribe()
     );
 
     it('should trigger an event when a value is added', done => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(1);
 
-        let record = changes[0];
+        const record = changes[0];
         expect(record).to.be.an('object');
         expect(record).to.have.property('key').that.equal('foo');
         expect(record).to.have.property('currentValue').that.equal('bar');
@@ -69,11 +71,11 @@ describe('Storage', () => {
     it('should trigger an event when a value is updated', done => {
       sessionStorage.setItem('foo', 'bar');
 
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(1);
 
-        let record = changes[0];
+        const record = changes[0];
         expect(record).to.be.an('object');
         expect(record).to.have.property('key').that.equal('foo');
         expect(record).to.have.property('currentValue').that.equal('baz');
@@ -88,11 +90,11 @@ describe('Storage', () => {
     it('should trigger an event when a value is removed', done => {
       sessionStorage.setItem('foo', 'bar');
 
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(1);
 
-        let record = changes[0];
+        const record = changes[0];
         expect(record).to.be.an('object');
         expect(record).to.have.property('key').that.equal('foo');
         expect(record).to.have.property('currentValue').that.is.null;
@@ -108,7 +110,7 @@ describe('Storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       subscription = storage.onChanges.subscribe(changes => {
         expect(changes).to.be.an('array').and.have.lengthOf(2);
 
@@ -136,17 +138,17 @@ describe('Storage', () => {
    */
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
-      let storage = new Storage(sessionStorage);
-      let iterator = storage[Symbol.iterator]();
+      const storage = new SessionStorage(window.document);
+      const iterator = storage[Symbol.iterator]();
       expect(iterator.next().done).to.be.true;
     });
 
     it('should return a value iterator if storage is not empty', () => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      let iterator = storage[Symbol.iterator]();
+      const iterator = storage[Symbol.iterator]();
       let next = iterator.next();
       expect(next.done).to.be.false;
       expect(next.value).to.be.an('array');
@@ -169,7 +171,7 @@ describe('Storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(storage).to.have.lengthOf(2);
 
       storage.clear();
@@ -182,7 +184,7 @@ describe('Storage', () => {
    */
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(storage.get('foo')).to.be.null;
       expect(storage.get('foo', '123')).to.equal('123');
 
@@ -199,7 +201,7 @@ describe('Storage', () => {
    */
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(storage.getObject('foo')).to.be.null;
       expect(storage.getObject('foo', {key: 'value'})).to.deep.equal({key: 'value'});
 
@@ -215,7 +217,7 @@ describe('Storage', () => {
     });
 
     it('should return the default value if the value can\'t be deserialized', () => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
       expect(storage.getObject('foo', 'defaultValue')).to.equal('defaultValue');
     });
@@ -226,13 +228,13 @@ describe('Storage', () => {
    */
   describe('#has()', () => {
     it('should return `false` if the specified key is not contained', () => {
-      expect(new Storage(sessionStorage).has('foo')).to.be.false;
+      expect(new SessionStorage(window.document).has('foo')).to.be.false;
     });
 
     it('should return `true` if the specified key is contained', () => {
       sessionStorage.setItem('foo', 'bar');
 
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(storage.has('foo')).to.be.true;
       expect(storage.has('bar')).to.be.false;
     });
@@ -246,7 +248,7 @@ describe('Storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(sessionStorage.getItem('foo')).to.equal('bar');
 
       storage.remove('foo');
@@ -263,7 +265,7 @@ describe('Storage', () => {
    */
   describe('#set()', () => {
     it('should properly set the storage entries', () => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(sessionStorage.getItem('foo')).to.be.null;
 
       storage.set('foo', 'bar');
@@ -279,7 +281,7 @@ describe('Storage', () => {
    */
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
-      let storage = new Storage(sessionStorage);
+      const storage = new SessionStorage(window.document);
       expect(sessionStorage.getItem('foo')).to.be.null;
 
       storage.setObject('foo', 123);

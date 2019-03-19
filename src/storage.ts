@@ -1,58 +1,44 @@
-import {Subject} from 'rxjs';
+import {DOCUMENT} from '@angular/common';
+import {Inject, Injectable, SimpleChange, SimpleChanges} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
 
 /**
  * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
  */
-export class Storage {
+export abstract class BaseStorage {
 
   /**
-   * The class name.
+   * The handler of "changes" events.
    */
-  readonly [Symbol.toStringTag]: string = 'Storage';
+  private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /**
-   * Initializes a new instance of the class.
-   * @param {Storage} backend The underlying data store.
+   * Creates a new storage service.
+   * @param _backend The underlying data store.
    */
-  constructor(backend) {
-
-    /**
-     * The underlying data store.
-     * @type {Storage}
-     */
-    this._backend = backend;
-
-    /**
-     * The handler of "changes" events.
-     * @type {Subject<KeyValueChangeRecord>}
-     */
-    this._onChanges = new Subject;
-  }
+  protected constructor(private readonly _backend: Storage) {}
 
   /**
    * The keys of this storage.
-   * @type {string[]}
    */
-  get keys() {
-    let keys = [];
-    for (let i = 0; i < this.length; i++) keys.push(this._backend.key(i));
+  get keys(): string[] {
+    const keys = [];
+    for (let i = 0; i < this.length; i++) keys.push(this._backend.key(i)!);
     return keys;
   }
 
   /**
    * The number of entries in this storage.
-   * @type {number}
    */
-  get length() {
+  get length(): number {
     return this._backend.length;
   }
 
   /**
    * The stream of "changes" events.
-   * @type {Observable<KeyValueChangeRecord[]>}
    */
-  get onChanges() {
+  get onChanges(): Observable<SimpleChanges> {
     return this._onChanges.asObservable();
   }
 
@@ -60,40 +46,40 @@ export class Storage {
    * Returns a new iterator that allows iterating the entries of this storage.
    * @return An iterator for the entries of this storage.
    */
-  *[Symbol.iterator]() {
-    for (let key of this.keys) yield [key, this.get(key)];
+  *[Symbol.iterator](): IterableIterator<[string, string | null]> {
+    for (const key of this.keys) yield [key, this.get(key)];
   }
 
   /**
    * Removes all entries from this storage.
-   * @emits {KeyValueChangeRecord[]} The "changes" event.
    */
-  clear() {
-    let changes = this.keys.map(key => ({currentValue: null, key, previousValue: this.get(key)}));
+  clear(): void {
+    const changes = {} as SimpleChanges;
+    for (const [key, value] of this) changes[key] = new SimpleChange(value, null, value === null);
     this._backend.clear();
     this._onChanges.next(changes);
   }
 
   /**
    * Gets the value associated to the specified key.
-   * @param {string} key The key to seek for.
-   * @param {*} defaultValue The default item value if it does not exist.
-   * @return {string} The value of the storage item, or the default value if the item is not found.
+   * @param key The key to seek for.
+   * @param defaultValue The default item value if it does not exist.
+   * @return The value of the storage item, or the default value if the item is not found.
    */
-  get(key, defaultValue = null) {
-    let value = this._backend.getItem(key);
+  get(key: string, defaultValue: string | null = null): string | null {
+    const value = this._backend.getItem(key);
     return typeof value == 'string' ? value : defaultValue;
   }
 
   /**
    * Gets the deserialized value associated to the specified key.
-   * @param {string} key The key to seek for.
-   * @param {*} defaultValue The default item value if it does not exist.
-   * @return {*} The deserialized value of the storage item, or the default value if the item is not found.
+   * @param key The key to seek for.
+   * @param defaultValue The default item value if it does not exist.
+   * @return The deserialized value of the storage item, or the default value if the item is not found.
    */
-  getObject(key, defaultValue = null) {
+  getObject(key: string, defaultValue: any = null): any {
     try {
-      let value = this.get(key);
+      const value = this.get(key);
       return typeof value == 'string' ? JSON.parse(value) : defaultValue;
     }
 
@@ -104,34 +90,41 @@ export class Storage {
 
   /**
    * Gets a value indicating whether this storage contains the specified key.
-   * @param {string} key The key to seek for.
-   * @return {boolean} `true` if this storage contains the specified key, otherwise `false`.
+   * @param key The key to seek for.
+   * @return `true` if this storage contains the specified key, otherwise `false`.
    */
-  has(key) {
+  has(key: string): boolean {
     return this.keys.includes(key);
   }
 
   /**
    * Removes the value associated to the specified key.
-   * @param {string} key The key to seek for.
-   * @emits {KeyValueChangeRecord[]} The "changes" event.
+   * @param key The key to seek for.
+   * @return The value associated with the specified key before it was removed.
    */
-  remove(key) {
-    let previousValue = this.get(key);
+  remove(key: string): string | null {
+    const previousValue = this.get(key);
     this._backend.removeItem(key);
-    this._onChanges.next([{currentValue: null, key, previousValue}]);
+    this._onChanges.next({
+      [key]: new SimpleChange(previousValue, null, previousValue === null)
+    });
+
+    return previousValue;
   }
 
   /**
    * Associates a given value to the specified key.
-   * @param {string} key The key to seek for.
-   * @param {string} value The item value.
-   * @emits {KeyValueChangeRecord[]} The "changes" event.
+   * @param key The key to seek for.
+   * @param value The item value.
    */
-  set(key, value) {
-    let previousValue = this.get(key);
+  set(key: string, value: string): this {
+    const previousValue = this.get(key);
     this._backend.setItem(key, value);
-    this._onChanges.next([{currentValue: value, key, previousValue}]);
+    this._onChanges.next({
+      [key]: new SimpleChange(previousValue, value, previousValue === null)
+    });
+
+    return this;
   }
 
   /**
