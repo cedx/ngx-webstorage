@@ -11,13 +11,13 @@ export abstract class BaseStorage {
   /**
    * The handler of "changes" events.
    */
-  private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
+  private _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /**
    * Creates a new storage service.
    * @param _backend The underlying data store.
    */
-  protected constructor(private readonly _backend: Storage) {}
+  protected constructor(private _backend: Storage) {}
 
   /**
    * The keys of this storage.
