@@ -34,7 +34,7 @@
 - Updated the package dependencies.
 
 ## Version 0.6.0
-- Raised the required [Node.js](https://nodejs.org) version.
+- Breaking change: raised the required [Node.js](https://nodejs.org) version.
 - Updated the package dependencies.
 
 ## Version 0.5.1
