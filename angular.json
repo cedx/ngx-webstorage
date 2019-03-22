@@ -18,14 +18,6 @@
             "project": "ng-package.json",
             "tsConfig": "src/tsconfig.json"
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "karmaConfig": "karma.conf.js",
-            "main": "test/index.ts",
-            "tsConfig": "src/tsconfig.json"
-          }
         }
       }
     }
