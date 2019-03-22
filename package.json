@@ -21,7 +21,7 @@
     "@angular/language-service": "^7.2.10",
     "@cedx/coveralls": "^8.4.0",
     "@types/chai": "^4.1.7",
-    "@types/node": "^11.11.4",
+    "@types/node": "^11.11.5",
     "chai": "^4.2.0",
     "codelyzer": "^4.5.0",
     "del": "^4.0.0",
