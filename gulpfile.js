@@ -29,14 +29,12 @@ task('build', series('build:src', parallel('build:esm', 'build:types'), 'build:c
 /**
  * Deletes all generated files and reset any saved state.
  */
-task('clean', () => del(['.nyc_output', 'build', 'coverage', 'doc/api', 'lib', 'var/**/*', 'web']));
+task('clean', () => del(['build', 'doc/api', 'lib', 'var/**/*', 'web']));
 
 /**
  * Uploads the results of the code coverage.
  */
-task('coverage:fix', () => src('var/lcov.info').pipe(replace(/ngx-webstorage\.ts([/\\])src/g, 'ngx-webstorage.js$1src')).pipe(dest('var')));
-task('coverage:upload', () => _exec('coveralls', ['var/lcov.info']));
-task('coverage', series('coverage:fix', 'coverage:upload'));
+task('coverage', () => _exec('coveralls', ['var/lcov.info']));
 
 /**
  * Builds the documentation.
