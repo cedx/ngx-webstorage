@@ -28,3 +28,36 @@ rules:
   trailing-comma: [true, {multiline: never, singleline: never}]
   triple-equals: false
   variable-name: [true, allow-leading-underscore, check-format]
+  # Codelyzer
+  angular-whitespace: [true, check-pipe, check-semicolon]
+  banana-in-box: true
+  contextual-life-cycle: true
+  decorator-not-allowed: true
+  enforce-component-selector: true
+  max-inline-declarations: [true, {styles: 5, template: 5}]
+  no-attribute-parameter-decorator: true
+  no-conflicting-life-cycle-hooks: true
+  no-forward-ref: true
+  no-input-prefix: true
+  no-input-rename: true
+  no-life-cycle-call: true
+  no-output-named-after-standard-event: true
+  no-output-on-prefix: true
+  no-output-rename: true
+  no-queries-parameter: true
+  no-template-call-expression: true
+  no-unused-css: true
+  pipe-impure: true
+  prefer-inline-decorator: true
+  prefer-output-readonly: true
+  template-conditional-complexity: true
+  template-cyclomatic-complexity: true
+  templates-no-negated-async: true
+  trackBy-function: true
+  use-host-property-decorator: true
+  use-input-property-decorator: true
+  use-life-cycle-interface: true
+  use-output-property-decorator: true
+  use-pipe-decorator: true
+  use-pipe-transform-interface: true
+  use-view-encapsulation: true
