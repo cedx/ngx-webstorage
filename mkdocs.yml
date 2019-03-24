@@ -1,5 +1,5 @@
 site_name: Web Storage for Angular
-site_description: General purpose library for Angular applications, implemented in TypeScript.
+site_description: Angular services for interacting with the Web Storage, implemented in TypeScript.
 site_author: Cédric Belin - cedric@belin.io
 site_url: https://dev.belin.io/ngx-webstorage.js
 

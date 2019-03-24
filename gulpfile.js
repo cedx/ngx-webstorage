@@ -59,7 +59,7 @@ task('lint', () => _exec('tslint', sources));
 /**
  * Runs the test suites.
  */
-task('test', () => _exec('karma', ['start']));
+task('test', () => _exec('ng', ['test', '--code-coverage']));
 
 /**
  * Upgrades the project to the latest revision.
