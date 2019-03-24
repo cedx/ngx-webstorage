@@ -3,13 +3,6 @@
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [TypeScript](https://www.typescriptlang.org).
 
-## Installing via [npm](https://www.npmjs.com)
-From a command prompt, run:
-
-```shell
-$ npm install --save @cedx/ngx-webstorage
-```
-
 ## Usage
 This package provides two [injection tokens](https://angular.io/docs/js/latest/api/core/index/InjectionToken-class.html) dedicated to the Web Storage: `localStorage` and `sessionStorage`.
 

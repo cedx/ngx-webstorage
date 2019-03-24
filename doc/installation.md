@@ -34,7 +34,7 @@ npm install @cedx/ngx-webstorage
 Now in your [TypeScript](https://www.typescriptlang.org) code, you can use:
 
 ```ts
-import {NgxWebStorage} from '@cedx/ngx-webstorage';
+import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
 ```
 
 !!! info
