@@ -1,11 +1,10 @@
-import {Subscription} from 'rxjs';
 import {SessionStorage} from '../src';
-import {afterEach} from '@angular/core/testing/src/testing_internal';
 
 /**
  * Tests the `Storage` class.
  */
 describe('Storage', () => {
+  beforeEach(() => sessionStorage.clear());
 
   /**
    * Tests the `Storage#keys` property.
@@ -21,8 +20,8 @@ describe('Storage', () => {
 
       const keys = new SessionStorage(window.document).keys;
       expect(keys.length).toEqual(2);
-      expect(keys[0]).toEqual('foo');
-      expect(keys[1]).toEqual('bar');
+      expect(keys).toContain('foo');
+      expect(keys).toContain('bar');
     });
   });
 
@@ -45,88 +44,69 @@ describe('Storage', () => {
    * Tests the `Storage#onChanges` property.
    */
   describe('#onChanges', () => {
-    let subscription: Subscription;
-    afterEach(() => subscription.unsubscribe());
-
     it('should trigger an event when a value is added', done => {
       const storage = new SessionStorage(window.document);
-      subscription = storage.onChanges.subscribe(changes => {
-        expect(changes).toBe('array').and.have.lengthOf(1);
-
-        const record = changes[0];
-        expect(record).toBe('object');
-        expect(record.key).toEqual('foo');
-        expect(record.currentValue).toEqual('bar');
-        expect(record.previousValue).toBeNull();
-
+      const subscription = storage.onChanges.subscribe(changes => {
+        expect(Object.keys(changes)).toEqual(['foo']);
+        expect(changes.foo.currentValue).toEqual('bar');
+        expect(changes.foo.previousValue).toBeNull();
         done();
       });
 
       storage.set('foo', 'bar');
+      subscription.unsubscribe();
     });
 
     it('should trigger an event when a value is updated', done => {
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
 
-      const storage = new SessionStorage(window.document);
-      subscription = storage.onChanges.subscribe(changes => {
-        expect(changes).toBe('array').and.have.lengthOf(1);
-
-        const record = changes[0];
-        expect(record).toBe('object');
-        expect(record.key).toEqual('foo');
-        expect(record.currentValue).toEqual('baz');
-        expect(record.previousValue).toEqual('bar');
-
+      const subscription = storage.onChanges.subscribe(changes => {
+        expect(Object.keys(changes)).toEqual(['foo']);
+        expect(changes.foo.currentValue).toEqual('baz');
+        expect(changes.foo.previousValue).toEqual('bar');
         done();
       });
 
       storage.set('foo', 'baz');
+      subscription.unsubscribe();
     });
 
     it('should trigger an event when a value is removed', done => {
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
 
-      const storage = new SessionStorage(window.document);
-      subscription = storage.onChanges.subscribe(changes => {
-        expect(changes).toBe('array').and.have.lengthOf(1);
-
-        const record = changes[0];
-        expect(record).toBe('object');
-        expect(record.key).toEqual('foo');
-        expect(record.currentValue).toBeNull();
-        expect(record.previousValue).toEqual('bar');
-
+      const subscription = storage.onChanges.subscribe(changes => {
+        expect(Object.keys(changes)).toEqual(['foo']);
+        expect(changes.foo.currentValue).toBeNull();
+        expect(changes.foo.previousValue).toEqual('bar');
         done();
       });
 
       storage.remove('foo');
+      subscription.unsubscribe();
     });
 
     it('should trigger an event when the storage is cleared', done => {
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      const storage = new SessionStorage(window.document);
-      subscription = storage.onChanges.subscribe(changes => {
-        expect(changes).toBe('array').and.have.lengthOf(2);
+      const subscription = storage.onChanges.subscribe(changes => {
+        const keys = Object.keys(changes);
+        expect(keys.length).toEqual(2);
+        expect(keys).toContain('foo');
+        expect(keys).toContain('bar');
 
-        let record = changes[0];
-        expect(record).toBe('object');
-        expect(record.key).toEqual('foo');
-        expect(record.currentValue).toBeNull();
-        expect(record.previousValue).toEqual('bar');
-
-        record = changes[1];
-        expect(record).toBe('object');
-        expect(record.key).toEqual('bar');
-        expect(record.currentValue).toBeNull();
-        expect(record.previousValue).toEqual('baz');
-
+        expect(changes.foo.currentValue).toBeNull();
+        expect(changes.foo.previousValue).toEqual('bar');
+        expect(changes.bar.currentValue).toBeNull();
+        expect(changes.bar.previousValue).toEqual('baz');
         done();
       });
 
       storage.clear();
+      subscription.unsubscribe();
     });
   });
 
@@ -146,17 +126,18 @@ describe('Storage', () => {
       sessionStorage.setItem('bar', 'baz');
 
       const iterator = storage[Symbol.iterator]();
+      const values = [];
+
       let next = iterator.next();
       expect(next.done).toBeFalsy();
-      expect(next.value).toBe('array');
-      expect(next.value[0]).toEqual('foo');
-      expect(next.value[1]).toEqual('bar');
-
+      values.push(next.value);
       next = iterator.next();
       expect(next.done).toBeFalsy();
-      expect(next.value[0]).toEqual('bar');
-      expect(next.value[1]).toEqual('baz');
+      values.push(next.value);
       expect(iterator.next().done).toBeTruthy();
+
+      expect(values).toContain(['foo', 'bar']);
+      expect(values).toContain(['bar', 'baz']);
     });
   });
 
@@ -165,10 +146,9 @@ describe('Storage', () => {
    */
   describe('#clear()', () => {
     it('should remove all storage entries', () => {
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
-
-      const storage = new SessionStorage(window.document);
       expect(storage.length).toEqual(2);
 
       storage.clear();
@@ -209,14 +189,12 @@ describe('Storage', () => {
       expect(storage.getObject('foo')).toEqual('bar');
 
       sessionStorage.setItem('foo', '{"key": "value"}');
-      expect(storage.getObject('foo')).toBe('object')
-        .and.have.property('key).toEqual('value');
+      expect(storage.getObject('foo')).toEqual({key: 'value'});
     });
 
     it('should return the default value if the value can\'t be deserialized', () => {
-      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
-      expect(storage.getObject('foo', 'defaultValue')).toEqual('defaultValue');
+      expect(new SessionStorage(window.document).getObject('foo', 'defaultValue')).toEqual('defaultValue');
     });
   });
 
@@ -229,9 +207,8 @@ describe('Storage', () => {
     });
 
     it('should return `true` if the specified key is contained', () => {
-      sessionStorage.setItem('foo', 'bar');
-
       const storage = new SessionStorage(window.document);
+      sessionStorage.setItem('foo', 'bar');
       expect(storage.has('foo')).toBeTruthy();
       expect(storage.has('bar')).toBeFalsy();
     });
@@ -242,10 +219,9 @@ describe('Storage', () => {
    */
   describe('#remove()', () => {
     it('should properly remove the storage entries', () => {
+      const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
-
-      const storage = new SessionStorage(window.document);
       expect(sessionStorage.getItem('foo')).toEqual('bar');
 
       storage.remove('foo');
@@ -264,10 +240,8 @@ describe('Storage', () => {
     it('should properly set the storage entries', () => {
       const storage = new SessionStorage(window.document);
       expect(sessionStorage.getItem('foo')).toBeNull();
-
       storage.set('foo', 'bar');
       expect(sessionStorage.getItem('foo')).toEqual('bar');
-
       storage.set('foo', '123');
       expect(sessionStorage.getItem('foo')).toEqual('123');
     });
@@ -280,13 +254,10 @@ describe('Storage', () => {
     it('should properly serialize and set the storage entries', () => {
       const storage = new SessionStorage(window.document);
       expect(sessionStorage.getItem('foo')).toBeNull();
-
       storage.setObject('foo', 123);
       expect(sessionStorage.getItem('foo')).toEqual('123');
-
       storage.setObject('foo', 'bar');
       expect(sessionStorage.getItem('foo')).toEqual('"bar"');
-
       storage.setObject('foo', {key: 'value'});
       expect(sessionStorage.getItem('foo')).toEqual('{"key":"value"}');
     });

@@ -55,7 +55,7 @@ export abstract class BaseStorage {
    */
   clear(): void {
     const changes = {} as SimpleChanges;
-    for (const [key, value] of this) changes[key] = new SimpleChange(value, null, value === null);
+    for (const [key, value] of this) changes[key] = new SimpleChange(value, null, false);
     this._backend.clear();
     this._onChanges.next(changes);
   }
@@ -106,7 +106,7 @@ export abstract class BaseStorage {
     const previousValue = this.get(key);
     this._backend.removeItem(key);
     this._onChanges.next({
-      [key]: new SimpleChange(previousValue, null, previousValue === null)
+      [key]: new SimpleChange(previousValue, null, false)
     });
 
     return previousValue;
@@ -121,7 +121,7 @@ export abstract class BaseStorage {
     const previousValue = this.get(key);
     this._backend.setItem(key, value);
     this._onChanges.next({
-      [key]: new SimpleChange(previousValue, value, previousValue === null)
+      [key]: new SimpleChange(previousValue, value, false)
     });
 
     return this;

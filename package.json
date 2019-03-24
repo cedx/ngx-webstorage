@@ -19,6 +19,7 @@
     "@angular/compiler-cli": "^7.2.10",
     "@angular/core": "^7.2.10",
     "@angular/language-service": "^7.2.10",
+    "@angular/platform-browser": "^7.2.10",
     "@angular/platform-browser-dynamic": "^7.2.10",
     "@cedx/coveralls": "^8.4.0",
     "@types/jasmine": "^3.3.12",
