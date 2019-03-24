@@ -140,6 +140,7 @@ export abstract class BaseStorage {
 
 /**
  * Provides access to the local storage.
+ * @dynamic
  */
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends BaseStorage {
@@ -155,6 +156,7 @@ export class LocalStorage extends BaseStorage {
 
 /**
  * Provides access to the session storage.
+ * @dynamic
  */
 @Injectable({providedIn: 'root'})
 export class SessionStorage extends BaseStorage {
