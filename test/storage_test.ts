@@ -51,7 +51,7 @@ describe('Storage', () => {
         expect(changes.foo.currentValue).toEqual('bar');
         expect(changes.foo.previousValue).toBeNull();
         done();
-      });
+      }, done);
 
       storage.set('foo', 'bar');
       subscription.unsubscribe();
@@ -66,7 +66,7 @@ describe('Storage', () => {
         expect(changes.foo.currentValue).toEqual('baz');
         expect(changes.foo.previousValue).toEqual('bar');
         done();
-      });
+      }, done);
 
       storage.set('foo', 'baz');
       subscription.unsubscribe();
@@ -81,7 +81,7 @@ describe('Storage', () => {
         expect(changes.foo.currentValue).toBeNull();
         expect(changes.foo.previousValue).toEqual('bar');
         done();
-      });
+      }, done);
 
       storage.remove('foo');
       subscription.unsubscribe();
@@ -103,7 +103,7 @@ describe('Storage', () => {
         expect(changes.bar.currentValue).toBeNull();
         expect(changes.bar.previousValue).toEqual('baz');
         done();
-      });
+      }, done);
 
       storage.clear();
       subscription.unsubscribe();
