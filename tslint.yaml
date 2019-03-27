@@ -50,7 +50,6 @@ rules:
   template-conditional-complexity: true
   template-cyclomatic-complexity: true
   templates-no-negated-async: true
-  trackBy-function: true
   use-host-property-decorator: true
   use-input-property-decorator: true
   use-life-cycle-interface: true
