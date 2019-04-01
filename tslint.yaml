@@ -29,31 +29,34 @@ rules:
   triple-equals: false
   variable-name: [true, allow-leading-underscore, check-format]
   # Codelyzer
-  angular-whitespace: [true, check-pipe, check-semicolon]
-  banana-in-box: true
-  contextual-life-cycle: true
-  decorator-not-allowed: true
-  enforce-component-selector: true
-  max-inline-declarations: [true, {styles: 5, template: 5}]
-  no-attribute-parameter-decorator: true
-  no-conflicting-life-cycle-hooks: true
+  component-max-inline-declarations: [true, {styles: 5, template: 5}]
+  contextual-decorator: true
+  contextual-lifecycle: true
+  no-attribute-decorator: true
+  no-conflicting-lifecycle: true
   no-forward-ref: true
+  no-host-metadata-property: true
   no-input-prefix: true
   no-input-rename: true
-  no-life-cycle-call: true
-  no-queries-parameter: true
-  no-template-call-expression: true
+  no-inputs-metadata-property: true
+  no-lifecycle-call: true
+  no-outputs-metadata-property: true
+  no-pipe-impure: true
+  no-queries-metadata-property: true
   no-unused-css: true
-  pipe-impure: true
   prefer-inline-decorator: true
   prefer-output-readonly: true
+  relative-url-prefix: true
+  template-banana-in-box: true
   template-conditional-complexity: true
   template-cyclomatic-complexity: true
-  templates-no-negated-async: true
-  use-host-property-decorator: true
-  use-input-property-decorator: true
-  use-life-cycle-interface: true
-  use-output-property-decorator: true
+  template-no-any: true
+  template-no-autofocus: true
+  template-no-call-expression: true
+  template-no-distracting-elements: true
+  template-no-negated-async: true
+  use-component-selector: true
+  use-component-view-encapsulation: true
+  use-lifecycle-interface: true
   use-pipe-decorator: true
   use-pipe-transform-interface: true
-  use-view-encapsulation: true
