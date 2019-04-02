@@ -172,20 +172,6 @@ console.log(localStorage.getObject('foo')); // {bar: "baz"}
 
 > The value is serialized using the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 
-### Iteration
-The `Storage` class is iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (e.g. the key and the value):
-
-```javascript
-localStorage.set('foo', 'bar');
-localStorage.set('anotherKey', 'anotherValue');
-
-for (let entry of localStorage) {
-  console.log(entry);
-  // Round 1: ["foo", "bar"]
-  // Round 2: ["anotherKey", "anotherValue"]
-}
-```
-
 ### Events
 Every time one or several values are changed (added, removed or updated) through the `Storage` class, a `changes` event is triggered.
 
