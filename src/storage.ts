@@ -6,7 +6,7 @@ import {Observable, Subject} from 'rxjs';
  * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
  */
-export abstract class DomStorage {
+export abstract class WebStorage {
 
   /**
    * The handler of "changes" events.
@@ -116,6 +116,7 @@ export abstract class DomStorage {
    * Associates a given value to the specified key.
    * @param key The key to seek for.
    * @param value The item value.
+   * @return This instance.
    */
   set(key: string, value: string): this {
     const previousValue = this.get(key);
@@ -143,7 +144,7 @@ export abstract class DomStorage {
  * @dynamic
  */
 @Injectable({providedIn: 'root'})
-export class LocalStorage extends DomStorage {
+export class LocalStorage extends WebStorage {
 
   /**
    * Creates a new storage service.
@@ -159,7 +160,7 @@ export class LocalStorage extends DomStorage {
  * @dynamic
  */
 @Injectable({providedIn: 'root'})
-export class SessionStorage extends DomStorage {
+export class SessionStorage extends WebStorage {
 
   /**
    * Creates a new storage service.
