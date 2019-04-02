@@ -1,13 +1,13 @@
 # Events
-The [`BaseStorage`](api.md) class is an [`EventEmitter`](https://nodejs.org/api/events.html): every time one or several values are changed (added, removed or updated) through this class, a `changes` event is triggered.
+The [`DomStorage`](api.md) class is an [`EventEmitter`](https://nodejs.org/api/events.html): every time one or several values are changed (added, removed or updated) through this class, a `changes` event is triggered.
 
 You can subscribe to this event using the `on()` method:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  new BaseStorage().on(BaseStorage.eventChanges, changes => {
+  new DomStorage().on(DomStorage.eventChanges, changes => {
     for (const [key, value] of changes.entries()) console.log(`${key}: ${value}`);
   });
 }
@@ -16,12 +16,12 @@ function main(): void {
 The changes are expressed as a [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) of [`SimpleChange`](https://github.com/cedx/ngx-webstorage.js/blob/master/src/simple_change.ts) instances, where an `undefined` property indicates an absence of value:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
 
-  cookies.on(BaseStorage.eventChanges, changes => {
+  cookies.on(DomStorage.eventChanges, changes => {
     for (const [key, change] of changes.entries()) console.log({
       key,
       current: change.currentValue,
@@ -40,13 +40,13 @@ function main(): void {
 }
 ```
 
-The values contained in the `currentValue` and `previousValue` properties of the `SimpleChange` instances are the raw cookie values. If you use the `BaseStorage#setObject()` method to set a cookie, you will get the serialized string value, not the original value passed to the method:
+The values contained in the `currentValue` and `previousValue` properties of the `SimpleChange` instances are the raw cookie values. If you use the `DomStorage#setObject()` method to set a cookie, you will get the serialized string value, not the original value passed to the method:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   cookies.setObject('foo', {bar: 'baz'});
   // Prints: {key: "foo", current: "{\"bar\": \"baz\"}", previous: undefined}
 }

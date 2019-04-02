@@ -2,13 +2,13 @@ path: blob/master
 source: src/storage.ts
 
 # Programming interface
-This package provides a service dedicated to the cookie management: the `BaseStorage` class.
+This package provides a service dedicated to the cookie management: the `DomStorage` class.
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
 
   cookies.set('foo', 'bar');
   console.log(cookies.get('foo')); // "bar"
@@ -18,16 +18,16 @@ function main(): void {
 }
 ```
 
-The `BaseStorage` class has the following API:
+The `DomStorage` class has the following API:
 
 ## **#defaults**: CookieOptions
 Returns the default [options](options.md) to pass when setting cookies:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(JSON.stringify(cookies.defaults));
   // {"domain": "", "expires": null, "path": "", "secure": false}
 
@@ -44,10 +44,10 @@ function main(): void {
 Returns the keys of the cookies associated with the current document:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.keys); // []
 
   cookies.set('foo', 'bar');
@@ -59,10 +59,10 @@ function main(): void {
 Returns the number of cookies associated with the current document:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.length); // 0
 
   cookies.set('foo', 'bar');
@@ -74,10 +74,10 @@ function main(): void {
 Removes all cookies associated with the current document:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   cookies.set('foo', 'bar');
   console.log(cookies.length); // 1
 
@@ -90,10 +90,10 @@ function main(): void {
 Returns the value associated to the specified key:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.get('foo')); // undefined
   console.log(cookies.get('foo', 'qux')); // "qux"
 
@@ -108,10 +108,10 @@ Returns `undefined` or the given default value if the key is not found.
 Deserializes and returns the value associated to the specified key:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.getObject('foo')); // undefined
   console.log(cookies.getObject('foo', 'qux')); // "qux"
   
@@ -129,10 +129,10 @@ Returns `undefined` or the given default value if the key is not found.
 Returns a boolean value indicating whether the current document has a cookie with the specified key:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.has('foo')); // false
 
   cookies.set('foo', 'bar');
@@ -144,10 +144,10 @@ function main(): void {
 Removes the value associated to the specified key:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
 
   cookies.set('foo', 'bar');
   console.log(cookies.has('foo')); // true
@@ -161,10 +161,10 @@ function main(): void {
 Associates a given value to the specified key:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.get('foo')); // undefined
 
   cookies.set('foo', 'bar');
@@ -176,10 +176,10 @@ function main(): void {
 Serializes and associates a given value to the specified key:
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   console.log(cookies.getObject('foo')); // undefined
 
   cookies.setObject('foo', {bar: 'baz'});

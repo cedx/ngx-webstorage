@@ -6,7 +6,7 @@ import {Observable, Subject} from 'rxjs';
  * Provides access to the Web storage.
  * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
  */
-export abstract class BaseStorage {
+export abstract class DomStorage {
 
   /**
    * The handler of "changes" events.
@@ -143,7 +143,7 @@ export abstract class BaseStorage {
  * @dynamic
  */
 @Injectable({providedIn: 'root'})
-export class LocalStorage extends BaseStorage {
+export class LocalStorage extends DomStorage {
 
   /**
    * Creates a new storage service.
@@ -159,7 +159,7 @@ export class LocalStorage extends BaseStorage {
  * @dynamic
  */
 @Injectable({providedIn: 'root'})
-export class SessionStorage extends BaseStorage {
+export class SessionStorage extends DomStorage {
 
   /**
    * Creates a new storage service.

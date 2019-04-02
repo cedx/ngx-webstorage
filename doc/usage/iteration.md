@@ -1,11 +1,11 @@
 # Iteration
-The [`BaseStorage`](api.md) class is iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (i.e. the key and the value):
+The [`DomStorage`](api.md) class is iterable: you can go through all key/value pairs contained using a `for...of` loop. Each entry is an array with two elements (i.e. the key and the value):
 
 ```ts
-import {BaseStorage} from '@cedx/ngx-webstorage';
+import {DomStorage} from '@cedx/ngx-webstorage';
 
 function main(): void {
-  const cookies = new BaseStorage;
+  const cookies = new DomStorage;
   cookies.set('foo', 'bar');
   cookies.set('anotherKey', 'anotherValue');
 
