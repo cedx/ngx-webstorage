@@ -1,9 +1,9 @@
 import {SessionStorage} from '../src';
 
 /**
- * Tests the `Storage` class.
+ * Tests the `WebStorage` class.
  */
-describe('Storage', () => {
+describe('WebStorage', () => {
   beforeEach(() => sessionStorage.clear());
 
   /**
