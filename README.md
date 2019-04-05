@@ -3,121 +3,40 @@
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [TypeScript](https://www.typescriptlang.org).
 
-## Usage
-This package provides two [injection tokens](https://angular.io/docs/js/latest/api/core/index/InjectionToken-class.html) dedicated to the Web Storage: `localStorage` and `sessionStorage`.
-
-These tokens are backed by the `Storage` class which provides access to the underlying Web APIs. They need to be registered with the dependency injector by importing their module, the `StorageModule` class:
-
-```javascript
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {StorageModule} from '@cedx/ngx-webstorage';
-import {AppComponent} from './app_component';
-
-// The root module.
-export class AppModule {
-
-  // The class decorators.
-  static get annotations() {
-    return [new NgModule({
-      bootstrap: [AppComponent],
-      declarations: [AppComponent],
-      imports: [BrowserModule, StorageModule]
-    })];
-  }
-}
-```
-
-> The `StorageModule` provider is intended for the application root module.
-
-Then, they will be available in the constructor of the component classes:
-
-```javascript
-import {Component} from '@angular/core';
-import {localStorage, sessionStorage} from '@cedx/ngx-webstorage';
-
-// The main component.
-export class AppComponent {
-
-  // The class decorators.
-  static get annotations() {
-    return [new Component({
-      selector: 'my-application',
-      template: '<h1>Hello World!</h1>'
-    })];
-  }
-
-  // The constructor parameters.
-  static get parameters() {
-    return [localStorage, sessionStorage];
-  }
-
-  // Initializes a new instance of the class.
-  constructor(localStorage, sessionStorage) {
-    localStorage.get('foo');
-    localStorage.getObject('bar');
-
-    sessionStorage.set('foo', 'bar');
-    sessionStorage.setObject('foo', {bar: 'baz'});
-  }
-}
-```
-
 ### Programming interface
 The `Storage` class has the following API:
-
-#### `.keys: string[]`
-Returns the list of all the keys of the associated storage:
-
-```javascript
-console.log(localStorage.keys); // []
-
-localStorage.set('foo', 'bar');
-console.log(localStorage.keys); // ["foo"]
-```
 
 #### `.length: number`
 Returns the number of entries in the associated storage:
 
 ```javascript
-console.log(localStorage.length); // 0
-
-localStorage.set('foo', 'bar');
-console.log(localStorage.length); // 1
 ```
 
 #### `.clear()`
 Removes all entries from the associated storage:
 
 ```javascript
-localStorage.set('foo', 'bar');
-console.log(localStorage.length); // 1
-
-localStorage.clear();
-console.log(localStorage.length); // 0
 ```
 
 #### `.get(key: string, defaultValue: any = null): string`
 Returns the value associated to the specified key:
 
 ```javascript
-localStorage.set('foo', 'bar');
-console.log(localStorage.get('foo')); // "bar"
+this._storage.set('foo', 'bar');
+console.log(this._storage.get('foo')); // "bar"
 ```
 
 Returns the `defaultValue` parameter if the key is not found:
 
 ```javascript
-console.log(localStorage.get('unknownKey')); // null
-console.log(localStorage.get('unknownKey', 'foo')); // "foo"
+console.log(this._storage.get('unknownKey')); // null
+console.log(this._storage.get('unknownKey', 'foo')); // "foo"
 ```
 
 #### `.getObject(key: string, defaultValue: any = null): any`
 Deserializes and returns the value associated to the specified key:
 
 ```javascript
-localStorage.setObject('foo', {bar: 'baz'});
-console.log(localStorage.getObject('foo')); // {bar: "baz"}
 ```
 
 > The value is deserialized using the [`JSON.parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) method.
@@ -125,52 +44,9 @@ console.log(localStorage.getObject('foo')); // {bar: "baz"}
 Returns the `defaultValue` parameter if the key is not found:
 
 ```javascript
-console.log(localStorage.getObject('unknownKey')); // null
-console.log(localStorage.getObject('unknownKey', false)); // false
+console.log(this._storage.getObject('unknownKey')); // null
+console.log(this._storage.getObject('unknownKey', false)); // false
 ```
-
-#### `.has(key: string): boolean`
-Returns a boolean value indicating whether the associated storage contains the specified key:
-
-```javascript
-console.log(localStorage.has('foo')); // false
-
-localStorage.set('foo', 'bar');
-console.log(localStorage.has('foo')); // true
-```
-
-#### `.remove(key: string)`
-Removes the value associated to the specified key:
-
-```javascript
-localStorage.set('foo', 'bar');
-console.log(localStorage.has('foo')); // true
-
-localStorage.remove('foo');
-console.log(localStorage.has('foo')); // false
-```
-
-#### `.set(key: string, value: string)`
-Associates a given value to the specified key:
-
-```javascript
-console.log(localStorage.get('foo')); // null
-
-localStorage.set('foo', 'bar');
-console.log(localStorage.get('foo')); // "bar"
-```
-
-#### `.setObject(key: string, value: any)`
-Serializes and associates a given value to the specified key:
-
-```javascript
-console.log(localStorage.getObject('foo')); // null
-
-localStorage.setObject('foo', {bar: 'baz'});
-console.log(localStorage.getObject('foo')); // {bar: "baz"}
-```
-
-> The value is serialized using the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 
 ### Events
 Every time one or several values are changed (added, removed or updated) through the `Storage` class, a `changes` event is triggered.
@@ -178,7 +54,7 @@ Every time one or several values are changed (added, removed or updated) through
 This event is exposed as an [Observable](http://reactivex.io/intro.html), you can subscribe to it using the `onChanges` property:
 
 ```javascript
-localStorage.onChanges.subscribe(
+this._storage.onChanges.subscribe(
   changes => console.log(changes)
 );
 ```
@@ -186,29 +62,34 @@ localStorage.onChanges.subscribe(
 The changes are expressed as an array of [`KeyValueChangeRecord`](https://angular.io/api/core/KeyValueChangeRecord) instances, where a `null` reference indicates an absence of value:
 
 ```javascript
-localStorage.onChanges.subscribe(changes => console.log(changes[0]));
+this._storage.onChanges.subscribe(changes => console.log(changes[0]));
 
-localStorage.set('foo', 'bar');
+this._storage.set('foo', 'bar');
 // Prints: {key: "foo", currentValue: "bar", previousValue: null}
 
-localStorage.set('foo', 'baz');
+this._storage.set('foo', 'baz');
 // Prints: {key: "foo", currentValue: "baz", previousValue: "bar"}
 
-localStorage.remove('foo');
+this._storage.remove('foo');
 // Prints: {key: "foo", currentValue: null, previousValue: "baz"}
 ```
 
 The values contained in the `currentValue` and `previousValue` properties of the `KeyValueChangeRecord` instances are the raw storage values. If you use the `Storage#setObject` method to change a key, you will get the serialized string value, not the original value passed to the method:
 
 ```javascript
-localStorage.setObject('foo', {bar: 'baz'});
+this._storage.setObject('foo', {bar: 'baz'});
 // Prints: {key: "foo", currentValue: "{\"bar\": \"baz\"}", previousValue: null}
 ```
 
-## See also
+
+## Documentation
+- [User guide](https://dev.belin.io/ngx-webstorage.js)
 - [API reference](https://dev.belin.io/ngx-webstorage.js/api)
-- [Code coverage](https://coveralls.io/github/cedx/ngx-webstorage.js)
-- [Continuous integration](https://travis-ci.com/cedx/ngx-webstorage.js)
+
+## Development
+- [Git repository](https://github.com/cedx/ngx-webstorage.js)
+- [npm package](https://www.npmjs.com/package/@cedx/ngx-webstorage)
+- [Submit an issue](https://github.com/cedx/ngx-webstorage.js/issues)
 
 ## License
 [Web Storage for Angular](https://dev.belin.io/ngx-webstorage.js) is distributed under the MIT License.

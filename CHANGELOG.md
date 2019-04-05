@@ -1,10 +1,10 @@
 # Changelog
 
 ## Version 2.0.0
-- Breaking change: changed the case of the injection tokens.
-- Breaking change: dropped the [CommonJS](https://nodejs.org/api/modules.html) modules in favor of [ECMAScript](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) ones.
+- Breaking change: dropped the [CommonJS modules](https://nodejs.org/api/modules.html) in favor of [ECMAScript](https://nodejs.org/api/esm.html) ones.
 - Breaking change: ported the source code to [TypeScript](https://www.typescriptlang.org).
 - Breaking change: removed the `StorageModule` module.
+- Breaking change: replaced the injection tokens by dedicated classes.
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
 - Replaced [ESDoc](https://esdoc.org) documentation generator by [TypeDoc](https://typedoc.org).
 - Replaced [ESLint](https://eslint.org) static analyzer by [TSLint](https://palantir.github.io/tslint).

@@ -5,95 +5,124 @@ source: src/storage.ts
 This package provides two services dedicated to the Web Storage: the `LocalStorage` and `SessionStorage` classes.
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    this._storage.get('foo');
+    this._storage.getObject('bar');
 
-  storage.set('foo', 'bar');
-  console.log(storage.get('foo')); // "bar"
-
-  storage.setObject('foo', {baz: 'qux'});
-  console.log(storage.getObject('foo')); // {baz: "qux"}
+    this._storage.set('foo', 'bar');
+    this._storage.setObject('foo', {bar: 'baz'});
+  }
 }
 ```
 
-The `WebStorage` class has the following API:
-
-## **#defaults**: CookieOptions
-Returns the default [options](options.md) to pass when setting storage:
-
-```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
-
-function main(): void {
-  const storage = new WebStorage;
-  console.log(JSON.stringify(storage.defaults));
-  // {"domain": "", "expires": null, "path": "", "secure": false}
-
-  storage.defaults.domain = 'domain.com';
-  storage.defaults.path = '/www';
-  storage.defaults.secure = true;
-
-  console.log(JSON.stringify(storage.defaults));
-  // {"domain": "domain.com", "expires": null, "path": "/www", "secure": true}
-}
-```
+The `LocalStorage` and `SessionStorage` classes has the following API:
 
 ## **#keys**: string[]
-Returns the keys of the storage associated with the current document:
+Returns the keys of the the associated storage:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-  console.log(storage.keys); // []
-
-  storage.set('foo', 'bar');
-  console.log(storage.keys); // ["foo"]
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    console.log(this._storage.keys); // []
+    
+    this._storage.set('foo', 'bar');
+    console.log(this._storage.keys); // ["foo"]
+  }
 }
 ```
 
 ## **#length**: number
-Returns the number of storage associated with the current document:
+Returns the number of entries in the associated storage:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-  console.log(storage.length); // 0
-
-  storage.set('foo', 'bar');
-  console.log(storage.length); // 1
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    console.log(this._storage.length); // 0
+    
+    this._storage.set('foo', 'bar');
+    console.log(this._storage.length); // 1
+  }
 }
 ```
 
 ## **#clear**(): void
-Removes all storage associated with the current document:
+Removes all entries from the associated storage:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-  storage.set('foo', 'bar');
-  console.log(storage.length); // 1
-
-  storage.clear();
-  console.log(storage.length); // 0
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    this._storage.set('foo', 'bar');
+    console.log(this._storage.length); // 1
+    
+    this._storage.clear();
+    console.log(this._storage.length); // 0
+  }
 }
 ```
 
-## **#get**(key: string, defaultValue?: string): string | undefined
+## **#get**(key: string, defaultValue: string | null = null): string | null
 Returns the value associated to the specified key:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    this._storage.get('foo');
+    this._storage.getObject('bar');
+
+    this._storage.set('foo', 'bar');
+    this._storage.setObject('foo', {bar: 'baz'});
+  }
+}
+
+// TODO
 function main(): void {
-  const storage = new WebStorage;
+  const storage = new SessionStorage;
   console.log(storage.get('foo')); // undefined
   console.log(storage.get('foo', 'qux')); // "qux"
 
@@ -102,16 +131,34 @@ function main(): void {
 }
 ```
 
-Returns `undefined` or the given default value if the key is not found.
+Returns `null` or the given default value if the key is not found.
 
-## **#getObject**(key: string, defaultValue?: any): any
+## **#getObject**(key: string, defaultValue: any = null): any
 Deserializes and returns the value associated to the specified key:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    this._storage.setObject('foo', {bar: 'baz'});
+    console.log(this._storage.getObject('foo')); // {bar: "baz"}
+
+    this._storage.set('foo', 'bar');
+    this._storage.setObject('foo', {bar: 'baz'});
+  }
+}
+
+// TODO
 function main(): void {
-  const storage = new WebStorage;
+  const storage = new SessionStorage;
   console.log(storage.getObject('foo')); // undefined
   console.log(storage.getObject('foo', 'qux')); // "qux"
   
@@ -123,67 +170,98 @@ function main(): void {
 !!! info
     The value is deserialized using the [`JSON.parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) method.
 
-Returns `undefined` or the given default value if the key is not found.
+Returns `null` or the given default value if the key is not found.
 
 ## **#has**(key: string): boolean
-Returns a boolean value indicating whether the current document has a cookie with the specified key:
+Returns a boolean value indicating whether the associated storage contains the specified key:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-  console.log(storage.has('foo')); // false
-
-  storage.set('foo', 'bar');
-  console.log(storage.has('foo')); // true
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    console.log(this._storage.has('foo')); // false
+    
+    this._storage.set('foo', 'bar');
+    console.log(this._storage.has('foo')); // true
+  }
 }
 ```
 
-## **#remove**(key: string, options: Partial&lt;CookieOptions&gt; = {}): string
+## **#remove**(key: string): string | null
 Removes the value associated to the specified key:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-
-  storage.set('foo', 'bar');
-  console.log(storage.has('foo')); // true
-
-  console.log(storage.remove('foo')); // "bar"
-  console.log(storage.has('foo')); // false
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    this._storage.set('foo', 'bar');
+    console.log(this._storage.has('foo')); // true
+    
+    console.log(this._storage.remove('foo')); // "bar"
+    console.log(this._storage.has('foo')); // false
+  }
 }
 ```
 
-## **#set**(key: string, value: string, options: Partial&lt;CookieOptions&gt; = {}): this
+## **#set**(key: string, value: string): this
 Associates a given value to the specified key:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-  console.log(storage.get('foo')); // undefined
-
-  storage.set('foo', 'bar');
-  console.log(storage.get('foo')); // "bar"
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    console.log(this._storage.get('foo')); // null
+    
+    this._storage.set('foo', 'bar');
+    console.log(this._storage.get('foo')); // "bar"
+  }
 }
 ```
 
-## **#setObject**(key: string, value: any, options: Partial&lt;CookieOptions&gt; = {}): this
+## **#setObject**(key: string, value: any): this
 Serializes and associates a given value to the specified key:
 
 ```ts
-import {WebStorage} from '@cedx/ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from '@cedx/ngx-webstorage';
 
-function main(): void {
-  const storage = new WebStorage;
-  console.log(storage.getObject('foo')); // undefined
-
-  storage.setObject('foo', {bar: 'baz'});
-  console.log(storage.getObject('foo')); // {bar: "baz"}
+@Component({
+  selector: 'my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(private _storage: LocalStorage) {}
+  
+  ngOnInit(): void {
+    console.log(this._storage.getObject('foo')); // null
+    
+    this._storage.setObject('foo', {bar: 'baz'});
+    console.log(this._storage.getObject('foo')); // {bar: "baz"}
+  }
 }
 ```
 
