@@ -13,7 +13,7 @@
 /*.js
 /*.yaml
 /*.yml
+/**/*.tsconfig.json
 /angular.json
 /ng-package.json
-/tsconfig.json
 /lib/**/*.map

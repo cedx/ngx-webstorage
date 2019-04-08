@@ -25,7 +25,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-The `LocalStorage` and `SessionStorage` classes has the following API:
+Each class extends from the `WebStorage` abstract class that has the following API:
 
 ## **#keys**: string[]
 Returns the keys of the the associated storage:
@@ -112,22 +112,12 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    this._storage.get('foo');
-    this._storage.getObject('bar');
+    console.log(this._storage.get('foo')); // null
+    console.log(this._storage.get('foo', 'qux')); // "qux"
 
     this._storage.set('foo', 'bar');
-    this._storage.setObject('foo', {bar: 'baz'});
+    console.log(this._storage.get('foo')); // "bar"
   }
-}
-
-// TODO
-function main(): void {
-  const storage = new SessionStorage;
-  console.log(storage.get('foo')); // undefined
-  console.log(storage.get('foo', 'qux')); // "qux"
-
-  storage.set('foo', 'bar');
-  console.log(storage.get('foo')); // "bar"
 }
 ```
 
@@ -148,22 +138,12 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
+    console.log(this._storage.getObject('foo')); // null
+    console.log(this._storage.getObject('foo', 'qux')); // "qux"
+  
     this._storage.setObject('foo', {bar: 'baz'});
     console.log(this._storage.getObject('foo')); // {bar: "baz"}
-
-    this._storage.set('foo', 'bar');
-    this._storage.setObject('foo', {bar: 'baz'});
   }
-}
-
-// TODO
-function main(): void {
-  const storage = new SessionStorage;
-  console.log(storage.getObject('foo')); // undefined
-  console.log(storage.getObject('foo', 'qux')); // "qux"
-  
-  storage.setObject('foo', {bar: 'baz'});
-  console.log(storage.getObject('foo')); // {bar: "baz"}
 }
 ```
 

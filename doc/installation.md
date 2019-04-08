@@ -42,4 +42,4 @@ import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
     To consume it, you must use a dedicated tool chain, like a build system coupled with a bundler.
 
 ### 3. Use it
-See the [usage information](usage.md).
+See the [usage information](usage/api.md).
