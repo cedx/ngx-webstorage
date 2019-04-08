@@ -7,7 +7,7 @@ describe('WebStorage', () => {
   beforeEach(() => sessionStorage.clear());
 
   /**
-   * Tests the `Storage#keys` property.
+   * Tests the `WebStorage#keys` property.
    */
   describe('#keys', () => {
     it('should return an empty array for an empty storage', () => {
@@ -26,7 +26,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#length` property.
+   * Tests the `WebStorage#length` property.
    */
   describe('#length', () => {
     it('should return zero for an empty storage', () => {
@@ -41,7 +41,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#onChanges` property.
+   * Tests the `WebStorage#onChanges` property.
    */
   describe('#onChanges', () => {
     it('should trigger an event when a value is added', done => {
@@ -111,7 +111,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#[Symbol.iterator]()` method.
+   * Tests the `WebStorage#[Symbol.iterator]()` method.
    */
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
@@ -142,7 +142,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#clear()` method.
+   * Tests the `WebStorage#clear()` method.
    */
   describe('#clear()', () => {
     it('should remove all storage entries', () => {
@@ -157,7 +157,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#get()` method.
+   * Tests the `WebStorage#get()` method.
    */
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
@@ -174,7 +174,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#getObject()` method.
+   * Tests the `WebStorage#getObject()` method.
    */
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
@@ -199,7 +199,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#has()` method.
+   * Tests the `WebStorage#has()` method.
    */
   describe('#has()', () => {
     it('should return `false` if the specified key is not contained', () => {
@@ -215,7 +215,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#remove()` method.
+   * Tests the `WebStorage#remove()` method.
    */
   describe('#remove()', () => {
     it('should properly remove the storage entries', () => {
@@ -234,7 +234,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#set()` method.
+   * Tests the `WebStorage#set()` method.
    */
   describe('#set()', () => {
     it('should properly set the storage entries', () => {
@@ -248,7 +248,7 @@ describe('WebStorage', () => {
   });
 
   /**
-   * Tests the `Storage#setObject()` method.
+   * Tests the `WebStorage#setObject()` method.
    */
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {

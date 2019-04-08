@@ -1,8 +1,9 @@
 # Changelog
 
-## Version 2.0.0
+## Version [2.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.3.0...v2.0.0)
 - Breaking change: dropped the [CommonJS modules](https://nodejs.org/api/modules.html) in favor of [ECMAScript](https://nodejs.org/api/esm.html) ones.
 - Breaking change: ported the source code to [TypeScript](https://www.typescriptlang.org).
+- Breaking change: raised the required [Node.js](https://nodejs.org) version.
 - Breaking change: removed the `StorageModule` module.
 - Breaking change: replaced the injection tokens by dedicated classes.
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
@@ -12,46 +13,46 @@
 - Updated the build system to [Gulp](https://gulpjs.com) version 4.
 - Updated the package dependencies.
 
-## Version 1.3.0
+## Version [1.3.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.2.0...v1.3.0)
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
 - Updated the package dependencies.
 
-## Version 1.2.0
+## Version [1.2.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.1.0...v1.2.0)
 - Added support for [Browserslist](http://browserl.ist) shared settings.
 - Added the [`#[Symbol.toStringTag]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property to the `Storage` class.
 - Moved the [Angular](https://angular.io) and [RxJS](http://reactivex.io/rxjs) dependencies to peer ones.
 - Updated the package dependencies.
 
-## Version 1.1.0
+## Version [1.1.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.0.0...v1.1.0)
 - Updated the package dependencies.
 
-## Version 1.0.0
+## Version [1.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.7.0...v1.0.0)
 - First stable release.
 - Updated the package dependencies.
 
-## Version 0.7.0
+## Version [0.7.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.6.0...v0.7.0)
 - Errors from `Storage#getObject()` method are silently discarded.
 - Updated the package dependencies.
 
-## Version 0.6.0
+## Version [0.6.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.5.1...v0.6.0)
 - Breaking change: raised the required [Node.js](https://nodejs.org) version.
 - Updated the package dependencies.
 
-## Version 0.5.1
+## Version [0.5.1](https://github.com/cedx/ngx-webstorage.js/compare/v0.5.0...v0.5.1)
 - Fixed a code generation bug.
 - Updated the package dependencies.
 
-## Version 0.5.0
+## Version [0.5.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.4.0...v0.5.0)
 - Added support for the [Node Security Platform](https://nodesecurity.io) reports.
 - Updated the package dependencies.
 
-## Version 0.4.0
+## Version [0.4.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.3.0...v0.4.0)
 - Added the `onChanges` event stream to the `Storage` class.
 
-## Version 0.3.0
+## Version [0.3.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.2.0...v0.3.0)
 - Renamed the package to `ngx-webstorage` due to a trademark issue. 
 
-## Version 0.2.0
+## Version [0.2.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.1.0...v0.2.0)
 - Breaking change: removed the `LocalStorage` and `SessionStorage` classes.
 - Breaking change: removed the `WINDOW` injection token.
 - Breaking change: renamed the `DOMStorage` class to `Storage`.
