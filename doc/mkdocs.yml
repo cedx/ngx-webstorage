@@ -3,8 +3,8 @@ site_description: Angular services for interacting with the Web Storage, impleme
 site_author: Cédric Belin - cedric@belin.io
 site_url: https://dev.belin.io/ngx-webstorage.js
 
-docs_dir: doc
-site_dir: web
+docs_dir: .
+site_dir: ../web
 
 repo_name: GitHub
 repo_url: https://github.com/cedx/ngx-webstorage.js

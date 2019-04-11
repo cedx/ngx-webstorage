@@ -11,8 +11,6 @@
 /*.code-workspace
 /*.iml
 /*.js
-/*.yaml
-/*.yml
 /**/*.tsconfig.json
 /angular.json
 /ng-package.json
