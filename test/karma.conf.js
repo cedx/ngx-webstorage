@@ -5,9 +5,6 @@ module.exports = config => config.set({
     fixWebpackSourcePaths: true,
     reports: ['lcovonly']
   },
-  customLaunchers: {
-    FirefoxHeadless: {base: 'Firefox', flags: ['--headless']}
-  },
   frameworks: ['jasmine', '@angular-devkit/build-angular'],
   plugins: [
     require('karma-coverage-istanbul-reporter'),
