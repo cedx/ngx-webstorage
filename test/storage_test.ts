@@ -1,14 +1,10 @@
 import {SessionStorage} from '../src';
 
-/**
- * Tests the `WebStorage` class.
- */
+/** Tests the `WebStorage` class. */
 describe('WebStorage', () => {
   beforeEach(() => sessionStorage.clear());
 
-  /**
-   * Tests the `WebStorage#keys` property.
-   */
+  /** Tests the `WebStorage#keys` property. */
   describe('#keys', () => {
     it('should return an empty array for an empty storage', () => {
       expect(new SessionStorage(window.document).keys.length).toEqual(0);
@@ -25,9 +21,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#length` property.
-   */
+  /** Tests the `WebStorage#length` property. */
   describe('#length', () => {
     it('should return zero for an empty storage', () => {
       expect(new SessionStorage(window.document).length).toEqual(0);
@@ -40,9 +34,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#onChanges` property.
-   */
+  /** Tests the `WebStorage#onChanges` property. */
   describe('#onChanges', () => {
     it('should trigger an event when a value is added', done => {
       const storage = new SessionStorage(window.document);
@@ -110,9 +102,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#[Symbol.iterator]()` method.
-   */
+  /** Tests the `WebStorage#[Symbol.iterator]()` method. */
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
       const storage = new SessionStorage(window.document);
@@ -141,9 +131,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#clear()` method.
-   */
+  /** Tests the `WebStorage#clear()` method. */
   describe('#clear()', () => {
     it('should remove all storage entries', () => {
       const storage = new SessionStorage(window.document);
@@ -156,9 +144,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#get()` method.
-   */
+  /** Tests the `WebStorage#get()` method. */
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
       const storage = new SessionStorage(window.document);
@@ -173,9 +159,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#getObject()` method.
-   */
+  /** Tests the `WebStorage#getObject()` method. */
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
       const storage = new SessionStorage(window.document);
@@ -198,9 +182,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#has()` method.
-   */
+  /** Tests the `WebStorage#has()` method. */
   describe('#has()', () => {
     it('should return `false` if the specified key is not contained', () => {
       expect(new SessionStorage(window.document).has('foo')).toBeFalsy();
@@ -214,9 +196,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#remove()` method.
-   */
+  /** Tests the `WebStorage#remove()` method. */
   describe('#remove()', () => {
     it('should properly remove the storage entries', () => {
       const storage = new SessionStorage(window.document);
@@ -233,9 +213,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#set()` method.
-   */
+  /** Tests the `WebStorage#set()` method. */
   describe('#set()', () => {
     it('should properly set the storage entries', () => {
       const storage = new SessionStorage(window.document);
@@ -247,9 +225,7 @@ describe('WebStorage', () => {
     });
   });
 
-  /**
-   * Tests the `WebStorage#setObject()` method.
-   */
+  /** Tests the `WebStorage#setObject()` method. */
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
       const storage = new SessionStorage(window.document);

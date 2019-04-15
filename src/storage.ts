@@ -2,15 +2,10 @@ import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, SimpleChange, SimpleChanges} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
-/**
- * Provides access to the Web storage.
- * See: https://developer.mozilla.org/en-US/docs/Web/API/Storage
- */
+/** Provides access to the Web storage. See: https://developer.mozilla.org/en-US/docs/Web/API/Storage */
 export abstract class WebStorage {
 
-  /**
-   * The handler of "changes" events.
-   */
+  /** The handler of "changes" events. */
   private _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /**
@@ -19,25 +14,19 @@ export abstract class WebStorage {
    */
   protected constructor(private _backend: Storage) {}
 
-  /**
-   * The keys of this storage.
-   */
+  /** The keys of this storage. */
   get keys(): string[] {
     const keys = [];
     for (let i = 0; i < this.length; i++) keys.push(this._backend.key(i)!);
     return keys;
   }
 
-  /**
-   * The number of entries in this storage.
-   */
+  /** The number of entries in this storage. */
   get length(): number {
     return this._backend.length;
   }
 
-  /**
-   * The stream of "changes" events.
-   */
+  /** The stream of "changes" events. */
   get onChanges(): Observable<SimpleChanges> {
     return this._onChanges.asObservable();
   }
@@ -50,9 +39,7 @@ export abstract class WebStorage {
     for (const key of this.keys) yield [key, this.get(key)];
   }
 
-  /**
-   * Removes all entries from this storage.
-   */
+  /** Removes all entries from this storage. */
   clear(): void {
     const changes = {} as SimpleChanges;
     for (const [key, value] of this) changes[key] = new SimpleChange(value, null, false);
@@ -139,10 +126,7 @@ export abstract class WebStorage {
   }
 }
 
-/**
- * Provides access to the local storage.
- * @dynamic
- */
+/** @dynamic Provides access to the local storage. */
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends WebStorage {
 
@@ -155,10 +139,7 @@ export class LocalStorage extends WebStorage {
   }
 }
 
-/**
- * Provides access to the session storage.
- * @dynamic
- */
+/** @dynamic Provides access to the session storage. */
 @Injectable({providedIn: 'root'})
 export class SessionStorage extends WebStorage {
 
