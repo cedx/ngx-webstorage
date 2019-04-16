@@ -126,7 +126,10 @@ export abstract class WebStorage {
   }
 }
 
-/** @dynamic Provides access to the local storage. */
+/**
+ * Provides access to the local storage.
+ * @dynamic
+ */
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends WebStorage {
 
@@ -139,7 +142,10 @@ export class LocalStorage extends WebStorage {
   }
 }
 
-/** @dynamic Provides access to the session storage. */
+/**
+ * Provides access to the session storage.
+ * @dynamic
+ */
 @Injectable({providedIn: 'root'})
 export class SessionStorage extends WebStorage {
 
