@@ -8,6 +8,7 @@
     "strictMetadataEmit": true
   },
   "compilerOptions": {
+    "baseUrl": ".",
     "emitDecoratorMetadata": true,
     "importHelpers": true,
     "module": "es2015",
