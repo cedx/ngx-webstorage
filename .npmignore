@@ -1,7 +1,7 @@
 /.*
 
-/build/
 /doc/api/
+/etc/
 /share/
 /src/
 /test/
@@ -11,7 +11,6 @@
 /*.code-workspace
 /*.iml
 /*.js
-/*.yaml
 /angular.json
 /ng-package.json
 /**/tsconfig.json

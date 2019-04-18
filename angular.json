@@ -15,7 +15,7 @@
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "project": "ng-package.json",
+            "project": "etc/ng-package.json",
             "tsConfig": "src/tsconfig.json"
           }
         },
@@ -25,7 +25,7 @@
             "codeCoverage": true,
             "main": "test/main.ts",
             "tsConfig": "test/tsconfig.json",
-            "karmaConfig": "test/karma.conf.js"
+            "karmaConfig": "etc/karma.js"
           }
         }
       }
