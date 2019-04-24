@@ -1,7 +1,7 @@
 addons: {firefox: latest}
 dist: xenial
 language: node_js
-node_js: lts/*
+node_js: node
 notifications: {email: false}
 
 install: npm install
