@@ -24,7 +24,7 @@
     "@cedx/coveralls": "^8.6.0",
     "@types/jasmine": "^3.3.12",
     "@types/node": "^11.13.7",
-    "codelyzer": "^5.0.0",
+    "codelyzer": "^5.0.1",
     "del": "^4.1.0",
     "gulp": "^4.0.1",
     "gulp-replace": "^1.0.0",
