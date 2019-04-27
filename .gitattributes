@@ -4,7 +4,6 @@
 *.js text
 *.json text
 *.md text
-*.mjs text
 *.opts text
 *.ts text
 *.txt text

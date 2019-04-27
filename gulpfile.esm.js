@@ -1,16 +1,20 @@
-'use strict';
-const {spawn} = require('child_process');
-const del = require('del');
-const {promises} = require('fs');
+import {spawn} from 'child_process';
+import del from 'del';
+import {promises} from 'fs';
+import gulp from 'gulp';
 const {dest, parallel, series, src, task, watch} = require('gulp');
-const replace = require('gulp-replace');
-const {delimiter, normalize, resolve} = require('path');
+import replace from 'gulp-replace';
+import {delimiter, normalize, resolve} from 'path';
 
 /**
  * The file patterns providing the list of source files.
  * @type {string[]}
  */
 const sources = ['*.js', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
+
+// Shortcuts.
+const {parallel, task, watch} = gulp;
+const {copyFile} = promises;
 
 // Initialize the build system.
 const _path = 'PATH' in process.env ? process.env.PATH : '';
@@ -76,7 +80,7 @@ task('default', task('build'));
  * @return {Promise<void>} Completes when the command is finally terminated.
  */
 function _exec(command, args = [], options = {}) {
-  return new Promise((fulfill, reject) => spawn(normalize(command), args, Object.assign({shell: true, stdio: 'inherit'}, options))
+  return new Promise((fulfill, reject) => spawn(normalize(command), args, {shell: true, stdio: 'inherit', ...options})
     .on('close', code => code ? reject(new Error(`${command}: ${code}`)) : fulfill())
   );
 }
