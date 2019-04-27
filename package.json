@@ -8,6 +8,7 @@
   "metadata": "lib/ngx-webstorage.metadata.json",
   "name": "@cedx/ngx-webstorage",
   "repository": "github:cedx/ngx-webstorage.js",
+  "type": "module",
   "types": "lib/ngx-webstorage.d.ts",
   "version": "2.0.0",
   "devDependencies": {
