@@ -27,6 +27,7 @@
     "@types/node": "^11.13.8",
     "codelyzer": "^5.0.1",
     "del": "^4.1.1",
+    "esm": "^3.2.22",
     "gulp": "^4.0.1",
     "gulp-replace": "^1.0.0",
     "jasmine-core": "^3.4.0",

@@ -2,7 +2,6 @@ import {spawn} from 'child_process';
 import del from 'del';
 import {promises} from 'fs';
 import gulp from 'gulp';
-const {dest, parallel, series, src, task, watch} = require('gulp');
 import replace from 'gulp-replace';
 import {delimiter, normalize, resolve} from 'path';
 
@@ -13,7 +12,7 @@ import {delimiter, normalize, resolve} from 'path';
 const sources = ['*.js', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
 
 // Shortcuts.
-const {parallel, task, watch} = gulp;
+const {dest, parallel, series, src, task, watch} = gulp;
 const {copyFile} = promises;
 
 // Initialize the build system.
@@ -36,17 +35,17 @@ task('coverage', () => _exec('coveralls', ['var/lcov.info']));
 
 /** Builds the documentation. */
 task('doc', async () => {
-  for (const path of ['CHANGELOG.md', 'LICENSE.md']) await promises.copyFile(path, `doc/about/${path.toLowerCase()}`);
+  for (const path of ['CHANGELOG.md', 'LICENSE.md']) await copyFile(path, `doc/about/${path.toLowerCase()}`);
   await _exec('typedoc', ['--options', 'etc/typedoc.js']);
   await _exec('mkdocs', ['build', '--config-file=etc/mkdocs.yaml']);
   return del(['doc/about/changelog.md', 'doc/about/license.md']);
 });
 
 /** Fixes the coding standards issues. */
-task('fix', () => _exec('tslint', ['--config', 'etc/tslint.yaml', '--fix', ...sources]));
+task('fix', () => _exec('tslint', ['--config', 'etc/tslint.json', '--fix', ...sources]));
 
 /** Performs the static analysis of source code. */
-task('lint', () => _exec('tslint', ['--config', 'etc/tslint.yaml', ...sources]));
+task('lint', () => _exec('tslint', ['--config', 'etc/tslint.json', ...sources]));
 
 /** Runs the test suites. */
 task('test', () => {
