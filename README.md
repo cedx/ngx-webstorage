@@ -3,6 +3,8 @@
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage), implemented in [TypeScript](https://www.typescriptlang.org).
 
+> This library is packaged as [ECMAScript modules](https://nodejs.org/api/esm.html).
+
 ## Documentation
 - [User guide](https://dev.belin.io/ngx-webstorage.js)
 - [API reference](https://dev.belin.io/ngx-webstorage.js/api)

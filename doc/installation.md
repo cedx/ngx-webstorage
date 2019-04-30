@@ -37,9 +37,5 @@ Now in your [TypeScript](https://www.typescriptlang.org) code, you can use:
 import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
 ```
 
-!!! info
-    This library is packaged as [ECMAScript modules](https://nodejs.org/api/esm.html) (`.js` files).  
-    To consume it, you must use a dedicated tool chain, like a build system coupled with a bundler.
-
 ### 3. Use it
 See the [usage information](usage/api.md).

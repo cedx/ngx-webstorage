@@ -13,4 +13,7 @@ Install the latest version of **Web Storage for Angular** with [npm](https://www
 npm install @cedx/ngx-webstorage
 ```
 
+!!! info
+    This library is packaged as [ECMAScript modules](https://nodejs.org/api/esm.html).
+
 For detailed instructions, see the [installation guide](installation.md).
