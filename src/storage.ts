@@ -70,7 +70,7 @@ export abstract class WebStorage {
       return typeof value == 'string' ? JSON.parse(value) : defaultValue;
     }
 
-    catch (err) {
+    catch {
       return defaultValue;
     }
   }
