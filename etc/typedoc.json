@@ -1,0 +1,7 @@
+{
+  "excludePrivate": true,
+  "gitRevision": "master",
+  "mode": "modules",
+  "name": "Web Storage for Angular",
+  "out": "doc/api"
+}
