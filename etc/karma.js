@@ -1,5 +1,5 @@
 module.exports = config => config.set({
-  browsers: ['FirefoxHeadless'],
+  browsers: ['ChromeHeadless'],
   coverageIstanbulReporter: {
     dir: require('path').join(__dirname, '../var'),
     fixWebpackSourcePaths: true,
