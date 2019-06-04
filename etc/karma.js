@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 module.exports = config => config.set({
-  browsers: ['ChromeHeadless'],
+  browsers: ['FirefoxHeadless'],
   coverageIstanbulReporter: {
-    dir: require('path').join(__dirname, '../var'),
+    dir: require('path').resolve(__dirname, '../var'),
     fixWebpackSourcePaths: true,
     reports: ['lcovonly']
   },
