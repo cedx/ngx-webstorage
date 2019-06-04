@@ -41,7 +41,7 @@ export abstract class WebStorage {
 
   /** Removes all entries from this storage. */
   clear(): void {
-    const changes = {} as SimpleChanges;
+    const changes: SimpleChanges = {};
     for (const [key, value] of this) changes[key] = new SimpleChange(value, null, false);
     this._backend.clear();
     this._onChanges.next(changes);

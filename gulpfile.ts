@@ -5,11 +5,8 @@ import * as gulp from 'gulp';
 import * as replace from 'gulp-replace';
 import {delimiter, normalize, resolve} from 'path';
 
-/**
- * The file patterns providing the list of source files.
- * @type {string[]}
- */
-const sources = ['*.js', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
+/** The file patterns providing the list of source files. */
+const sources: string[] = ['*.ts', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
 
 // Shortcuts.
 const {dest, parallel, series, src, task, watch} = gulp;
@@ -42,10 +39,10 @@ task('doc', async () => {
 });
 
 /** Fixes the coding standards issues. */
-task('fix', () => _exec('tslint', ['--config', 'etc/tslint.json', '--fix', ...sources]));
+task('fix', () => _exec('eslint', ['--config=etc/eslint.json', '--fix', ...sources]));
 
 /** Performs the static analysis of source code. */
-task('lint', () => _exec('tslint', ['--config', 'etc/tslint.json', ...sources]));
+task('lint', () => _exec('eslint', ['--config=etc/eslint.json', ...sources]));
 
 /** Runs the test suites. */
 task('test', () => {

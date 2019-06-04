@@ -14,7 +14,7 @@ describe('WebStorage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      const keys = new SessionStorage(window.document).keys;
+      const {keys} = new SessionStorage(window.document);
       expect(keys.length).toEqual(2);
       expect(keys).toContain('foo');
       expect(keys).toContain('bar');
