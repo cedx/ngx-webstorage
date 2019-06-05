@@ -10,7 +10,7 @@
   "repository": "github:cedx/ngx-webstorage.js",
   "type": "module",
   "types": "lib/ngx-webstorage.d.ts",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.800.1",
     "@angular-devkit/build-ng-packagr": "^0.800.1",
