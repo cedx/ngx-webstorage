@@ -2,7 +2,7 @@ import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, SimpleChange, SimpleChanges} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
-/** Provides access to the Web storage. See: https://developer.mozilla.org/en-US/docs/Web/API/Storage */
+/** Provides access to the {@link https://developer.mozilla.org/en-US/docs/Web/API/Storage|Web Storage}. */
 export abstract class WebStorage {
 
   /** The handler of "changes" events. */

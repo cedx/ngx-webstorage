@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
     "@cedx/coveralls": "^9.0.0",
+    "@compodoc/compodoc": "^1.1.9",
     "@types/gulp": "^4.0.6",
     "@types/gulp-replace": "0.0.31",
     "@types/jasmine": "^3.3.13",
@@ -42,7 +43,6 @@
     "rxjs": "^6.5.2",
     "ts-node": "^8.2.0",
     "tslib": "^1.9.3",
-    "typedoc": "^0.14.2",
     "typescript": "~3.4.5",
     "zone.js": "^0.9.1"
   },

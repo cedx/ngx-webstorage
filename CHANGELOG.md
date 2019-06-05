@@ -4,6 +4,7 @@
 - Breaking change: upgraded [Angular](https://angular.io) to version 8.
 - Added an example code.
 - Replaced [TSLint](https://palantir.github.io/tslint) static analyzer by [TypeScript ESLint](https://typescript-eslint.io).
+- Replaced [TypeDoc](https://typedoc.org) documentation generator by [Compodoc](https://compodoc.app).
 - Updated the package dependencies.
 
 ## Version [2.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.3.0...v2.0.0)
