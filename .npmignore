@@ -10,7 +10,7 @@
 
 /*.code-workspace
 /*.iml
-/*.js
+/*.ts
 /angular.json
 /ng-package.json
 /**/tsconfig.json
