@@ -1,5 +1,11 @@
 # Changelog
 
+## Version [3.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v2.0.0...v3.0.0)
+- Breaking change: upgraded [Angular](https://angular.io) to version 8.
+- Added an example code.
+- Replaced [TSLint](https://palantir.github.io/tslint) static analyzer by [TypeScript ESLint](https://typescript-eslint.io).
+- Updated the package dependencies.
+
 ## Version [2.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.3.0...v2.0.0)
 - Breaking change: dropped the [CommonJS modules](https://nodejs.org/api/modules.html) in favor of [ECMAScript](https://nodejs.org/api/esm.html) ones.
 - Breaking change: ported the source code to [TypeScript](https://www.typescriptlang.org).

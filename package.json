@@ -52,14 +52,14 @@
   },
   "keywords": [
     "angular",
+    "esm",
     "local",
     "ngx",
     "observable",
     "rxjs",
     "service",
     "session",
-    "storage",
-    "web"
+    "storage"
   ],
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
