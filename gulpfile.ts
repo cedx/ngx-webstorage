@@ -28,7 +28,7 @@ task('build', series('build:src', parallel('build:esm', 'build:types'), 'build:c
 task('clean', () => del(['build', 'doc/api', 'lib', 'var/**/*', 'web']));
 
 /** Uploads the results of the code coverage. */
-task('coverage:fix', () => src('var/lcov.info').pipe(replace(/\.js$/g, '.ts')).pipe(dest('var')));
+task('coverage:fix', () => src('var/lcov.info').pipe(replace(/\.js$/gm, '.ts')).pipe(dest('var')));
 task('coverage:upload', () => _exec('coveralls', ['var/lcov.info']));
 task('coverage', series('coverage:fix', 'coverage:upload'));
 
