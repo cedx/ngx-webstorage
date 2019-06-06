@@ -3,6 +3,5 @@
   "hideGenerator": true,
   "name": "Web Storage for Angular",
   "output": "doc/api",
-  "theme": "material",
   "tsconfig": "src/tsconfig.json"
 }
