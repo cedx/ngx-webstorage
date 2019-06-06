@@ -28,7 +28,9 @@ task('build', series('build:src', parallel('build:esm', 'build:types'), 'build:c
 task('clean', () => del(['build', 'doc/api', 'lib', 'var/**/*', 'web']));
 
 /** Uploads the results of the code coverage. */
-task('coverage', () => _exec('coveralls', ['var/lcov.info']));
+task('coverage:fix', () => src('var/lcov.info').pipe(replace(/\.js$/g, '.ts')).pipe(dest('var')));
+task('coverage:upload', () => _exec('coveralls', ['var/lcov.info']));
+task('coverage', series('coverage:fix', 'coverage:upload'));
 
 /** Builds the documentation. */
 task('doc', async () => {
@@ -47,7 +49,7 @@ task('lint', () => _exec('eslint', ['--config=etc/eslint.json', ...sources]));
 /** Runs the test suites. */
 task('test', () => {
   if (process.platform == 'win32') process.env.FIREFOX_BIN = 'C:\\Program Files\\Mozilla\\Firefox\\firefox.exe';
-  return _exec('ng', ['test']);
+  return _exec('ng', ['test', '--codeCoverage']);
 });
 
 /** Upgrades the project to the latest revision. */
