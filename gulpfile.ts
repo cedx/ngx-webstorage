@@ -49,7 +49,7 @@ task('lint', () => _exec('eslint', ['--config=etc/eslint.json', ...sources]));
 /** Runs the test suites. */
 task('test', () => {
   if (process.platform == 'win32') process.env.FIREFOX_BIN = 'C:\\Program Files\\Mozilla\\Firefox\\firefox.exe';
-  return _exec('ng', ['test', '--codeCoverage']);
+  return _exec('ng', ['test']);
 });
 
 /** Upgrades the project to the latest revision. */
