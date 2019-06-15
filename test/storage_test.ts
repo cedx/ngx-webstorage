@@ -103,7 +103,7 @@ describe('WebStorage', () => {
     it('should return a done iterator if storage is empty', () => {
       const storage = new SessionStorage(window.document);
       const iterator = storage[Symbol.iterator]();
-      expect(iterator.next().done).toBeTruthy();
+      expect(iterator.next().done).toBe(true);
     });
 
     it('should return a value iterator if storage is not empty', () => {
@@ -115,12 +115,12 @@ describe('WebStorage', () => {
       const values = [];
 
       let next = iterator.next();
-      expect(next.done).toBeFalsy();
+      expect(next.done).toBe(false);
       values.push(next.value);
       next = iterator.next();
-      expect(next.done).toBeFalsy();
+      expect(next.done).toBe(false);
       values.push(next.value);
-      expect(iterator.next().done).toBeTruthy();
+      expect(iterator.next().done).toBe(true);
 
       expect(values).toContain(['foo', 'bar']);
       expect(values).toContain(['bar', 'baz']);
@@ -177,14 +177,14 @@ describe('WebStorage', () => {
 
   describe('#has()', () => {
     it('should return `false` if the specified key is not contained', () => {
-      expect(new SessionStorage(window.document).has('foo')).toBeFalsy();
+      expect(new SessionStorage(window.document).has('foo')).toBe(false);
     });
 
     it('should return `true` if the specified key is contained', () => {
       const storage = new SessionStorage(window.document);
       sessionStorage.setItem('foo', 'bar');
-      expect(storage.has('foo')).toBeTruthy();
-      expect(storage.has('bar')).toBeFalsy();
+      expect(storage.has('foo')).toBe(true);
+      expect(storage.has('bar')).toBe(false);
     });
   });
 
