@@ -35,7 +35,7 @@ export abstract class WebStorage {
    * Returns a new iterator that allows iterating the entries of this storage.
    * @return An iterator for the entries of this storage.
    */
-  *[Symbol.iterator](): IterableIterator<[string, string | null]> {
+  *[Symbol.iterator](): IterableIterator<[string, string|null]> {
     for (const key of this.keys) yield [key, this.get(key)];
   }
 
@@ -53,7 +53,7 @@ export abstract class WebStorage {
    * @param defaultValue The default item value if it does not exist.
    * @return The value of the storage item, or the default value if the item is not found.
    */
-  get(key: string, defaultValue: string | null = null): string | null {
+  get(key: string, defaultValue: string|null = null): string|null {
     const value = this._backend.getItem(key);
     return typeof value == 'string' ? value : defaultValue;
   }
@@ -89,7 +89,7 @@ export abstract class WebStorage {
    * @param key The key to seek for.
    * @return The value associated with the specified key before it was removed.
    */
-  remove(key: string): string | null {
+  remove(key: string): string|null {
     const previousValue = this.get(key);
     this._backend.removeItem(key);
     this._onChanges.next({
