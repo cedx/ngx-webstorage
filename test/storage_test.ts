@@ -1,4 +1,4 @@
-import {SessionStorage} from '../src/index.js';
+import {SessionStorage} from '../src/index';
 
 /** Tests the {@link WebStorage} class. */
 describe('WebStorage', () => {
