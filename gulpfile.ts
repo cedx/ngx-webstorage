@@ -1,5 +1,5 @@
 import {spawn, SpawnOptions} from 'child_process';
-import del from 'del';
+import * as del from 'del';
 import {promises} from 'fs';
 import * as gulp from 'gulp';
 import * as replace from 'gulp-replace';

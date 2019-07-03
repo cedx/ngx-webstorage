@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "angularCompilerOptions": {
+    "enableIvy": true,
     "enableResourceInlining": true,
     "fullTemplateTypeCheck": true,
     "skipTemplateCodegen": true,
