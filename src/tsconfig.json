@@ -1,7 +1,6 @@
 {
   "extends": "../tsconfig.json",
   "angularCompilerOptions": {
-    "enableIvy": true,
     "enableResourceInlining": true,
     "fullTemplateTypeCheck": true,
     "skipTemplateCodegen": true,
@@ -10,7 +9,6 @@
   },
   "compilerOptions": {
     "baseUrl": ".",
-    "emitDecoratorMetadata": true,
     "importHelpers": true,
     "module": "es2015",
     "moduleResolution": "node"

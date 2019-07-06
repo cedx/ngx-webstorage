@@ -62,8 +62,8 @@
     "storage"
   ],
   "peerDependencies": {
-    "@angular/common": ">=8.0.0",
-    "@angular/core": ">=8.0.0",
+    "@angular/common": ">=8.1.0",
+    "@angular/core": ">=8.1.0",
     "rxjs": ">=6.5.0",
     "tslib": ">=1.10.0",
     "zone.js": ">=0.9.0"
