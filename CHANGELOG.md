@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [3.1.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.0.0...v3.1.0)
+- Raised the required [Angular](https://angular.io) version.
+- Raised the required [Node.js](https://nodejs.org) version.
+- Updated the package dependencies.
+
 ## Version [3.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v2.0.0...v3.0.0)
 - Breaking change: upgraded [Angular](https://angular.io) to version 8.
 - Added an example code.
