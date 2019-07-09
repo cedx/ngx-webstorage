@@ -23,7 +23,7 @@
     "@angular/platform-browser": "^8.1.0",
     "@angular/platform-browser-dynamic": "^8.1.0",
     "@cedx/coveralls": "^9.0.0",
-    "@compodoc/compodoc": "^1.1.9",
+    "@compodoc/compodoc": "^1.1.10",
     "@types/gulp": "^4.0.6",
     "@types/gulp-replace": "0.0.31",
     "@types/jasmine": "^3.3.13",
