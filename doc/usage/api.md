@@ -97,7 +97,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#get**(key: string, defaultValue: string | null = null): string | null
+## **#get**(key: string, defaultValue?: string): string|undefined
 Returns the value associated to the specified key:
 
 ```ts
@@ -112,7 +112,7 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    console.log(this._storage.get('foo')); // null
+    console.log(this._storage.get('foo')); // undefined
     console.log(this._storage.get('foo', 'qux')); // "qux"
 
     this._storage.set('foo', 'bar');
@@ -121,9 +121,9 @@ export class MyComponent implements OnInit {
 }
 ```
 
-Returns `null` or the given default value if the key is not found.
+Returns `undefined` or the given default value if the key is not found.
 
-## **#getObject**(key: string, defaultValue: any = null): any
+## **#getObject**(key: string, defaultValue?: any): any
 Deserializes and returns the value associated to the specified key:
 
 ```ts
@@ -138,7 +138,7 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    console.log(this._storage.getObject('foo')); // null
+    console.log(this._storage.getObject('foo')); // undefined
     console.log(this._storage.getObject('foo', 'qux')); // "qux"
   
     this._storage.setObject('foo', {bar: 'baz'});
@@ -150,7 +150,7 @@ export class MyComponent implements OnInit {
 !!! info
     The value is deserialized using the [`JSON.parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) method.
 
-Returns `null` or the given default value if the key is not found.
+Returns `undefined` or the given default value if the key is not found.
 
 ## **#has**(key: string): boolean
 Returns a boolean value indicating whether the associated storage contains the specified key:
@@ -175,7 +175,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#remove**(key: string): string | null
+## **#remove**(key: string): string|undefined
 Removes the value associated to the specified key:
 
 ```ts
@@ -214,7 +214,7 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    console.log(this._storage.get('foo')); // null
+    console.log(this._storage.get('foo')); // undefined
     
     this._storage.set('foo', 'bar');
     console.log(this._storage.get('foo')); // "bar"
@@ -237,7 +237,7 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    console.log(this._storage.getObject('foo')); // null
+    console.log(this._storage.getObject('foo')); // undefined
     
     this._storage.setObject('foo', {bar: 'baz'});
     console.log(this._storage.getObject('foo')); // {bar: "baz"}

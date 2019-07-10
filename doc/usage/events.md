@@ -22,7 +22,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-The changes are expressed as a map of [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where a `null` property indicates an absence of value:
+The changes are expressed as a map of [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where a `undefined` property indicates an absence of value:
 
 ```ts
 import {Component, OnInit} from '@angular/core';
@@ -45,13 +45,13 @@ export class MyComponent implements OnInit {
     });
 
     this._storage.set('foo', 'bar');
-    // Prints: {key: "foo", current: "bar", previous: null}
+    // Prints: {key: "foo", current: "bar", previous: undefined}
 
     this._storage.set('foo', 'baz');
     // Prints: {key: "foo", current: "baz", previous: "bar"}
 
     this._storage.remove('foo');
-    // Prints: {key: "foo", current: null, previous: "baz"}
+    // Prints: {key: "foo", current: undefined, previous: "baz"}
   }
 }
 ```
@@ -71,7 +71,7 @@ export class MyComponent implements OnInit {
   
   ngOnInit(): void {
     this._storage.setObject('foo', {bar: 'baz'});
-    // Prints: {key: "foo", current: "{\"bar\": \"baz\"}", previous: null}
+    // Prints: {key: "foo", current: "{\"bar\": \"baz\"}", previous: undefined}
   }
 }
 ```
