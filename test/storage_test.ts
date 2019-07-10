@@ -38,7 +38,7 @@ describe('WebStorage', () => {
       const subscription = storage.onChanges.subscribe(changes => {
         expect(Object.keys(changes)).toEqual(['foo']);
         expect(changes.foo.currentValue).toEqual('bar');
-        expect(changes.foo.previousValue).toBeNull();
+        expect(changes.foo.previousValue).toBeUndefined();
         done();
       }, done);
 
@@ -67,7 +67,7 @@ describe('WebStorage', () => {
 
       const subscription = storage.onChanges.subscribe(changes => {
         expect(Object.keys(changes)).toEqual(['foo']);
-        expect(changes.foo.currentValue).toBeNull();
+        expect(changes.foo.currentValue).toBeUndefined();
         expect(changes.foo.previousValue).toEqual('bar');
         done();
       }, done);
@@ -87,9 +87,9 @@ describe('WebStorage', () => {
         expect(keys).toContain('foo');
         expect(keys).toContain('bar');
 
-        expect(changes.foo.currentValue).toBeNull();
+        expect(changes.foo.currentValue).toBeUndefined();
         expect(changes.foo.previousValue).toEqual('bar');
-        expect(changes.bar.currentValue).toBeNull();
+        expect(changes.bar.currentValue).toBeUndefined();
         expect(changes.bar.previousValue).toEqual('baz');
         done();
       }, done);
@@ -142,7 +142,7 @@ describe('WebStorage', () => {
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
       const storage = new SessionStorage(window.document);
-      expect(storage.get('foo')).toBeNull();
+      expect(storage.get('foo')).toBeUndefined();
       expect(storage.get('foo', '123')).toEqual('123');
 
       sessionStorage.setItem('foo', 'bar');
@@ -156,7 +156,7 @@ describe('WebStorage', () => {
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
       const storage = new SessionStorage(window.document);
-      expect(storage.getObject('foo')).toBeNull();
+      expect(storage.getObject('foo')).toBeUndefined();
       expect(storage.getObject('foo', {key: 'value'})).toEqual({key: 'value'});
 
       sessionStorage.setItem('foo', '123');
