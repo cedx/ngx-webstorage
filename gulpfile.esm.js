@@ -48,10 +48,7 @@ task('fix', () => _exec('eslint', ['--config=etc/eslint.json', '--fix', ...sourc
 task('lint', () => _exec('eslint', ['--config=etc/eslint.json', ...sources]));
 
 /** Runs the test suites. */
-task('test', () => {
-  if (process.platform == 'win32') process.env.FIREFOX_BIN = 'C:\\Program Files\\Mozilla\\Firefox\\firefox.exe';
-  return _exec('ng', ['test']);
-});
+task('test', () => _exec('ng', ['test']));
 
 /** Upgrades the project to the latest revision. */
 task('upgrade', async () => {

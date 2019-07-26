@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 module.exports = config => config.set({
-  browsers: ['FirefoxHeadless'],
+  browsers: ['ChromeHeadless'],
   client: {clearContext: false},
   coverageIstanbulReporter: {
     dir: require('path').resolve(__dirname, '../var'),

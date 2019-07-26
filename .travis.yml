@@ -1,4 +1,4 @@
-addons: {firefox: latest}
+addons: {chrome: stable}
 dist: xenial
 language: node_js
 node_js: node
