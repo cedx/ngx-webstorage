@@ -19,13 +19,13 @@ if (!_path.includes(_vendor)) process.env.PATH = `${_vendor}${delimiter}${_path}
 
 /** Builds the project. */
 task('build:clean', () => del('build'));
-task('build:esm', () => src(['build/esm2015/**/*.js']).pipe(replace(/\/\/# sourceMappingURL=.*$/g, '')).pipe(dest('lib')));
-task('build:src', () => _exec('ng', ['build']));
+task('build:fix', () => src(['build/esm2015/**/*.js']).pipe(replace(/\/\/# sourceMappingURL=.*$/g, '')).pipe(dest('lib')));
+task('build:js', () => _exec('ng', ['build']));
 task('build:types', () => src(['build/**/*.d.ts', 'build/*.metadata.json']).pipe(dest('lib')));
-task('build', series('build:src', parallel('build:esm', 'build:types'), 'build:clean'));
+task('build', series('build:js', parallel('build:fix', 'build:types'), 'build:clean'));
 
 /** Deletes all generated files and reset any saved state. */
-task('clean', () => del(['doc/api', 'lib', 'var/**/*', 'web']));
+task('clean', () => del(['build', 'doc/api', 'lib', 'var/**/*', 'web']));
 
 /** Uploads the results of the code coverage. */
 task('coverage', () => _exec('coveralls', ['var/lcov.info']));
