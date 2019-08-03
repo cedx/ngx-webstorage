@@ -8,8 +8,8 @@
 ## Version [3.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v2.0.0...v3.0.0)
 - Breaking change: upgraded [Angular](https://angular.io) to version 8.
 - Added an example code.
-- Replaced [TSLint](https://palantir.github.io/tslint) static analyzer by [TypeScript ESLint](https://typescript-eslint.io).
-- Replaced [TypeDoc](https://typedoc.org) documentation generator by [Compodoc](https://compodoc.app).
+- Replaced the [TSLint](https://palantir.github.io/tslint) static analyzer by [TypeScript ESLint](https://typescript-eslint.io).
+- Replaced the [TypeDoc](https://typedoc.org) documentation generator by [Compodoc](https://compodoc.app).
 - Updated the package dependencies.
 
 ## Version [2.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.3.0...v2.0.0)
@@ -19,8 +19,8 @@
 - Breaking change: removed the `StorageModule` module.
 - Breaking change: replaced the injection tokens by dedicated classes.
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
-- Replaced [ESDoc](https://esdoc.org) documentation generator by [TypeDoc](https://typedoc.org).
-- Replaced [ESLint](https://eslint.org) static analyzer by [TSLint](https://palantir.github.io/tslint).
+- Replaced the [ESDoc](https://esdoc.org) documentation generator by [TypeDoc](https://typedoc.org).
+- Replaced the [ESLint](https://eslint.org) static analyzer by [TSLint](https://palantir.github.io/tslint).
 - Removed the dependency on [Babel](https://babeljs.io) compiler.
 - Updated the build system to [Gulp](https://gulpjs.com) version 4.
 - Updated the package dependencies.
