@@ -1,6 +1,6 @@
 import {SessionStorage} from '../src/index';
 
-/** Tests the {@link WebStorage} class. */
+/** Tests the [[WebStorage]] class. */
 describe('WebStorage', () => {
   beforeEach(() => sessionStorage.clear());
 
