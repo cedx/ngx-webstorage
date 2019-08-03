@@ -1,8 +1,14 @@
 # Changelog
 
+## Version [3.2.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.1.0...v3.2.0)
+- APIs that use `null` references to indicate an absence of value now use `undefined`.
+- Raised the [Angular](https://angular.io) constraint.
+- Raised the [Node.js](https://nodejs.org) constraint.
+- Updated the package dependencies.
+
 ## Version [3.1.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.0.0...v3.1.0)
-- Raised the required [Angular](https://angular.io) version.
-- Raised the required [Node.js](https://nodejs.org) version.
+- Raised the [Angular](https://angular.io) constraint.
+- Raised the [Node.js](https://nodejs.org) constraint.
 - Updated the package dependencies.
 
 ## Version [3.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v2.0.0...v3.0.0)
