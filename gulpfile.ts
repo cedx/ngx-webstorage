@@ -1,12 +1,12 @@
 import {spawn, SpawnOptions} from 'child_process';
-import del from 'del';
+import * as del from 'del';
 import {promises} from 'fs';
-import gulp from 'gulp';
-import replace from 'gulp-replace';
+import * as gulp from 'gulp';
+import * as replace from 'gulp-replace';
 import {delimiter, normalize, resolve} from 'path';
 
 /** The file patterns providing the list of source files. */
-const sources: string[] = ['*.js', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
+const sources: string[] = ['*.ts', 'example/*.ts', 'src/**/*.ts', 'test/**/*.ts'];
 
 // Shortcuts.
 const {dest, parallel, series, src, task, watch} = gulp;
@@ -25,7 +25,7 @@ task('build:types', () => src(['build/**/*.d.ts', 'build/*.metadata.json']).pipe
 task('build', series('build:src', parallel('build:esm', 'build:types'), 'build:clean'));
 
 /** Deletes all generated files and reset any saved state. */
-task('clean', () => del(['build', 'doc/api', 'lib', 'var/**/*', 'web']));
+task('clean', () => del(['doc/api', 'lib', 'var/**/*', 'web']));
 
 /** Uploads the results of the code coverage. */
 task('coverage', () => _exec('coveralls', ['var/lcov.info']));
