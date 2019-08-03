@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "experimentalDecorators": true,
     "module": "commonjs",
     "moduleResolution": "node",
