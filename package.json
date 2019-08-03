@@ -71,7 +71,7 @@
   },
   "scripts": {
     "coverage": "gulp coverage",
-    "prepack": "gulp build",
+    "prepack": "gulp",
     "start": "gulp watch",
     "test": "gulp test"
   }
