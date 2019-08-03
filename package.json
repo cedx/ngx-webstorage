@@ -10,7 +10,7 @@
   "repository": "github:cedx/ngx-webstorage.js",
   "type": "module",
   "types": "lib/ngx-webstorage.d.ts",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.802.0",
     "@angular-devkit/build-ng-packagr": "^0.802.0",
@@ -32,7 +32,6 @@
     "@typescript-eslint/parser": "^1.13.0",
     "del": "^5.0.0",
     "eslint": "^6.1.0",
-    "esm": "^3.2.25",
     "gulp": "^4.0.2",
     "gulp-replace": "^1.0.0",
     "jasmine-core": "^3.4.0",
@@ -43,7 +42,6 @@
     "ng-packagr": "^5.4.3",
     "rxjs": "^6.5.2",
     "ts-node": "^8.3.0",
-    "tslib": "^1.10.0",
     "typescript": "^3.5.3",
     "zone.js": "^0.10.0"
   },

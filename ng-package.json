@@ -4,6 +4,6 @@
   "lib": {
     "entryFile": "src/index.ts",
     "flatModuleFile": "ngx-webstorage",
-    "languageLevel": ["dom", "es2018"]
+    "languageLevel": ["dom", "esnext"]
   }
 }
