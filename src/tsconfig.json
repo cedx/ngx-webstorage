@@ -1,5 +1,6 @@
 {
   "extends": "../tsconfig.json",
+  "include": ["**/*.ts"],
   "angularCompilerOptions": {
     "enableResourceInlining": true,
     "fullTemplateTypeCheck": true,
@@ -8,9 +9,8 @@
     "strictMetadataEmit": true
   },
   "compilerOptions": {
-    "baseUrl": ".",
+    "declaration": true,
     "importHelpers": true,
-    "module": "esnext",
-    "moduleResolution": "node"
+    "module": "esnext"
   }
 }

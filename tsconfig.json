@@ -1,11 +1,10 @@
 {
-  "include": ["src/**/*.ts"],
   "compilerOptions": {
-    "declaration": true,
+    "baseUrl": ".",
     "experimentalDecorators": true,
     "module": "commonjs",
-    "outDir": "lib",
-    "sourceMap": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "strict": true,
     "target": "esnext"
   }

@@ -1,10 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["**/*.ts", "../src/**/*.ts"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "importHelpers": true,
-    "module": "esnext",
-    "moduleResolution": "node"
+    "sourceMap": true
   }
 }
