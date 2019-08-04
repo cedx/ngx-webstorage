@@ -18,8 +18,12 @@ const _vendor = resolve('node_modules/.bin');
 if (!_path.includes(_vendor)) process.env.PATH = `${_vendor}${delimiter}${_path}`;
 
 /** Builds the project. */
+task('build:fix', () => src(['build/esm2015/**/*.js'])
+  .pipe(replace(/(export|import)\s+(.+)\s+from\s+'(\.[^']+)'/g, "$1 $2 from '$3.js'"))
+  .pipe(replace(/\/\/# sourceMappingURL=.*$/g, ''))
+  .pipe(dest('lib')));
+
 task('build:clean', () => del('build'));
-task('build:fix', () => src(['build/esm2015/**/*.js']).pipe(replace(/\/\/# sourceMappingURL=.*$/g, '')).pipe(dest('lib')));
 task('build:js', () => _exec('ng', ['build']));
 task('build:types', () => src(['build/**/*.d.ts', 'build/*.metadata.json']).pipe(dest('lib')));
 task('build', series('build:js', parallel('build:fix', 'build:types'), 'build:clean'));
