@@ -199,6 +199,8 @@ export class MyComponent implements OnInit {
 }
 ```
 
+Returns the value associated with the specified key before it was removed.
+
 ## **#set**(key: string, value: string): this
 Associates a given value to the specified key:
 
