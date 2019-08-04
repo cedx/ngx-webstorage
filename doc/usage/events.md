@@ -4,7 +4,7 @@ Every time one or several values are changed (added, removed or updated) through
 This event is exposed as an [Observable](https://angular.io/guide/observables), you can subscribe to it using the `onChanges` property:
 
 ```ts
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
 @Component({
@@ -15,17 +15,17 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    this._storage.onChanges.subscribe(changes => {
+    this._storage.onChanges.subscribe((changes: SimpleChanges) => {
       for (const [key, value] of Object.entries(changes)) console.log(`${key}: ${JSON.stringify(value)}`);
     });
   }
 }
 ```
 
-The changes are expressed as a map of [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where a `undefined` property indicates an absence of value:
+The changes are expressed as a map of [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where an `undefined` property indicates an absence of value:
 
 ```ts
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
 @Component({
@@ -36,7 +36,7 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    this._storage.onChanges.subscribe(changes => {
+    this._storage.onChanges.subscribe((changes: SimpleChanges) => {
       for (const [key, change] of Object.entries(changes)) console.log({
         key,
         current: change.currentValue,
