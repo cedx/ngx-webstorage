@@ -17,7 +17,7 @@ export abstract class WebStorage {
   /** The keys of this storage. */
   get keys(): string[] {
     const keys = [];
-    for (let i = 0; i < this.length; i++) keys.push(this._backend.key(i) as string);
+    for (let i = 0; i < this.length; i++) keys.push(this._backend.key(i)!);
     return keys;
   }
 
@@ -70,7 +70,7 @@ export abstract class WebStorage {
       return typeof value == 'string' ? JSON.parse(value) : defaultValue;
     }
 
-    catch {
+    catch (err) {
       return defaultValue;
     }
   }
@@ -138,7 +138,7 @@ export class LocalStorage extends WebStorage {
    * @param document The current HTML document.
    */
   constructor(@Inject(DOCUMENT) document: Document) {
-    super((document.defaultView as Window).localStorage);
+    super(document.defaultView!.localStorage);
   }
 }
 
@@ -154,6 +154,6 @@ export class SessionStorage extends WebStorage {
    * @param document The current HTML document.
    */
   constructor(@Inject(DOCUMENT) document: Document) {
-    super((document.defaultView as Window).sessionStorage);
+    super(document.defaultView!.sessionStorage);
   }
 }

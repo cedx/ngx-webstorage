@@ -1,4 +1,4 @@
-/* eslint-disable line-comment-position */
+/* eslint-disable capitalized-comments, line-comment-position */
 import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import {LocalStorage} from '@cedx/ngx-webstorage';
