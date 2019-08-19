@@ -1,6 +1,5 @@
 /* eslint-disable capitalized-comments, line-comment-position */
 import {Component, OnInit} from '@angular/core';
-// @ts-ignore
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
 /** A component that demonstrates the usage of the [[LocalStorage]] service. */

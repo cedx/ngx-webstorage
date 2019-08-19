@@ -3,7 +3,7 @@ import {Inject, Injectable, SimpleChange, SimpleChanges} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
-export abstract class WebStorage {
+export abstract class WebStorage implements Iterable<[string, string|undefined]> {
 
   /** The handler of "changes" events. */
   private _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
