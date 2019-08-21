@@ -1,5 +1,4 @@
 {
-  "author": "Cédric Belin <cedric@belin.io>",
   "bugs": "https://github.com/cedx/ngx-webstorage.js/issues",
   "description": "Angular services for interacting with the Web Storage.",
   "homepage": "https://dev.belin.io/ngx-webstorage.js",
@@ -11,6 +10,11 @@
   "type": "module",
   "types": "lib/ngx-webstorage.d.ts",
   "version": "3.2.0",
+  "author": {
+    "email": "cedric@belin.io",
+    "name": "Cédric Belin",
+    "url": "https://belin.io"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.802.2",
     "@angular-devkit/build-ng-packagr": "^0.802.2",
