@@ -39,7 +39,7 @@ task('doc', async () => {
   for (const path of ['CHANGELOG.md', 'LICENSE.md']) await copyFile(path, `doc/about/${path.toLowerCase()}`);
   await _exec('compodoc', ['--config=etc/compodoc.json']);
   await _exec('mkdocs', ['build', '--config-file=etc/mkdocs.yaml']);
-  return del(['doc/about/changelog.md', 'doc/about/license.md']);
+  return del(['doc/about/changelog.md', 'doc/about/license.md', 'web/mkdocs.yaml']);
 });
 
 /** Fixes the coding standards issues. */
