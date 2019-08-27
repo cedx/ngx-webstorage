@@ -3,7 +3,7 @@ Every time one or several values are changed (added, removed or updated) through
 
 This event is exposed as an [Observable](https://angular.io/guide/observables), you can subscribe to it using the `onChanges` property:
 
-```ts
+```typescript
 import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -24,7 +24,7 @@ export class MyComponent implements OnInit {
 
 The changes are expressed as a map of [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where an `undefined` property indicates an absence of value:
 
-```ts
+```typescript
 import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -58,7 +58,7 @@ export class MyComponent implements OnInit {
 
 The values contained in the `currentValue` and `previousValue` properties of the `SimpleChange` instances are the raw storage values. If you use the `WebStorage#setObject()` method to store a value, you will get the serialized string value, not the original value passed to the method:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {SessionStorage} from '@cedx/ngx-webstorage';
 

@@ -4,7 +4,7 @@ source: src/storage.ts
 # Programming interface
 This package provides two services dedicated to the Web Storage: the `LocalStorage` and `SessionStorage` classes.
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -30,7 +30,7 @@ Each class extends from the `WebStorage` abstract class that has the following A
 ## **#keys**: string[]
 Returns the keys of the the associated storage:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -53,7 +53,7 @@ export class MyComponent implements OnInit {
 ## **#length**: number
 Returns the number of entries in the associated storage:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -76,7 +76,7 @@ export class MyComponent implements OnInit {
 ## **#clear**(): void
 Removes all entries from the associated storage:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -100,7 +100,7 @@ export class MyComponent implements OnInit {
 ## **#get**(key: string, defaultValue?: string): string|undefined
 Returns the value associated to the specified key:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -126,7 +126,7 @@ Returns `undefined` or the given default value if the key is not found.
 ## **#getObject**(key: string, defaultValue?: any): any
 Deserializes and returns the value associated to the specified key:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -155,7 +155,7 @@ Returns `undefined` or the given default value if the key is not found.
 ## **#has**(key: string): boolean
 Returns a boolean value indicating whether the associated storage contains the specified key:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -178,7 +178,7 @@ export class MyComponent implements OnInit {
 ## **#remove**(key: string): string|undefined
 Removes the value associated to the specified key:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -204,7 +204,7 @@ Returns the value associated with the specified key before it was removed.
 ## **#set**(key: string, value: string): this
 Associates a given value to the specified key:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
@@ -227,7 +227,7 @@ export class MyComponent implements OnInit {
 ## **#setObject**(key: string, value: any): this
 Serializes and associates a given value to the specified key:
 
-```ts
+```typescript
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
