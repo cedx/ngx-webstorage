@@ -6,14 +6,14 @@ describe('WebStorage', () => {
 
   describe('#keys', () => {
     it('should return an empty array for an empty storage', () => {
-      expect(new SessionStorage(window.document).keys.length).toEqual(0);
+      expect(new SessionStorage(document).keys.length).toEqual(0);
     });
 
     it('should return the list of keys for a non-empty storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
-      const {keys} = new SessionStorage(window.document);
+      const {keys} = new SessionStorage(document);
       expect(keys.length).toEqual(2);
       expect(keys).toContain('foo');
       expect(keys).toContain('bar');
@@ -22,19 +22,19 @@ describe('WebStorage', () => {
 
   describe('#length', () => {
     it('should return zero for an empty storage', () => {
-      expect(new SessionStorage(window.document).length).toEqual(0);
+      expect(new SessionStorage(document).length).toEqual(0);
     });
 
     it('should return the number of entries for a non-empty storage', () => {
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
-      expect(new SessionStorage(window.document).length).toEqual(2);
+      expect(new SessionStorage(document).length).toEqual(2);
     });
   });
 
   describe('#onChanges', () => {
     it('should trigger an event when a value is added', done => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       const subscription = storage.onChanges.subscribe(changes => {
         expect(Object.keys(changes)).toEqual(['foo']);
         expect(changes.foo.currentValue).toEqual('bar');
@@ -47,7 +47,7 @@ describe('WebStorage', () => {
     });
 
     it('should trigger an event when a value is updated', done => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
 
       const subscription = storage.onChanges.subscribe(changes => {
@@ -62,7 +62,7 @@ describe('WebStorage', () => {
     });
 
     it('should trigger an event when a value is removed', done => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
 
       const subscription = storage.onChanges.subscribe(changes => {
@@ -77,7 +77,7 @@ describe('WebStorage', () => {
     });
 
     it('should trigger an event when the storage is cleared', done => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
@@ -101,13 +101,13 @@ describe('WebStorage', () => {
 
   describe('#[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       const iterator = storage[Symbol.iterator]();
       expect(iterator.next().done).toBe(true);
     });
 
     it('should return a value iterator if storage is not empty', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
 
@@ -129,7 +129,7 @@ describe('WebStorage', () => {
 
   describe('#clear()', () => {
     it('should remove all storage entries', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
       expect(storage.length).toEqual(2);
@@ -141,7 +141,7 @@ describe('WebStorage', () => {
 
   describe('#get()', () => {
     it('should properly get the storage entries', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       expect(storage.get('foo')).toBeUndefined();
       expect(storage.get('foo', '123')).toEqual('123');
 
@@ -155,7 +155,7 @@ describe('WebStorage', () => {
 
   describe('#getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       expect(storage.getObject('foo')).toBeUndefined();
       expect(storage.getObject('foo', {key: 'value'})).toEqual({key: 'value'});
 
@@ -171,17 +171,17 @@ describe('WebStorage', () => {
 
     it('should return the default value if the value can\'t be deserialized', () => {
       sessionStorage.setItem('foo', 'bar');
-      expect(new SessionStorage(window.document).getObject('foo', 'defaultValue')).toEqual('defaultValue');
+      expect(new SessionStorage(document).getObject('foo', 'defaultValue')).toEqual('defaultValue');
     });
   });
 
   describe('#has()', () => {
     it('should return `false` if the specified key is not contained', () => {
-      expect(new SessionStorage(window.document).has('foo')).toBe(false);
+      expect(new SessionStorage(document).has('foo')).toBe(false);
     });
 
     it('should return `true` if the specified key is contained', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
       expect(storage.has('foo')).toBe(true);
       expect(storage.has('bar')).toBe(false);
@@ -190,7 +190,7 @@ describe('WebStorage', () => {
 
   describe('#remove()', () => {
     it('should properly remove the storage entries', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       sessionStorage.setItem('foo', 'bar');
       sessionStorage.setItem('bar', 'baz');
       expect(sessionStorage.getItem('foo')).toEqual('bar');
@@ -206,7 +206,7 @@ describe('WebStorage', () => {
 
   describe('#set()', () => {
     it('should properly set the storage entries', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       expect(sessionStorage.getItem('foo')).toBeNull();
       storage.set('foo', 'bar');
       expect(sessionStorage.getItem('foo')).toEqual('bar');
@@ -217,7 +217,7 @@ describe('WebStorage', () => {
 
   describe('#setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
-      const storage = new SessionStorage(window.document);
+      const storage = new SessionStorage(document);
       expect(sessionStorage.getItem('foo')).toBeNull();
       storage.setObject('foo', 123);
       expect(sessionStorage.getItem('foo')).toEqual('123');
