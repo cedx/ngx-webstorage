@@ -50,7 +50,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   /**
    * Gets the value associated to the specified key.
    * @param key The key to seek for.
-   * @param defaultValue The default item value if it does not exist.
+   * @param defaultValue The value to return if the item does not exist.
    * @return The value of the storage item, or the default value if the item is not found.
    */
   get(key: string, defaultValue?: string): string|undefined {
@@ -61,7 +61,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   /**
    * Gets the deserialized value associated to the specified key.
    * @param key The key to seek for.
-   * @param defaultValue The default item value if it does not exist.
+   * @param defaultValue The value to return if the item does not exist.
    * @return The deserialized value of the storage item, or the default value if the item is not found.
    */
   getObject(key: string, defaultValue?: any): any {
