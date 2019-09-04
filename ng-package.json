@@ -4,6 +4,7 @@
   "lib": {
     "entryFile": "src/index.ts",
     "flatModuleFile": "ngx-webstorage",
-    "languageLevel": ["dom", "esnext"]
+    "languageLevel": ["dom", "esnext"],
+    "umdId": "ngxWebStorage"
   }
 }
