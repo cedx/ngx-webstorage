@@ -1,4 +1,4 @@
-/** A storage backend based on a [Map](https://developer.mozilla.org/en-US/docs/Web/API/Map). */
+/** A storage backend based on a [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). */
 export class MapBackend implements Storage {
 
   /** The underlying data store. */
