@@ -75,6 +75,9 @@
     "tslib": ">=1.10.0",
     "zone.js": ">=0.10.0"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/cedx"
+  },
   "scripts": {
     "coverage": "gulp coverage",
     "prepack": "gulp",
