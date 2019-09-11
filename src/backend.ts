@@ -1,5 +1,5 @@
 /** A storage backend based on a [Map](https://developer.mozilla.org/en-US/docs/Web/API/Map). */
-export class MemoryBackend implements Storage {
+export class MapBackend implements Storage {
 
   /** The underlying data store. */
   private _map: Map<string, string> = new Map<string, string>();

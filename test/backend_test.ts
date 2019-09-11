@@ -1,14 +1,14 @@
-import {MemoryBackend} from '../src/index';
+import {MapBackend} from '../src/index';
 
 /** Tests the [[MemoryBackend]] class. */
 describe('MemoryBackend', () => {
   describe('#length', () => {
     it('should return zero for an empty backend', () => {
-      expect(new MemoryBackend().length).toEqual(0);
+      expect(new MapBackend().length).toEqual(0);
     });
 
     it('should return the number of entries for a non-empty backend', () => {
-      const backend = new MemoryBackend;
+      const backend = new MapBackend;
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
       expect(backend.length).toEqual(2);
@@ -17,7 +17,7 @@ describe('MemoryBackend', () => {
 
   describe('#clear()', () => {
     it('should remove all backend entries', () => {
-      const backend = new MemoryBackend;
+      const backend = new MapBackend;
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
       backend.clear();
@@ -27,7 +27,7 @@ describe('MemoryBackend', () => {
 
   describe('#getItem() / #setItem()', () => {
     it('should properly get and set the backend entries', () => {
-      const backend = new MemoryBackend;
+      const backend = new MapBackend;
       expect(backend.getItem('foo')).toBeNull();
       backend.setItem('foo', 'bar');
       expect(backend.getItem('foo')).toEqual('bar');
@@ -38,7 +38,7 @@ describe('MemoryBackend', () => {
 
   describe('#removeItem()', () => {
     it('should properly remove the backend entries', () => {
-      const backend = new MemoryBackend;
+      const backend = new MapBackend;
       backend.setItem('foo', 'bar');
       backend.setItem('bar', 'baz');
       expect(backend.getItem('foo')).toEqual('bar');

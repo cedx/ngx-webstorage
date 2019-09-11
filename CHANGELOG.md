@@ -2,6 +2,7 @@
 
 ## Version [3.3.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.2.0...v3.3.0)
 - Added support for [Angular Universal](https://angular.io/guide/universal).
+- Updated the package dependencies.
 
 ## Version [3.2.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.1.0...v3.2.0)
 - APIs that use `null` references to indicate an absence of value now use `undefined`.

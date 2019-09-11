@@ -1,7 +1,7 @@
 import {isPlatformBrowser} from '@angular/common';
 import {Inject, Injectable, PLATFORM_ID, SimpleChange, SimpleChanges} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {MemoryBackend} from './backend';
+import {MapBackend} from './backend';
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]> {
@@ -136,7 +136,7 @@ export class LocalStorage extends WebStorage {
    * @param platformId The identifier of the current platform.
    */
   constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
-    super(isPlatformBrowser(platformId) ? window.localStorage : new MemoryBackend);
+    super(isPlatformBrowser(platformId) ? window.localStorage : new MapBackend);
   }
 }
 
@@ -149,6 +149,6 @@ export class SessionStorage extends WebStorage {
    * @param platformId The identifier of the current platform.
    */
   constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
-    super(isPlatformBrowser(platformId) ? window.sessionStorage : new MemoryBackend);
+    super(isPlatformBrowser(platformId) ? window.sessionStorage : new MapBackend);
   }
 }
