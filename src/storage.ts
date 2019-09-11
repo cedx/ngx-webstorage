@@ -1,19 +1,32 @@
 import {isPlatformBrowser} from '@angular/common';
-import {Inject, Injectable, PLATFORM_ID, SimpleChange, SimpleChanges} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Inject, Injectable, OnDestroy, PLATFORM_ID, SimpleChange, SimpleChanges} from '@angular/core';
+import {fromEvent, Observable, Subject, Subscription} from 'rxjs';
 import {MapBackend} from './backend';
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
-export abstract class WebStorage implements Iterable<[string, string|undefined]> {
+export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
   /** The handler of "changes" events. */
   private _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
+  /** The subscription to the storage events. */
+  private readonly _subscription: Subscription|undefined;
+
   /**
    * Creates a new storage service.
    * @param _backend The underlying data store.
+   * @param isBrowser Value indicating if the runtime platform is a browser.
    */
-  protected constructor(private _backend: Storage) {}
+  protected constructor(private _backend: Storage, private isBrowser: boolean = false) {
+    if (isBrowser) this._subscription = fromEvent(window, 'storage').subscribe(event => {
+      const storageEvent = event as StorageEvent;
+      if (storageEvent.key !== null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
+        typeof storageEvent.oldValue == 'string' ? storageEvent.oldValue : undefined,
+        typeof storageEvent.newValue == 'string' ? storageEvent.newValue : undefined,
+        false
+      )});
+    });
+  }
 
   /** The keys of this storage. */
   get keys(): string[] {
@@ -85,6 +98,11 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
     return this.keys.includes(key);
   }
 
+  /** Method invoked before the service is destroyed. */
+  ngOnDestroy(): void {
+    if (this._subscription) this._subscription.unsubscribe();
+  }
+
   /**
    * Removes the value associated to the specified key.
    * @param key The key to seek for.
@@ -136,7 +154,8 @@ export class LocalStorage extends WebStorage {
    * @param platformId The identifier of the current platform.
    */
   constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
-    super(isPlatformBrowser(platformId) ? window.localStorage : new MapBackend);
+    const isBrowser = isPlatformBrowser(platformId);
+    super(isBrowser ? window.localStorage : new MapBackend, isBrowser);
   }
 }
 
@@ -149,6 +168,7 @@ export class SessionStorage extends WebStorage {
    * @param platformId The identifier of the current platform.
    */
   constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
-    super(isPlatformBrowser(platformId) ? window.sessionStorage : new MapBackend);
+    const isBrowser = isPlatformBrowser(platformId);
+    super(isBrowser ? window.sessionStorage : new MapBackend, isBrowser);
   }
 }
