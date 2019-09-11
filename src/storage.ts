@@ -1,6 +1,7 @@
-import {DOCUMENT} from '@angular/common';
-import {Inject, Injectable, SimpleChange, SimpleChanges} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import {Inject, Injectable, PLATFORM_ID, SimpleChange, SimpleChanges} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
+import {MemoryBackend} from './backend';
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]> {
@@ -126,34 +127,28 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   }
 }
 
-/**
- * Provides access to the local storage.
- * @dynamic
- */
+/** Provides access to the local storage. */
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends WebStorage {
 
   /**
    * Creates a new storage service.
-   * @param document The current HTML document.
+   * @param platformId The identifier of the current platform.
    */
-  constructor(@Inject(DOCUMENT) document: Document) {
-    super(document.defaultView!.localStorage);
+  constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
+    super(isPlatformBrowser(platformId) ? window.localStorage : new MemoryBackend);
   }
 }
 
-/**
- * Provides access to the session storage.
- * @dynamic
- */
+/** Provides access to the session storage. */
 @Injectable({providedIn: 'root'})
 export class SessionStorage extends WebStorage {
 
   /**
    * Creates a new storage service.
-   * @param document The current HTML document.
+   * @param platformId The identifier of the current platform.
    */
-  constructor(@Inject(DOCUMENT) document: Document) {
-    super(document.defaultView!.sessionStorage);
+  constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
+    super(isPlatformBrowser(platformId) ? window.sessionStorage : new MemoryBackend);
   }
 }
