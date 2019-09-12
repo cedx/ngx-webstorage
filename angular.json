@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "defaultProject": "library",
+  "defaultProject": "ngx-webstorage",
   "version": 1,
   "projects": {
-    "library": {
+    "ngx-webstorage": {
       "prefix": "ngx",
       "projectType": "library",
       "root": "",
