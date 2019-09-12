@@ -7,7 +7,7 @@ import {MapBackend} from './backend';
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
   /** The handler of "changes" events. */
-  private _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
+  private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /** The subscription to the storage events. */
   private readonly _subscription: Subscription|undefined;
@@ -17,10 +17,10 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    * @param _backend The underlying data store.
    * @param isBrowser Value indicating if the runtime platform is a browser.
    */
-  protected constructor(private _backend: Storage, private isBrowser: boolean = false) {
+  protected constructor(private _backend: Storage, isBrowser: boolean = false) {
     if (isBrowser) this._subscription = fromEvent(window, 'storage').subscribe(event => {
       const storageEvent = event as StorageEvent;
-      if (storageEvent.key !== null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
+      if (storageEvent.key != null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
         typeof storageEvent.oldValue == 'string' ? storageEvent.oldValue : undefined,
         typeof storageEvent.newValue == 'string' ? storageEvent.newValue : undefined,
         false

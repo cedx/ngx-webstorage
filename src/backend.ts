@@ -2,7 +2,7 @@
 export class MapBackend implements Storage {
 
   /** The underlying data store. */
-  private _map: Map<string, string> = new Map<string, string>();
+  private readonly _map: Map<string, string> = new Map<string, string>();
 
   /** The number of entries in this backend. */
   get length(): number {
