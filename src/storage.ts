@@ -1,7 +1,5 @@
-import {isPlatformBrowser} from '@angular/common';
-import {Inject, Injectable, OnDestroy, PLATFORM_ID, SimpleChange, SimpleChanges} from '@angular/core';
+import {Injectable, OnDestroy, SimpleChange, SimpleChanges} from '@angular/core';
 import {fromEvent, Observable, Subject, Subscription} from 'rxjs';
-import {MapBackend} from './backend';
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
@@ -15,10 +13,9 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   /**
    * Creates a new storage service.
    * @param _backend The underlying data store.
-   * @param isBrowser Value indicating if the runtime platform is a browser.
    */
-  protected constructor(private _backend: Storage, isBrowser: boolean = false) {
-    if (isBrowser) this._subscription = fromEvent(window, 'storage').subscribe(event => {
+  protected constructor(private _backend: Storage) {
+    this._subscription = fromEvent(window, 'storage').subscribe(event => {
       const storageEvent = event as StorageEvent;
       if (storageEvent.key != null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
         typeof storageEvent.oldValue == 'string' ? storageEvent.oldValue : undefined,
@@ -149,13 +146,9 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends WebStorage {
 
-  /**
-   * Creates a new storage service.
-   * @param platformId The identifier of the current platform.
-   */
-  constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
-    const isBrowser = isPlatformBrowser(platformId);
-    super(isBrowser ? window.localStorage : new MapBackend, isBrowser);
+  /** Creates a new storage service. */
+  constructor() {
+    super(localStorage);
   }
 }
 
@@ -163,12 +156,8 @@ export class LocalStorage extends WebStorage {
 @Injectable({providedIn: 'root'})
 export class SessionStorage extends WebStorage {
 
-  /**
-   * Creates a new storage service.
-   * @param platformId The identifier of the current platform.
-   */
-  constructor(@Inject(PLATFORM_ID) platformId: Object) { // eslint-disable-line @typescript-eslint/ban-types
-    const isBrowser = isPlatformBrowser(platformId);
-    super(isBrowser ? window.sessionStorage : new MapBackend, isBrowser);
+  /** Creates a new storage service. */
+  constructor() {
+    super(sessionStorage);
   }
 }
