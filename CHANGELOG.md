@@ -1,6 +1,8 @@
 # Changelog
 
 ## Version [3.5.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.4.0...v3.5.0)
+- Dropped support for [Angular Universal](https://angular.io/guide/universal).
+- Updated the package dependencies.
 
 ## Version [3.4.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.3.0...v3.4.0)
 - Added support for the [storage events](https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event).
