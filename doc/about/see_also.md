@@ -6,5 +6,5 @@
 - [Submit an issue](https://github.com/cedx/ngx-webstorage.js/issues)
 
 ## Testing
-- [Continuous integration](https://travis-ci.com/cedx/ngx-webstorage.js)
+- [Continuous integration](https://github.com/cedx/ngx-webstorage.js/actions)
 - [Code coverage](https://coveralls.io/github/cedx/ngx-webstorage.js)
