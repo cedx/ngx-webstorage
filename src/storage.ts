@@ -28,8 +28,11 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   /** The keys of this storage. */
   get keys(): string[] {
     const keys = [];
-    for (let i = 0; i < this.length; i++) keys.push(this._backend.key(i)!);
-    return keys;
+    for (let i = 0; true; i++) {
+      const key = this._backend.key(i);
+      if (key === null) return keys;
+      keys.push(key);
+    }
   }
 
   /** The number of entries in this storage. */
