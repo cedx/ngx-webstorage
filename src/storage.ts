@@ -140,6 +140,16 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   setObject(key: string, value: any): this {
     return this.set(key, JSON.stringify(value));
   }
+
+  /**
+   * Converts this object to a map in JSON format.
+   * @return The map in JSON format corresponding to this object.
+   */
+  toJSON(): Record<string, any> {
+    const map: Record<string, any> = {};
+    for (const [key, value] of this) map[key] = value;
+    return map;
+  }
 }
 
 /** Provides access to the local storage. */

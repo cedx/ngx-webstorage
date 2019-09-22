@@ -227,4 +227,17 @@ describe('WebStorage', () => {
       expect(sessionStorage.getItem('foo')).toEqual('{"key":"value"}');
     });
   });
+
+  describe('#toJSON()', () => {
+    it('should return an empty map for an empty storage', () => {
+      const storage = new SessionStorage;
+      expect(storage.toJSON()).toEqual({});
+    });
+
+    it('should return a non-empty map for a non-empty storage', () => {
+      const storage = new SessionStorage;
+      storage.set('foo', 'bar').set('baz', 'qux');
+      expect(storage.toJSON()).toEqual({baz: 'qux', foo: 'bar'});
+    });
+  });
 });
