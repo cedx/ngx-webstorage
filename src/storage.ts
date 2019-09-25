@@ -8,7 +8,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /** The subscription to the storage events. */
-  private readonly _subscription: Subscription|undefined;
+  private readonly _subscription: Subscription;
 
   /**
    * Creates a new storage service.
@@ -100,7 +100,8 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
   /** Method invoked before the service is destroyed. */
   ngOnDestroy(): void {
-    if (this._subscription) this._subscription.unsubscribe();
+    this._subscription.unsubscribe();
+    this._onChanges.complete();
   }
 
   /**
