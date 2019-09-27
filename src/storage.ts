@@ -5,32 +5,20 @@ import {fromEvent, Observable, Subject, Subscription} from 'rxjs';
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
   /** The handler of "changes" events. */
-  private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
-
-  /** The subscription to the storage events. */
-  private readonly _subscription?: Subscription;
+  protected readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /**
    * Creates a new storage service.
    * @param _backend The underlying data store.
    */
-  protected constructor(private _backend: Storage) {
-    if (this instanceof LocalStorage) this._subscription = fromEvent(window, 'storage').subscribe(event => {
-      const storageEvent = event as StorageEvent;
-      if (storageEvent.key != null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
-        typeof storageEvent.oldValue == 'string' ? storageEvent.oldValue : undefined,
-        typeof storageEvent.newValue == 'string' ? storageEvent.newValue : undefined,
-        false
-      )});
-    });
-  }
+  protected constructor(private _backend: Storage) {}
 
   /** The keys of this storage. */
   get keys(): string[] {
     const keys = [];
-    for (let i = 0; true; i++) {
+    for (let i = 0; true; i++) { // eslint-disable-line no-constant-condition
       const key = this._backend.key(i);
-      if (key === null) return keys;
+      if (key == null) return keys;
       keys.push(key);
     }
   }
@@ -69,7 +57,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    */
   get(key: string, defaultValue?: string): string|undefined {
     const value = this._backend.getItem(key);
-    return typeof value == 'string' ? value : defaultValue;
+    return value != null ? value : defaultValue;
   }
 
   /**
@@ -81,7 +69,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   getObject(key: string, defaultValue?: any): any {
     try {
       const value = this.get(key);
-      return typeof value == 'string' ? JSON.parse(value) : defaultValue;
+      return value != undefined ? JSON.parse(value) : defaultValue;
     }
 
     catch (err) {
@@ -100,7 +88,6 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
   /** Method invoked before the service is destroyed. */
   ngOnDestroy(): void {
-    if (this._subscription) this._subscription.unsubscribe();
     this._onChanges.complete();
   }
 
@@ -158,11 +145,28 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
 /** Provides access to the local storage. */
 @Injectable({providedIn: 'root'})
-export class LocalStorage extends WebStorage {
+export class LocalStorage extends WebStorage implements OnDestroy {
+
+  /** The subscription to the storage events. */
+  private readonly _subscription: Subscription;
 
   /** Creates a new storage service. */
   constructor() {
     super(localStorage);
+    this._subscription = fromEvent(window, 'storage').subscribe(event => {
+      const storageEvent = event as StorageEvent;
+      if (storageEvent.key != null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
+        storageEvent.oldValue != null ? storageEvent.oldValue : undefined,
+        storageEvent.newValue != null ? storageEvent.newValue : undefined,
+        false
+      )});
+    });
+  }
+
+  /** Method invoked before the service is destroyed. */
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
+    super.ngOnDestroy();
   }
 }
 
