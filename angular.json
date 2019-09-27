@@ -22,7 +22,7 @@
             "codeCoverage": true,
             "main": "test/main.ts",
             "tsConfig": "test/tsconfig.json",
-            "karmaConfig": "etc/karma.js"
+            "karmaConfig": "etc/karma.cjs"
           }
         }
       }
