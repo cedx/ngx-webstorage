@@ -8,14 +8,14 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /** The subscription to the storage events. */
-  private readonly _subscription: Subscription;
+  private readonly _subscription?: Subscription;
 
   /**
    * Creates a new storage service.
    * @param _backend The underlying data store.
    */
   protected constructor(private _backend: Storage) {
-    this._subscription = fromEvent(window, 'storage').subscribe(event => {
+    if (this instanceof LocalStorage) this._subscription = fromEvent(window, 'storage').subscribe(event => {
       const storageEvent = event as StorageEvent;
       if (storageEvent.key != null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
         typeof storageEvent.oldValue == 'string' ? storageEvent.oldValue : undefined,
@@ -100,7 +100,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
   /** Method invoked before the service is destroyed. */
   ngOnDestroy(): void {
-    this._subscription.unsubscribe();
+    if (this._subscription) this._subscription.unsubscribe();
     this._onChanges.complete();
   }
 
