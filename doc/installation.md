@@ -5,16 +5,16 @@ Before installing **Web Storage for Angular**, you need to make sure you have [N
 and [npm](https://www.npmjs.com), the Node.js package manager, up and running.
 
 !!! warning
-    Web Storage for Angular requires Node.js >= **12.10.0**.
+    Web Storage for Angular requires Node.js >= **12.11.0**.
 
 You can verify if you're already good to go with the following commands:
 
 ```shell
 node --version
-# v12.10.0
+# v12.11.0
 
 npm --version
-# 6.10.3
+# 6.11.3
 ```
 
 !!! info
