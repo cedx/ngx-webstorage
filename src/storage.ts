@@ -153,11 +153,10 @@ export class LocalStorage extends WebStorage implements OnDestroy {
   /** Creates a new storage service. */
   constructor() {
     super(localStorage);
-    this._subscription = fromEvent(window, 'storage').subscribe(event => {
-      const storageEvent = event as StorageEvent;
-      if (storageEvent.key != null) this._onChanges.next({[storageEvent.key]: new SimpleChange(
-        storageEvent.oldValue != null ? storageEvent.oldValue : undefined,
-        storageEvent.newValue != null ? storageEvent.newValue : undefined,
+    this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
+      if (event.key != null) this._onChanges.next({[event.key]: new SimpleChange(
+        event.oldValue != null ? event.oldValue : undefined,
+        event.newValue != null ? event.newValue : undefined,
         false
       )});
     });
