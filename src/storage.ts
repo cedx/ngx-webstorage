@@ -145,7 +145,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
 /** Provides access to the local storage. */
 @Injectable({providedIn: 'root'})
-export class LocalStorage extends WebStorage implements OnDestroy {
+export class LocalStorage extends WebStorage {
 
   /** The subscription to the storage events. */
   private readonly _subscription: Subscription;
