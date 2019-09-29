@@ -7,11 +7,20 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   /** The handler of "changes" events. */
   protected readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
+  /** The subscription to the storage events. */
+  private readonly _subscription: Subscription;
+
   /**
    * Creates a new storage service.
    * @param _backend The underlying data store.
    */
-  protected constructor(private _backend: Storage) {}
+  protected constructor(private _backend: Storage) {
+    this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
+      if (event.key == null || event.storageArea != _backend) return;
+      const change = new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false);
+      this._onChanges.next({[event.key]: change});
+    });
+  }
 
   /** The keys of this storage. */
   get keys(): string[] {
@@ -88,6 +97,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
   /** Method invoked before the service is destroyed. */
   ngOnDestroy(): void {
+    this._subscription.unsubscribe();
     this._onChanges.complete();
   }
 
@@ -147,23 +157,9 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends WebStorage {
 
-  /** The subscription to the storage events. */
-  private readonly _subscription: Subscription;
-
   /** Creates a new storage service. */
   constructor() {
     super(localStorage);
-    this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
-      if (event.key == null) return;
-      const change = new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false);
-      this._onChanges.next({[event.key]: change});
-    });
-  }
-
-  /** Method invoked before the service is destroyed. */
-  ngOnDestroy(): void {
-    this._subscription.unsubscribe();
-    super.ngOnDestroy();
   }
 }
 
