@@ -59,21 +59,8 @@ export class MyComponent implements OnInit {
 The values contained in the `currentValue` and `previousValue` properties of the `SimpleChange` instances are the raw storage values. If you use the `WebStorage#setObject()` method to store a value, you will get the serialized string value, not the original value passed to the method:
 
 ```typescript
-import {Component, OnInit} from '@angular/core';
-import {SessionStorage} from '@cedx/ngx-webstorage';
-
-@Component({
-  selector: 'my-component',
-  templateUrl: './my-component.html'
-})
-export class MyComponent implements OnInit {
-  constructor(private _storage: SessionStorage) {}
-  
-  ngOnInit(): void {
-    this._storage.setObject('foo', {bar: 'baz'});
-    // Prints: {key: "foo", current: "{\"bar\": \"baz\"}", previous: undefined}
-  }
-}
+this._storage.setObject('foo', {bar: 'baz'});
+// Prints: {key: "foo", current: "{\"bar\": \"baz\"}", previous: undefined}
 ```
 
 !!! info
