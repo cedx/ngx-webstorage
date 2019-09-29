@@ -17,8 +17,9 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   protected constructor(private _backend: Storage) {
     this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
       if (event.key == null || event.storageArea != _backend) return;
-      const change = new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false);
-      this._onChanges.next({[event.key]: change});
+      this._onChanges.next({
+        [event.key]: new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false)
+      });
     });
   }
 
