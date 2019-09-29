@@ -1,6 +1,5 @@
 import {Injectable, OnDestroy, SimpleChange, SimpleChanges} from '@angular/core';
 import {fromEvent, Observable, Subject, Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
@@ -16,12 +15,11 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    * @param _backend The underlying data store.
    */
   protected constructor(private _backend: Storage) {
-    this._subscription = fromEvent<StorageEvent>(window, 'storage')
-      .pipe(filter(event => event.key != null && event.storageArea == _backend))
-      .subscribe(event => {
-        const change = new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false);
-        this._onChanges.next({[event.key!]: change});
-      });
+    this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
+      if (event.key == null || event.storageArea != _backend) return;
+      const change = new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false);
+      this._onChanges.next({[event.key]: change});
+    });
   }
 
   /** The keys of this storage. */
