@@ -9,6 +9,7 @@
     "strictMetadataEmit": true
   },
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "importHelpers": true,
     "module": "esnext"
