@@ -16,11 +16,11 @@ export class MyComponent implements OnInit {
   constructor(private _storage: LocalStorage) {}
   
   ngOnInit(): void {
-    this._storage.get('foo');
-    this._storage.getObject('bar');
-
     this._storage.set('foo', 'bar');
-    this._storage.setObject('foo', {bar: 'baz'});
+    console.log(this._storage.get('foo')); // "bar"
+
+    this._storage.setObject('foo', {baz: 'qux'});
+    console.log(this._storage.getObject('foo')); // {baz: "qux"}
   }
 }
 ```
