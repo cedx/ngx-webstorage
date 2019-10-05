@@ -143,13 +143,16 @@ describe('WebStorage', () => {
     it('should properly get the storage entries', () => {
       const storage = new SessionStorage;
       expect(storage.get('foo')).toBeUndefined();
-      expect(storage.get('foo', '123')).toEqual('123');
 
       sessionStorage.setItem('foo', 'bar');
       expect(storage.get('foo')).toEqual('bar');
 
       sessionStorage.setItem('foo', '123');
       expect(storage.get('foo')).toEqual('123');
+    });
+
+    it('should return the given default value if the key is not found', () => {
+      expect(new SessionStorage().get('bar', '123')).toEqual('123');
     });
   });
 
