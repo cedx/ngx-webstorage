@@ -3,7 +3,6 @@
     "experimentalDecorators": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "strict": true,
     "target": "esnext"
   }
