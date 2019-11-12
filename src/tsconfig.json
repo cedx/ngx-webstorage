@@ -12,6 +12,6 @@
     "baseUrl": ".",
     "declaration": true,
     "importHelpers": true,
-    "module": "esnext"
+    "module": "es2015"
   }
 }
