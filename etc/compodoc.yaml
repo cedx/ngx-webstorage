@@ -1,0 +1,4 @@
+disablePrivate: true
+name: Web Storage for Angular
+output: doc/api
+tsconfig: src/tsconfig.json

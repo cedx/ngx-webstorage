@@ -37,16 +37,16 @@ task('coverage', () => _exec('coveralls', ['var/lcov.info']));
 /** Builds the documentation. */
 task('doc', async () => {
   for (const path of ['CHANGELOG.md', 'LICENSE.md']) await copyFile(path, `doc/about/${path.toLowerCase()}`);
-  await _exec('compodoc', ['--config=etc/compodoc.json']);
+  await _exec('compodoc', ['--config=etc/compodoc.yaml']);
   await _exec('mkdocs', ['build', '--config-file=doc/mkdocs.yaml']);
   return del(['doc/about/changelog.md', 'doc/about/license.md', 'web/mkdocs.yaml']);
 });
 
 /** Fixes the coding standards issues. */
-task('fix', () => _exec('eslint', ['--config=etc/eslint.json', '--fix', ...sources]));
+task('fix', () => _exec('eslint', ['--config=etc/eslint.yaml', '--fix', ...sources]));
 
 /** Performs the static analysis of source code. */
-task('lint', () => _exec('eslint', ['--config=etc/eslint.json', ...sources]));
+task('lint', () => _exec('eslint', ['--config=etc/eslint.yaml', ...sources]));
 
 /** Publishes the package to the registry. */
 task('publish:github', () => _exec('npm', ['publish', '--registry=https://npm.pkg.github.com']));
