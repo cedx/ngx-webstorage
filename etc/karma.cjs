@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-module.exports = config => config.set({
+module.exports = configuration => configuration.set({
   basePath: '..',
   browsers: ['ChromeHeadless'],
   client: {clearContext: false},
