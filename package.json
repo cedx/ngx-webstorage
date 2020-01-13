@@ -28,8 +28,6 @@
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@cedx/coveralls": "^9.3.0",
     "@compodoc/compodoc": "^1.1.11",
-    "@types/gulp": "^4.0.6",
-    "@types/gulp-replace": "^0.0.31",
     "@types/jasmine": "^3.5.0",
     "@types/node": "^13.1.6",
     "@typescript-eslint/eslint-plugin": "^2.16.0",
