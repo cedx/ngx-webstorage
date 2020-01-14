@@ -26,7 +26,7 @@
     "@angular/language-service": "^8.2.14",
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
-    "@cedx/coveralls": "^9.3.0",
+    "@cedx/coveralls": "^9.4.0",
     "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "^3.5.0",
     "@types/node": "^13.1.6",
