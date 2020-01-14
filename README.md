@@ -11,6 +11,7 @@
 
 ## Development
 - [Git repository](https://github.com/cedx/ngx-webstorage.js)
+- [GitHub package](https://github.com/cedx/ngx-webstorage.js/packages)
 - [npm package](https://www.npmjs.com/package/@cedx/ngx-webstorage)
 - [Submit an issue](https://github.com/cedx/ngx-webstorage.js/issues)
 
