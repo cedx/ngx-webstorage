@@ -1,4 +1,7 @@
+customFavicon: doc/img/favicon.ico
 disablePrivate: true
+gaSite: auto
+hideGenerator: true
 name: Web Storage for Angular
 output: doc/api
 tsconfig: src/tsconfig.json
