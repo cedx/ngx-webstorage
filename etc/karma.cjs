@@ -1,7 +1,9 @@
 module.exports = configuration => configuration.set({
   basePath: '..',
   browsers: ['ChromeHeadless'],
-  client: {clearContext: false},
+  client: {
+    clearContext: false
+  },
   coverageIstanbulReporter: {
     dir: 'var',
     fixWebpackSourcePaths: true,
