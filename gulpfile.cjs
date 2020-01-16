@@ -5,20 +5,15 @@ const {dest, parallel, series, src, task, watch} = require('gulp');
 const replace = require('gulp-replace');
 const {delimiter, normalize, resolve} = require('path');
 
-/**
- * The file patterns providing the list of source files.
- * @type {string[]}
- */
-const sources = ['src/**/*.ts', 'test/**/*.ts'];
-
 // Initialize the build system.
 const _path = 'PATH' in process.env ? process.env.PATH : '';
 const _vendor = resolve('node_modules/.bin');
 if (!_path.includes(_vendor)) process.env.PATH = `${_vendor}${delimiter}${_path}`;
 
 /** Builds the project. */
+const esmRegex = /(export|import)\s+(.+)\s+from\s+'(\.[^']+)'/g;
 task('build:fix', () => src(['build/esm2015/**/*.js'])
-  .pipe(replace(/(export|import)\s+(.+)\s+from\s+'(\.[^']+)'/g, "$1 $2 from '$3.js'"))
+  .pipe(replace(esmRegex, "$1 $2 from '$3.js'"))
   .pipe(replace(/\/\/# sourceMappingURL=.*$/g, ''))
   .pipe(dest('lib')));
 
@@ -36,16 +31,16 @@ task('coverage', () => _exec('coveralls', ['var/lcov.info']));
 /** Builds the documentation. */
 task('doc', async () => {
   for (const path of ['CHANGELOG.md', 'LICENSE.md']) await promises.copyFile(path, `doc/about/${path.toLowerCase()}`);
-  await _exec('compodoc', ['--config=etc/compodoc.yaml']);
+  await _exec('compodoc', ['--config=etc/compodoc.yaml', `--gaID=${process.env.GOOGLE_ANALYTICS_ID}`]);
   await _exec('mkdocs', ['build', '--config-file=doc/mkdocs.yaml']);
   return del(['doc/about/changelog.md', 'doc/about/license.md', 'web/mkdocs.yaml']);
 });
 
 /** Fixes the coding standards issues. */
-task('fix', () => _exec('eslint', ['--config=etc/eslint.yaml', '--fix', ...sources]));
+task('fix', () => _exec('eslint', ['--config=etc/eslint.yaml', '--fix', 'src/**/*.ts', 'test/**/*.ts']));
 
 /** Performs the static analysis of source code. */
-task('lint', () => _exec('eslint', ['--config=etc/eslint.yaml', ...sources]));
+task('lint', () => _exec('eslint', ['--config=etc/eslint.yaml', 'src/**/*.ts', 'test/**/*.ts']));
 
 /** Publishes the package to the registry. */
 task('publish:github', () => _exec('npm', ['publish', '--registry=https://npm.pkg.github.com']));
