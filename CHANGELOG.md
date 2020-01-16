@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [3.6.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.5.0...v3.6.0)
+- Updated the package dependencies.
+
 ## Version [3.5.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.4.0...v3.5.0)
 - Dropped support for [Angular Universal](https://angular.io/guide/universal).
 - Updated the package dependencies.
