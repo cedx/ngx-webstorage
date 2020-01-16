@@ -9,7 +9,7 @@
   "repository": "github:cedx/ngx-webstorage.js",
   "type": "module",
   "types": "lib/index.d.ts",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "author": {
     "email": "cedric@belin.io",
     "name": "Cédric Belin",
