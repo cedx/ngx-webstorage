@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [3.7.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.6.0...v3.7.0)
+- Added the `putIfAbsent()` and `putObjectIfAbsent()` methods to the `WebStorage` class.
+- Updated the package dependencies.
+
 ## Version [3.6.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.5.0...v3.6.0)
 - Updated the package dependencies.
 
