@@ -191,6 +191,38 @@ describe('WebStorage', () => {
     });
   });
 
+  describe('#putIfAbsent()', () => {
+    it('should add a new entry if it does not exist', () => {
+      const storage = new SessionStorage;
+      expect(sessionStorage.getItem('foo')).toBeNull();
+      expect(storage.putIfAbsent('foo', () => 'bar')).toEqual('bar');
+      expect(sessionStorage.getItem('foo')).toEqual('bar');
+    });
+
+    it('should not add a new entry if it already exists', () => {
+      const storage = new SessionStorage;
+      sessionStorage.setItem('foo', 'bar');
+      expect(storage.putIfAbsent('foo', () => 'qux')).toEqual('bar');
+      expect(sessionStorage.getItem('foo')).toEqual('bar');
+    });
+  });
+
+  describe('#putObjectIfAbsent()', () => {
+    it('should add a new entry if it does not exist', () => {
+      const storage = new SessionStorage;
+      expect(sessionStorage.getItem('foo')).toBeNull();
+      expect(storage.putObjectIfAbsent('foo', () => 123)).toEqual(123);
+      expect(sessionStorage.getItem('foo')).toEqual('123');
+    });
+
+    it('should not add a new entry if it already exists', () => {
+      const storage = new SessionStorage;
+      sessionStorage.setItem('foo', '123');
+      expect(storage.putObjectIfAbsent('foo', () => 456)).toEqual(123);
+      expect(sessionStorage.getItem('foo')).toEqual('123');
+    });
+  });
+
   describe('#remove()', () => {
     it('should properly remove the storage entries', () => {
       const storage = new SessionStorage;
