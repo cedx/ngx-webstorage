@@ -29,7 +29,7 @@
     "@cedx/coveralls": "^9.4.0",
     "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "^3.5.3",
-    "@types/node": "^13.7.0",
+    "@types/node": "^13.7.1",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "del": "^5.1.0",
