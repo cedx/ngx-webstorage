@@ -16,20 +16,20 @@
     "url": "https://belin.io"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.25",
-    "@angular-devkit/build-ng-packagr": "^0.803.25",
-    "@angular/cli": "^8.3.25",
-    "@angular/common": "^8.2.14",
-    "@angular/compiler": "^8.2.14",
-    "@angular/compiler-cli": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "@angular/language-service": "^8.2.14",
-    "@angular/platform-browser": "^8.2.14",
-    "@angular/platform-browser-dynamic": "^8.2.14",
+    "@angular-devkit/build-angular": "^0.900.2",
+    "@angular-devkit/build-ng-packagr": "^0.900.2",
+    "@angular/cli": "^9.0.2",
+    "@angular/common": "^9.0.1",
+    "@angular/compiler": "^9.0.1",
+    "@angular/compiler-cli": "^9.0.1",
+    "@angular/core": "^9.0.1",
+    "@angular/language-service": "^9.0.1",
+    "@angular/platform-browser": "^9.0.1",
+    "@angular/platform-browser-dynamic": "^9.0.1",
     "@cedx/coveralls": "^9.4.0",
     "@compodoc/compodoc": "^1.1.11",
-    "@types/jasmine": "^3.5.4",
-    "@types/node": "^13.7.1",
+    "@types/jasmine": "^3.5.5",
+    "@types/node": "^13.7.2",
     "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@typescript-eslint/parser": "^2.20.0",
     "del": "^5.1.0",
@@ -41,17 +41,16 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "^3.1.1",
-    "ng-packagr": "^5.7.1",
+    "ng-packagr": "^9.0.1",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
-    "typescript": "~3.5.3",
+    "typescript": "^3.7.5",
     "zone.js": "^0.10.2"
   },
   "engines": {
     "node": ">=12.16.0"
   },
   "files": [
-    "build/",
     "lib/"
   ],
   "funding": {
@@ -70,8 +69,8 @@
     "storage"
   ],
   "peerDependencies": {
-    "@angular/common": ">=8.2.0",
-    "@angular/core": ">=8.2.0",
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
     "rxjs": ">=6.5.0",
     "tslib": ">=1.10.0",
     "zone.js": ">=0.10.0"
