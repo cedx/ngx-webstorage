@@ -4,7 +4,7 @@ import {SessionStorage} from '../src/index';
 describe('WebStorage', () => {
   beforeEach(() => sessionStorage.clear());
 
-  describe('#keys', () => {
+  describe('.keys', () => {
     it('should return an empty array for an empty storage', () => {
       expect(new SessionStorage().keys.length).toEqual(0);
     });
@@ -20,7 +20,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#length', () => {
+  describe('.length', () => {
     it('should return zero for an empty storage', () => {
       expect(new SessionStorage().length).toEqual(0);
     });
@@ -32,7 +32,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#onChanges', () => {
+  describe('.onChanges', () => {
     it('should trigger an event when a value is added', done => {
       const storage = new SessionStorage;
       const subscription = storage.onChanges.subscribe(changes => {
@@ -99,7 +99,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#[Symbol.iterator]()', () => {
+  describe('.[Symbol.iterator]()', () => {
     it('should return a done iterator if storage is empty', () => {
       const storage = new SessionStorage;
       const iterator = storage[Symbol.iterator]();
@@ -127,7 +127,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#clear()', () => {
+  describe('.clear()', () => {
     it('should remove all storage entries', () => {
       const storage = new SessionStorage;
       sessionStorage.setItem('foo', 'bar');
@@ -139,7 +139,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#get()', () => {
+  describe('.get()', () => {
     it('should properly get the storage entries', () => {
       const storage = new SessionStorage;
       expect(storage.get('foo')).toBeUndefined();
@@ -156,7 +156,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#getObject()', () => {
+  describe('.getObject()', () => {
     it('should properly get the deserialized storage entries', () => {
       const storage = new SessionStorage;
       expect(storage.getObject('foo')).toBeUndefined();
@@ -178,7 +178,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#has()', () => {
+  describe('.has()', () => {
     it('should return `false` if the specified key is not contained', () => {
       expect(new SessionStorage().has('foo')).toBe(false);
     });
@@ -191,7 +191,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#putIfAbsent()', () => {
+  describe('.putIfAbsent()', () => {
     it('should add a new entry if it does not exist', () => {
       const storage = new SessionStorage;
       expect(sessionStorage.getItem('foo')).toBeNull();
@@ -207,7 +207,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#putObjectIfAbsent()', () => {
+  describe('.putObjectIfAbsent()', () => {
     it('should add a new entry if it does not exist', () => {
       const storage = new SessionStorage;
       expect(sessionStorage.getItem('foo')).toBeNull();
@@ -223,7 +223,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#remove()', () => {
+  describe('.remove()', () => {
     it('should properly remove the storage entries', () => {
       const storage = new SessionStorage;
       sessionStorage.setItem('foo', 'bar');
@@ -239,7 +239,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#set()', () => {
+  describe('.set()', () => {
     it('should properly set the storage entries', () => {
       const storage = new SessionStorage;
       expect(sessionStorage.getItem('foo')).toBeNull();
@@ -250,7 +250,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#setObject()', () => {
+  describe('.setObject()', () => {
     it('should properly serialize and set the storage entries', () => {
       const storage = new SessionStorage;
       expect(sessionStorage.getItem('foo')).toBeNull();
@@ -263,7 +263,7 @@ describe('WebStorage', () => {
     });
   });
 
-  describe('#toJSON()', () => {
+  describe('.toJSON()', () => {
     it('should return an empty map for an empty storage', () => {
       const storage = new SessionStorage;
       expect(storage.toJSON()).toEqual({});
