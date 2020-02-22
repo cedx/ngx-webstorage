@@ -27,7 +27,7 @@ export class MyComponent implements OnInit {
 
 Each class extends from the `WebStorage` abstract class that has the following API:
 
-## **#keys**: string[]
+## **keys**: string[]
 Returns the keys of the the associated storage:
 
 ```typescript
@@ -50,7 +50,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#length**: number
+## **length**: number
 Returns the number of entries in the associated storage:
 
 ```typescript
@@ -73,7 +73,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#clear**(): void
+## **clear**(): void
 Removes all entries from the associated storage:
 
 ```typescript
@@ -97,7 +97,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#get**(key: string, defaultValue?: string): string|undefined
+## **get**(key: string, defaultValue?: string): string|undefined
 Returns the value associated to the specified key:
 
 ```typescript
@@ -123,7 +123,7 @@ export class MyComponent implements OnInit {
 
 Returns `undefined` or the given default value if the key is not found.
 
-## **#getObject**(key: string, defaultValue?: any): any
+## **getObject**(key: string, defaultValue?: any): any
 Deserializes and returns the value associated to the specified key:
 
 ```typescript
@@ -152,7 +152,7 @@ export class MyComponent implements OnInit {
 
 Returns `undefined` or the given default value if the key is not found.
 
-## **#has**(key: string): boolean
+## **has**(key: string): boolean
 Returns a boolean value indicating whether the associated storage contains the specified key:
 
 ```typescript
@@ -175,7 +175,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#putIfAbsent**(key: string, ifAbsent: () => string): string
+## **putIfAbsent**(key: string, ifAbsent: () => string): string
 Looks up the value of the specified key, or add a new value if it isn't there.
 
 Returns the value associated to the key, if there is one. Otherwise calls `ifAbsent` to get a new value, associates the key to that value, and then returns the new value:
@@ -204,7 +204,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#putObjectIfAbsent**(key: string, ifAbsent: () => any): any
+## **putObjectIfAbsent**(key: string, ifAbsent: () => any): any
 Looks up the value of the specified key, or add a new value if it isn't there.
 
 Returns the deserialized value associated to the key, if there is one. Otherwise calls `ifAbsent` to get a new value, serializes and associates the key to that value, and then returns the new value:
@@ -236,7 +236,7 @@ export class MyComponent implements OnInit {
 !!! info
     The value is serialized using the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method, and deserialized using the [`JSON.parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) method.
 
-## **#remove**(key: string): string|undefined
+## **remove**(key: string): string|undefined
 Removes the value associated to the specified key:
 
 ```typescript
@@ -262,7 +262,7 @@ export class MyComponent implements OnInit {
 
 Returns the value associated with the specified key before it was removed.
 
-## **#set**(key: string, value: string): this
+## **set**(key: string, value: string): this
 Associates a given value to the specified key:
 
 ```typescript
@@ -285,7 +285,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-## **#setObject**(key: string, value: any): this
+## **setObject**(key: string, value: any): this
 Serializes and associates a given value to the specified key:
 
 ```typescript

@@ -55,7 +55,7 @@
 
 ## Version [1.2.0](https://github.com/cedx/ngx-webstorage.js/compare/v1.1.0...v1.2.0)
 - Added support for [Browserslist](http://browserl.ist) shared settings.
-- Added the [`#[Symbol.toStringTag]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property to the `Storage` class.
+- Added the [`[Symbol.toStringTag]`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) property to the `Storage` class.
 - Moved the [Angular](https://angular.io) and [RxJS](http://reactivex.io/rxjs) dependencies to peer ones.
 - Updated the package dependencies.
 
@@ -67,7 +67,7 @@
 - Updated the package dependencies.
 
 ## Version [0.7.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.6.0...v0.7.0)
-- Errors from `Storage#getObject()` method are silently discarded.
+- Errors from `Storage.getObject()` method are silently discarded.
 - Updated the package dependencies.
 
 ## Version [0.6.0](https://github.com/cedx/ngx-webstorage.js/compare/v0.5.1...v0.6.0)
@@ -92,7 +92,7 @@
 - Breaking change: removed the `LocalStorage` and `SessionStorage` classes.
 - Breaking change: removed the `WINDOW` injection token.
 - Breaking change: renamed the `DOMStorage` class to `Storage`.
-- Breaking change: renamed the `Storage#containsKey` method to `has`.
+- Breaking change: renamed the `Storage.containsKey()` method to `has`.
 - Added the `LocalStorage` and `SessionStorage` injection tokens.
 - Updated the package dependencies.
 
