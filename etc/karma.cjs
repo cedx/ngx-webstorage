@@ -1,4 +1,4 @@
-module.exports = configuration => configuration.set({
+module.exports = config => config.set({
   basePath: '..',
   browsers: ['ChromeHeadless'],
   client: {
