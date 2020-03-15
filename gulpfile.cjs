@@ -11,7 +11,7 @@ const _vendor = resolve('node_modules/.bin');
 if (!_path.includes(_vendor)) process.env.PATH = `${_vendor}${delimiter}${_path}`;
 
 /** Builds the project. */
-const esmRegex = /(export|import)\s+(.+)\s+from\s+'(\.[^']+)'/g;
+const esmRegex = /(export|import)\s+(.+)\s+from\s+'(\.((?!.*\.js)[^']+))'/g;
 task('build:fix', () => src(['build/esm2015/**/*.js'])
   .pipe(replace(esmRegex, "$1 $2 from '$3.js'"))
   .pipe(replace(/\/\/# sourceMappingURL=.*$/g, ''))
