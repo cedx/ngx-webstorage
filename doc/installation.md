@@ -36,6 +36,3 @@ Now in your [TypeScript](https://www.typescriptlang.org) code, you can use:
 ```typescript
 import {LocalStorage, SessionStorage} from '@cedx/ngx-webstorage';
 ```
-
-### 3. Use it
-See the [usage information](usage/api.md).
