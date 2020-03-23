@@ -4,20 +4,24 @@ import {fromEvent, Observable, Subject, Subscription} from 'rxjs';
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
+  /** The underlying data store. */
+  readonly #backend: Storage;
+
   /** The handler of "changes" events. */
-  protected readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
+  readonly #onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
   /** The subscription to the storage events. */
-  private readonly _subscription: Subscription;
+  readonly #subscription: Subscription;
 
   /**
    * Creates a new storage service.
-   * @param _backend The underlying data store.
+   * @param backend The underlying data store.
    */
-  protected constructor(private _backend: Storage) {
-    this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
-      if (event.key == null || event.storageArea != _backend) return;
-      this._onChanges.next({
+  protected constructor(backend: Storage) {
+    this.#backend = backend;
+    this.#subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
+      if (event.key == null || event.storageArea != this.#backend) return;
+      this.#onChanges.next({
         [event.key]: new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false)
       });
     });
@@ -27,7 +31,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   get keys(): string[] {
     const keys = [];
     for (let i = 0; true; i++) { // eslint-disable-line no-constant-condition
-      const key = this._backend.key(i);
+      const key = this.#backend.key(i);
       if (key == null) return keys;
       keys.push(key);
     }
@@ -35,12 +39,12 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
   /** The number of entries in this storage. */
   get length(): number {
-    return this._backend.length;
+    return this.#backend.length;
   }
 
   /** The stream of "changes" events. */
   get onChanges(): Observable<SimpleChanges> {
-    return this._onChanges.asObservable();
+    return this.#onChanges.asObservable();
   }
 
   /**
@@ -55,8 +59,8 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   clear(): void {
     const changes: SimpleChanges = {};
     for (const [key, value] of this) changes[key] = new SimpleChange(value, undefined, false);
-    this._backend.clear();
-    this._onChanges.next(changes);
+    this.#backend.clear();
+    this.#onChanges.next(changes);
   }
 
   /**
@@ -66,7 +70,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    * @return The value of the storage item, or the default value if the item is not found.
    */
   get(key: string, defaultValue?: string): string|undefined {
-    const value = this._backend.getItem(key);
+    const value = this.#backend.getItem(key);
     return value != null ? value : defaultValue;
   }
 
@@ -98,8 +102,8 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
   /** Method invoked before the service is destroyed. */
   ngOnDestroy(): void {
-    this._subscription.unsubscribe();
-    this._onChanges.complete();
+    this.#subscription.unsubscribe();
+    this.#onChanges.complete();
   }
 
   /**
@@ -139,8 +143,8 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    */
   remove(key: string): string|undefined {
     const previousValue = this.get(key);
-    this._backend.removeItem(key);
-    this._onChanges.next({
+    this.#backend.removeItem(key);
+    this.#onChanges.next({
       [key]: new SimpleChange(previousValue, undefined, false)
     });
 
@@ -155,8 +159,8 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    */
   set(key: string, value: string): this {
     const previousValue = this.get(key);
-    this._backend.setItem(key, value);
-    this._onChanges.next({
+    this.#backend.setItem(key, value);
+    this.#onChanges.next({
       [key]: new SimpleChange(previousValue, value, false)
     });
 
