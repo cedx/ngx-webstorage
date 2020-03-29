@@ -19,7 +19,7 @@ describe('WebStorage', () => {
 
   describe('.length', () => {
     it('should return zero for an empty storage', () => {
-      expect(new SessionStorage()).to.be.empty;
+      expect(new SessionStorage()).to.have.lengthOf(0);
     });
 
     it('should return the number of entries for a non-empty storage', () => {
@@ -129,7 +129,7 @@ describe('WebStorage', () => {
       const storage = new SessionStorage;
       expect(storage).to.have.lengthOf(2);
       storage.clear();
-      expect(storage).to.be.empty;
+      expect(storage).to.have.lengthOf(0);
     });
   });
 
