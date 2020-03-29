@@ -18,7 +18,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
     this._subscription = fromEvent<StorageEvent>(window, 'storage').subscribe(event => {
       if (event.key == null || event.storageArea != this._backend) return;
       this._onChanges.next({
-        [event.key]: new SimpleChange(event.oldValue != null ? event.oldValue : undefined, event.newValue != null ? event.newValue : undefined, false)
+        [event.key]: new SimpleChange(event.oldValue ?? undefined, event.newValue ?? undefined, false)
       });
     });
   }
@@ -66,8 +66,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
    * @return The value of the storage item, or the default value if the item is not found.
    */
   get(key: string, defaultValue?: string): string|undefined {
-    const value = this._backend.getItem(key);
-    return value != null ? value : defaultValue;
+    return this._backend.getItem(key) ?? defaultValue;
   }
 
   /**
