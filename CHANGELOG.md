@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [4.0.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.7.0...v4.0.0)
+- Breaking change: upgraded [Angular](https://angular.io) to version 9.
+- Ported the tests to [Mocha](https://mochajs.org) and [Chai](https://www.chaijs.com).
+- Updated the package dependencies.
+
 ## Version [3.7.0](https://github.com/cedx/ngx-webstorage.js/compare/v3.6.0...v3.7.0)
 - Added the `putIfAbsent()` and `putObjectIfAbsent()` methods to the `WebStorage` class.
 - Updated the package dependencies.
