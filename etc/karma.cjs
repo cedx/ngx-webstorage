@@ -9,7 +9,7 @@ module.exports = config => config.set({
     fixWebpackSourcePaths: true,
     reports: ['lcovonly']
   },
-  frameworks: ['jasmine', '@angular-devkit/build-angular'],
+  frameworks: ['mocha', 'chai', '@angular-devkit/build-angular'],
   plugins: ['karma-*', '@angular-devkit/build-angular/plugins/karma'],
   reporters: ['progress'],
   singleRun: true
