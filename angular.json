@@ -21,8 +21,8 @@
           "options": {
             "codeCoverage": true,
             "main": "test/main.ts",
-            "tsConfig": "test/tsconfig.json",
-            "karmaConfig": "etc/karma.cjs"
+            "karmaConfig": "etc/karma.cjs",
+            "tsConfig": "test/tsconfig.json"
           }
         }
       }

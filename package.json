@@ -4,7 +4,6 @@
   "homepage": "https://dev.belin.io/ngx-webstorage.js",
   "license": "MIT",
   "main": "lib/index.js",
-  "metadata": "lib/ngx-webstorage.metadata.json",
   "name": "@cedx/ngx-webstorage",
   "repository": "github:cedx/ngx-webstorage.js",
   "type": "module",
@@ -16,8 +15,8 @@
     "url": "https://belin.io"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.900.7",
-    "@angular-devkit/build-ng-packagr": "^0.900.7",
+    "@angular-devkit/build-angular": "^0.901.0",
+    "@angular-devkit/build-ng-packagr": "^0.901.0",
     "@angular/cli": "^9.1.0",
     "@angular/common": "^9.1.0",
     "@angular/compiler": "^9.1.0",
