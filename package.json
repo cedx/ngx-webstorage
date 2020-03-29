@@ -29,7 +29,7 @@
     "@cedx/coveralls": "^9.4.0",
     "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "^3.5.10",
-    "@types/node": "^13.9.4",
+    "@types/node": "^13.9.5",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "del": "^5.1.0",
@@ -69,8 +69,8 @@
     "storage"
   ],
   "peerDependencies": {
-    "@angular/common": ">=9.0.0",
-    "@angular/core": ">=9.0.0",
+    "@angular/common": ">=9.1.0",
+    "@angular/core": ">=9.1.0",
     "rxjs": ">=6.5.0",
     "tslib": ">=1.11.0",
     "zone.js": ">=0.10.0"
