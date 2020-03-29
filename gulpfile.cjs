@@ -19,7 +19,7 @@ task('build:fix', () => src(['build/esm2015/**/*.js'])
 
 task('build:clean', () => del('build'));
 task('build:js', () => _exec('ng', ['build']));
-task('build:types', () => src(['build/**/*.d.ts', 'build/*.metadata.json']).pipe(dest('lib')));
+task('build:types', () => src('build/**/*.d.ts').pipe(dest('lib')));
 task('build', series('build:js', parallel('build:fix', 'build:types'), 'build:clean'));
 
 /** Deletes all generated files and reset any saved state. */
