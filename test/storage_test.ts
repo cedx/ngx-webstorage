@@ -267,7 +267,7 @@ describe('WebStorage', () => {
     it('should return a non-empty map for a non-empty storage', () => {
       const storage = new SessionStorage;
       storage.set('foo', 'bar').set('baz', 'qux');
-      expect(storage.toJSON()).to.be.an('object').that.deep.equal({baz: 'qux', foo: 'bar'});
+      expect(storage.toJSON()).to.deep.equal({baz: 'qux', foo: 'bar'});
     });
   });
 });
