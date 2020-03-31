@@ -63,5 +63,10 @@ this._storage.setObject('foo', {bar: 'baz'});
 // Prints: {key: "foo", current: "{\"bar\": \"baz\"}", previous: undefined}
 ```
 
+## Changes in the context of another document
+The `WebStorage` parent class supports the global [storage events](https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event).
+
+When a change is made to the storage area within the context of another document (i.e. in another tab or `<iframe>`), a `changes` event is triggered to notify the modification.
+
 !!! info
-    [Storage events](https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event) are partially supported: except when the [`Storage.clear()`](https://developer.mozilla.org/en-US/docs/Web/API/Storage/clear) method is called, whenever the Web storage is changed in the context of another document, a `changes` event is triggered.
+    You do not need to explicitly subscribe to the global [storage events](https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event): this is automatically done when instantiating the service. The subscription is canceled when the service is destroyed (i.e. its `ngOnDestroy()` method is called).
