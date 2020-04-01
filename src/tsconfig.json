@@ -8,15 +8,13 @@
     "strictMetadataEmit": true
   },
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "..",
     "declaration": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "incremental": true,
     "module": "es2015",
     "moduleResolution": "node",
     "strict": true,
-    "target": "es2019",
-    "tsBuildInfoFile": "../var/tsbuild.json"
+    "target": "es2019"
   }
 }
