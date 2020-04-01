@@ -11,7 +11,7 @@ extends:
   - plugin:@typescript-eslint/recommended-requiring-type-checking
 parser: '@typescript-eslint/parser'
 parserOptions:
-  project: test/tsconfig.json
+  project: src/tsconfig.json
   sourceType: module
   warnOnUnsupportedTypeScriptVersion: false
 plugins: ['@typescript-eslint']

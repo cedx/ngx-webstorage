@@ -37,10 +37,10 @@ task('doc', async () => {
 });
 
 /** Fixes the coding standards issues. */
-task('fix', () => _exec('eslint', ['--config=etc/eslint.yaml', '--fix', 'src/**/*.ts', 'test/**/*.ts']));
+task('fix', () => _exec('eslint', ['--config=etc/eslint.yaml', '--fix', 'src/**/*.ts']));
 
 /** Performs the static analysis of source code. */
-task('lint', () => _exec('eslint', ['--config=etc/eslint.yaml', 'src/**/*.ts', 'test/**/*.ts']));
+task('lint', () => _exec('eslint', ['--config=etc/eslint.yaml', 'src/**/*.ts']));
 
 /** Publishes the package to the registry. */
 task('publish:github', () => _exec('npm', ['publish', '--registry=https://npm.pkg.github.com']));
