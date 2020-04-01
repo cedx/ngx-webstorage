@@ -81,7 +81,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
       return value != undefined ? JSON.parse(value) : defaultValue;
     }
 
-    catch (err) {
+    catch {
       return defaultValue;
     }
   }
