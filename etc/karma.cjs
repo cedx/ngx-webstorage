@@ -1,6 +1,6 @@
 module.exports = config => config.set({
   basePath: '..',
-  browsers: ['ChromeHeadless'],
+  browsers: ['FirefoxHeadless'],
   client: {
     clearContext: false
   },
