@@ -22,7 +22,8 @@ export class MyComponent implements OnInit {
 }
 ```
 
-The changes are expressed as a map of [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where an `undefined` property indicates an absence of value:
+The changes are expressed as a [`SimpleChanges`](https://angular.io/api/core/SimpleChanges) object.
+The values of this object are [`SimpleChange`](https://angular.io/api/core/SimpleChange) instances, where an `undefined` property indicates an absence of value:
 
 ```typescript
 import {Component, OnInit, SimpleChanges} from '@angular/core';
