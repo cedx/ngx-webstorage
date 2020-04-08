@@ -2,10 +2,10 @@
   "include": ["**/*.ts"],
   "angularCompilerOptions": {
     "enableResourceInlining": true,
-    "fullTemplateTypeCheck": true,
     "skipTemplateCodegen": true,
     "strictInjectionParameters": true,
-    "strictMetadataEmit": true
+    "strictMetadataEmit": true,
+    "strictTemplates": true
   },
   "compilerOptions": {
     "baseUrl": "..",
