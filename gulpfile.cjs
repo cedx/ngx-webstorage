@@ -33,7 +33,7 @@ task('doc', async () => {
   for (const path of ['CHANGELOG.md', 'LICENSE.md']) await promises.copyFile(path, `doc/about/${path.toLowerCase()}`);
   await _exec('compodoc', ['--config=etc/compodoc.yaml', `--gaID=${process.env.GOOGLE_ANALYTICS_ID}`]);
   await _exec('mkdocs', ['build', '--config-file=doc/mkdocs.yaml']);
-  return del(['doc/about/changelog.md', 'doc/about/license.md', 'web/mkdocs.yaml']);
+  return del(['doc/about/changelog.md', 'doc/about/license.md', 'www/mkdocs.yaml']);
 });
 
 /** Fixes the coding standards issues. */
