@@ -1,5 +1,5 @@
 # Web Storage <small>for Angular</small>
-![Runtime](https://img.shields.io/npm/dependency-version/@cedx/ngx-webstorage/peer/@angular/core.svg) ![Release](https://img.shields.io/npm/v/@cedx/ngx-webstorage.svg) ![License](https://img.shields.io/npm/l/@cedx/ngx-webstorage.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-webstorage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-webstorage.js.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-webstorage.js/badge.svg) ![Build](https://github.com/cedx/ngx-webstorage.js/workflows/build/badge.svg)
+![Runtime](https://img.shields.io/npm/dependency-version/@cedx/ngx-webstorage/peer/@angular/core.svg) ![Release](https://img.shields.io/npm/v/@cedx/ngx-webstorage.svg) ![License](https://img.shields.io/npm/l/@cedx/ngx-webstorage.svg) ![Downloads](https://img.shields.io/npm/dt/@cedx/ngx-webstorage.svg) ![Dependencies](https://david-dm.org/cedx/ngx-webstorage.svg) ![Coverage](https://coveralls.io/repos/github/cedx/ngx-webstorage/badge.svg) ![Build](https://github.com/cedx/ngx-webstorage/workflows/build/badge.svg)
 
 [Angular](https://angular.io) services for interacting with the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage),
 implemented in [TypeScript](https://www.typescriptlang.org).

@@ -1,5 +1,7 @@
-path: blob/master
+---
+path: src/branch/master
 source: src/storage.ts
+---
 
 # Programming interface
 This package provides two services dedicated to the Web Storage: the `LocalStorage` and `SessionStorage` classes.
