@@ -1,6 +1,6 @@
 import {SessionStorage} from '../src/index';
 
-/** Tests the features of the [[WebStorage]] class. */
+/** Tests the features of the `WebStorage` class. */
 describe('WebStorage', () => {
   const {expect} = chai;
   beforeEach(() => sessionStorage.clear());

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from '@cedx/ngx-webstorage';
 
-/** A component that demonstrates the usage of the [[LocalStorage]] service. */
+/** A component that demonstrates the usage of the `LocalStorage` service. */
 @Component({
   selector: 'my-component',
   templateUrl: './my-component.html'
