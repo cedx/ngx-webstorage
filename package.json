@@ -49,7 +49,7 @@
     "zone.js": "^0.10.3"
   },
   "engines": {
-    "node": ">=14.1.0"
+    "node": ">=14.2.0"
   },
   "files": [
     "lib/"
@@ -81,9 +81,8 @@
     "url": "https://git.belin.io/cedx/ngx-webstorage.git"
   },
   "scripts": {
-    "coverage": "gulp coverage",
-    "prepack": "gulp",
-    "start": "gulp watch",
-    "test": "gulp test"
+    "coverage": "coveralls var/lcov.info",
+    "prepack": "pwsh tool/build.ps1",
+    "test": "ng test"
   }
 }
