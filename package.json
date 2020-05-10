@@ -33,8 +33,6 @@
     "@typescript-eslint/parser": "^2.31.0",
     "chai": "^4.2.0",
     "eslint": "^7.0.0",
-    "gulp": "^4.0.2",
-    "gulp-replace": "^1.0.0",
     "karma": "^5.0.5",
     "karma-chai": "^0.1.0",
     "karma-coverage-istanbul-reporter": "^3.0.2",
