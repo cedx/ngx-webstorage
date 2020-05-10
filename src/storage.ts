@@ -26,7 +26,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
   /** The keys of this storage. */
   get keys(): string[] {
     const keys = [];
-    for (let i = 0; true; i++) { // eslint-disable-line no-constant-condition
+    for (let i = 0; ; i++) { // eslint-disable-line no-constant-condition
       const key = this._backend.key(i);
       if (key == null) return keys;
       keys.push(key);
