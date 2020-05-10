@@ -2,7 +2,7 @@
 Set-StrictMode -Version Latest
 Set-Location (Split-Path $PSScriptRoot)
 
-node_modules/.bin/ng.ps1 build
+node_modules/.bin/ng build
 if (-not (Test-Path lib)) { New-Item lib -ItemType Directory | Out-Null }
 
 $regex = "(export|import)\s+(.+)\s+from\s+'((?!.*\.js)\.[^']+)'"
