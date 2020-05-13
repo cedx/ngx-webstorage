@@ -1,6 +1,7 @@
 {
   "include": ["**/*.ts"],
   "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true,
     "enableResourceInlining": true,
     "skipTemplateCodegen": true,
     "strictInjectionParameters": true,
