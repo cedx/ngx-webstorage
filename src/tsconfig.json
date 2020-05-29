@@ -1,21 +1,21 @@
 {
-  "include": ["**/*.ts"],
-  "angularCompilerOptions": {
-    "disableTypeScriptVersionCheck": true,
-    "enableResourceInlining": true,
-    "skipTemplateCodegen": true,
-    "strictInjectionParameters": true,
-    "strictMetadataEmit": true,
-    "strictTemplates": true
-  },
-  "compilerOptions": {
-    "baseUrl": "..",
-    "declaration": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "strict": true,
-    "target": "es2019"
-  }
+	"include": ["**/*.ts"],
+	"angularCompilerOptions": {
+		"disableTypeScriptVersionCheck": true,
+		"enableResourceInlining": true,
+		"skipTemplateCodegen": true,
+		"strictInjectionParameters": true,
+		"strictMetadataEmit": true,
+		"strictTemplates": true
+	},
+	"compilerOptions": {
+		"baseUrl": "..",
+		"declaration": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"module": "es2015",
+		"moduleResolution": "node",
+		"strict": true,
+		"target": "es2019"
+	}
 }

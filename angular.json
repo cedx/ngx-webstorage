@@ -1,31 +1,31 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "defaultProject": "ngx-webstorage",
-  "version": 1,
-  "projects": {
-    "ngx-webstorage": {
-      "prefix": "ngx",
-      "projectType": "library",
-      "root": "",
-      "sourceRoot": "src",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "project": "ng-package.json",
-            "tsConfig": "src/tsconfig.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "codeCoverage": true,
-            "main": "test/main.ts",
-            "karmaConfig": "etc/karma.cjs",
-            "tsConfig": "test/tsconfig.json"
-          }
-        }
-      }
-    }
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"defaultProject": "ngx-webstorage",
+	"version": 1,
+	"projects": {
+		"ngx-webstorage": {
+			"prefix": "ngx",
+			"projectType": "library",
+			"root": "",
+			"sourceRoot": "src",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"project": "ng-package.json",
+						"tsConfig": "src/tsconfig.json"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"codeCoverage": true,
+						"main": "test/main.ts",
+						"karmaConfig": "etc/karma.cjs",
+						"tsConfig": "test/tsconfig.json"
+					}
+				}
+			}
+		}
+	}
 }

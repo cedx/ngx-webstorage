@@ -8,7 +8,3 @@
 ## Testing
 - [Continuous integration](https://github.com/cedx/ngx-webstorage/actions)
 - [Code coverage](https://coveralls.io/github/cedx/ngx-webstorage)
-
-## Other implementations
-- Dart: [Web Storage for Dart](https://docs.belin.io/webstorage.dart)
-- JavaScript: [Web Storage for JS](https://docs.belin.io/webstorage.js)

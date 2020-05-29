@@ -1,7 +1,7 @@
 {
-  "extends": "../src/tsconfig.json",
-  "include": ["**/*.ts"],
-  "compilerOptions": {
-    "sourceMap": true
-  }
+	"extends": "../src/tsconfig.json",
+	"include": ["**/*.ts"],
+	"compilerOptions": {
+		"sourceMap": true
+	}
 }
