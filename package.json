@@ -7,7 +7,7 @@
 	"name": "@cedx/ngx-webstorage",
 	"type": "module",
 	"types": "./lib/index.d.ts",
-	"version": "4.1.0",
+	"version": "5.0.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
@@ -46,7 +46,7 @@
 		"zone.js": "^0.10.3"
 	},
 	"engines": {
-		"node": ">=14.3.0"
+		"node": ">=14.0.0"
 	},
 	"files": [
 		"lib/"
