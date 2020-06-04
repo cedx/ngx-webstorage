@@ -160,10 +160,10 @@ describe("WebStorage", () => {
 			sessionStorage.setItem("foo", "123");
 			expect(storage.getObject("foo")).to.equal(123);
 
-			sessionStorage.setItem("foo", ""bar"");
+			sessionStorage.setItem("foo", '"bar"');
 			expect(storage.getObject("foo")).to.equal("bar");
 
-			sessionStorage.setItem("foo", "{"key": "value"}");
+			sessionStorage.setItem("foo", '{"key": "value"}');
 			expect(storage.getObject("foo")).to.be.an("object").that.deep.equal({key: "value"});
 		});
 
@@ -252,9 +252,9 @@ describe("WebStorage", () => {
 			storage.setObject("foo", 123);
 			expect(sessionStorage.getItem("foo")).to.equal("123");
 			storage.setObject("foo", "bar");
-			expect(sessionStorage.getItem("foo")).to.equal(""bar"");
+			expect(sessionStorage.getItem("foo")).to.equal('"bar"');
 			storage.setObject("foo", {key: "value"});
-			expect(sessionStorage.getItem("foo")).to.equal("{"key":"value"}");
+			expect(sessionStorage.getItem("foo")).to.equal('{"key":"value"}');
 		});
 	});
 
