@@ -17,10 +17,10 @@ export class MyComponent implements OnInit {
 		this._storage.set("foo", "bar");
 		this._storage.set("anotherKey", "anotherValue");
 
-		for (const entry of this._storage) {
-			console.log(entry);
-			// Round 1: ["foo", "bar"]
-			// Round 2: ["anotherKey", "anotherValue"]
+		for (const [key, value] of this._storage) {
+			console.log(`${key} => ${value}`);
+			// Round 1: "foo => bar"
+			// Round 2: "anotherKey => anotherValue"
 		}
 	}
 }

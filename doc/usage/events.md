@@ -1,7 +1,7 @@
 # Events
 Every time one or several values are changed (added, removed or updated) through the `LocalStorage` or `SessionStorage` class, a `changes` event is triggered.
 
-This event is exposed as an [Observable](https://angular.io/guide/observables), you can subscribe to it using the `onChanges` property:
+This event is exposed as an [Observable](https://angular.io/guide/observables), you can subscribe to it using the `onChange` property:
 
 ``` typescript
 import {Component, OnInit, SimpleChanges} from "@angular/core";
@@ -15,7 +15,7 @@ export class MyComponent implements OnInit {
 	constructor(private _storage: LocalStorage) {}
 	
 	ngOnInit(): void {
-		this._storage.onChanges.subscribe((changes: SimpleChanges) => {
+		this._storage.onChange.subscribe((changes: SimpleChanges) => {
 			for (const [key, value] of Object.entries(changes)) console.log(`${key}: ${JSON.stringify(value)}`);
 		});
 	}
@@ -37,11 +37,11 @@ export class MyComponent implements OnInit {
 	constructor(private _storage: LocalStorage) {}
 	
 	ngOnInit(): void {
-		this._storage.onChanges.subscribe((changes: SimpleChanges) => {
+		this._storage.onChange.subscribe((changes: SimpleChanges) => {
 			for (const [key, change] of Object.entries(changes)) console.log({
 				key,
-				current: change.currentValue,
-				previous: change.previousValue
+				current: change.newValue,
+				previous: change.oldValue
 			});
 		});
 
@@ -57,7 +57,7 @@ export class MyComponent implements OnInit {
 }
 ```
 
-The values contained in the `currentValue` and `previousValue` properties of the `SimpleChange` instances are the raw storage values. If you use the `WebStorage.setObject()` method to store a value, you will get the serialized string value, not the original value passed to the method:
+The values contained in the `newValue` and `oldValue` properties of the `SimpleChange` instances are the raw storage values. If you use the `WebStorage.setObject()` method to store a value, you will get the serialized string value, not the original value passed to the method:
 
 ``` typescript
 this._storage.setObject("foo", {bar: "baz"});
