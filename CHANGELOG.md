@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [5.0.0](https://git.belin.io/cedx/ngx-webstorage/compare/v4.1.0...v5.0.0)
+- Breaking change: renamed the `onChanges` event stream to `onChange`.
+- Breaking change: replaced the map of `SimpleChange` instances by the native `StorageEvent` instance.
+
 ## Version [4.1.0](https://git.belin.io/cedx/ngx-webstorage/compare/v4.0.0...v4.1.0)
 - Dropped support for [GitHub Packages](https://github.com/features/packages).
 - Raised the [Node.js](https://nodejs.org) constraint.
