@@ -29,13 +29,13 @@ describe("WebStorage", () => {
 		});
 	});
 
-	describe(".onChanges", () => {
+	describe(".onChange", () => {
 		it("should trigger an event when a value is added", done => {
 			const storage = new SessionStorage;
-			const subscription = storage.onChange.subscribe(changes => {
-				expect(Object.keys(changes)).to.have.members(["foo"]);
-				expect(changes.foo.currentValue).to.equal("bar");
-				expect(changes.foo.previousValue).to.be.undefined;
+			const subscription = storage.onChange.subscribe(event => {
+				expect(event.key).to.equal("foo");
+				expect(event.oldValue).to.be.null;
+				expect(event.newValue).to.equal("bar");
 				done();
 			}, done);
 
@@ -47,10 +47,10 @@ describe("WebStorage", () => {
 			const storage = new SessionStorage;
 			sessionStorage.setItem("foo", "bar");
 
-			const subscription = storage.onChange.subscribe(changes => {
-				expect(Object.keys(changes)).to.have.members(["foo"]);
-				expect(changes.foo.currentValue).to.equal("baz");
-				expect(changes.foo.previousValue).to.equal("bar");
+			const subscription = storage.onChange.subscribe(event => {
+				expect(event.key).to.equal("foo");
+				expect(event.oldValue).to.equal("bar");
+				expect(event.newValue).to.equal("baz");
 				done();
 			}, done);
 
@@ -62,10 +62,10 @@ describe("WebStorage", () => {
 			const storage = new SessionStorage;
 			sessionStorage.setItem("foo", "bar");
 
-			const subscription = storage.onChange.subscribe(changes => {
-				expect(Object.keys(changes)).to.have.members(["foo"]);
-				expect(changes.foo.currentValue).to.be.undefined;
-				expect(changes.foo.previousValue).to.equal("bar");
+			const subscription = storage.onChange.subscribe(event => {
+				expect(event.key).to.equal("foo");
+				expect(event.oldValue).to.equal("bar");
+				expect(event.newValue).to.be.null;
 				done();
 			}, done);
 
@@ -78,12 +78,10 @@ describe("WebStorage", () => {
 			sessionStorage.setItem("foo", "bar");
 			sessionStorage.setItem("bar", "baz");
 
-			const subscription = storage.onChange.subscribe(changes => {
-				expect(Object.keys(changes)).to.have.ordered.members(["foo", "bar"]);
-				expect(changes.foo.currentValue).to.be.undefined;
-				expect(changes.foo.previousValue).to.equal("bar");
-				expect(changes.bar.currentValue).to.be.undefined;
-				expect(changes.bar.previousValue).to.equal("baz");
+			const subscription = storage.onChange.subscribe(event => {
+				expect(event.key).to.be.null;
+				expect(event.oldValue).to.be.null;
+				expect(event.newValue).to.be.null;
 				done();
 			}, done);
 

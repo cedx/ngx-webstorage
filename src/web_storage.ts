@@ -1,11 +1,11 @@
-import {OnDestroy, SimpleChange, SimpleChanges} from "@angular/core";
+import {OnDestroy} from "@angular/core";
 import {fromEvent, Observable, Subject, Subscription} from "rxjs";
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
 	/** The handler of "change" events. */
-	private readonly _onChange: Subject<SimpleChanges> = new Subject<SimpleChanges>();
+	private readonly _onChange: Subject<StorageEvent> = new Subject<StorageEvent>();
 
 	/** The subscription to the storage events. */
 	private readonly _subscription: Subscription;
@@ -16,10 +16,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 */
 	protected constructor(private readonly _backend: Storage) {
 		this._subscription = fromEvent<StorageEvent>(window, "storage").subscribe(event => {
-			if (event.key == null || event.storageArea != this._backend) return;
-			this._onChange.next({
-				[event.key]: new SimpleChange(event.oldValue ?? undefined, event.newValue ?? undefined, false)
-			});
+			if (event.storageArea == this._backend) this._emit(event.key, event.oldValue ?? undefined, event.newValue ?? undefined, event.url);
 		});
 	}
 
@@ -39,7 +36,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	}
 
 	/** The stream of "change" events. */
-	get onChange(): Observable<SimpleChanges> {
+	get onChange(): Observable<StorageEvent> {
 		return this._onChange.asObservable();
 	}
 
@@ -47,16 +44,14 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 * Returns a new iterator that allows iterating the entries of this storage.
 	 * @return An iterator for the entries of this storage.
 	 */
-	*[Symbol.iterator](): IterableIterator<[string, string|undefined]> {
-		for (const key of this.keys) yield [key, this.get(key)];
+	*[Symbol.iterator](): IterableIterator<[string, string]> {
+		for (const key of this.keys) yield [key, this.get(key)!];
 	}
 
 	/** Removes all entries from this storage. */
 	clear(): void {
-		const changes: SimpleChanges = {};
-		for (const [key, value] of this) changes[key] = new SimpleChange(value, undefined, false);
 		this._backend.clear();
-		this._onChange.next(changes);
+		this._emit(null);
 	}
 
 	/**
@@ -77,8 +72,8 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 */
 	getObject(key: string, defaultValue?: any): any {
 		try {
-			const value = this.get(key);
-			return value != undefined ? JSON.parse(value) : defaultValue;
+			const value = this._backend.getItem(key);
+			return value != null ? JSON.parse(value) : defaultValue;
 		}
 
 		catch {
@@ -92,7 +87,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 * @return `true` if this storage contains the specified key, otherwise `false`.
 	 */
 	has(key: string): boolean {
-		return this.keys.includes(key);
+		return this._backend.getItem(key) != null;
 	}
 
 	/** Method invoked before the service is destroyed. */
@@ -137,13 +132,10 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 * @return The value associated with the specified key before it was removed.
 	 */
 	remove(key: string): string|undefined {
-		const previousValue = this.get(key);
+		const oldValue = this.get(key);
 		this._backend.removeItem(key);
-		this._onChange.next({
-			[key]: new SimpleChange(previousValue, undefined, false)
-		});
-
-		return previousValue;
+		this._emit(key, oldValue);
+		return oldValue;
 	}
 
 	/**
@@ -153,12 +145,9 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 * @return This instance.
 	 */
 	set(key: string, value: string): this {
-		const previousValue = this.get(key);
+		const oldValue = this.get(key);
 		this._backend.setItem(key, value);
-		this._onChange.next({
-			[key]: new SimpleChange(previousValue, value, false)
-		});
-
+		this._emit(key, oldValue, value);
 		return this;
 	}
 
@@ -176,9 +165,22 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 * Converts this object to a map in JSON format.
 	 * @return The map in JSON format corresponding to this object.
 	 */
-	toJSON(): Record<string, any> {
-		const map: Record<string, any> = {};
-		for (const [key, value] of this) map[key] = value ?? null;
+	toJSON(): Record<string, string> {
+		const map: Record<string, string> = {};
+		for (const [key, value] of this) map[key] = value;
 		return map;
+	}
+
+	/**
+	 * Emits a new storage event.
+	 */
+	private _emit(key: string|null, oldValue?: string, newValue?: string, url?: string): void {
+		this._onChange.next(new StorageEvent("change", {
+			key,
+			newValue,
+			oldValue,
+			storageArea: this._backend,
+			url: url ?? location.href
+		}));
 	}
 }
