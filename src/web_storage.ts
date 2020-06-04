@@ -16,7 +16,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	 */
 	protected constructor(private readonly _backend: Storage) {
 		this._subscription = fromEvent<StorageEvent>(window, "storage").subscribe(event => {
-			if (event.storageArea == this._backend) this._emit(event.key, event.oldValue ?? undefined, event.newValue ?? undefined, event.url);
+			if (event.storageArea == this._backend) this._emit(event.key, event.oldValue, event.newValue, event.url);
 		});
 	}
 
@@ -173,8 +173,12 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 
 	/**
 	 * Emits a new storage event.
+	 * @param key The key changed.
+	 * @param oldValue The original value of the key.
+	 * @param newValue The new value of the key.
+	 * @param url The URL of the document whose key changed.
 	 */
-	private _emit(key: string|null, oldValue?: string, newValue?: string, url?: string): void {
+	private _emit(key: string|null, oldValue?: string|null, newValue?: string|null, url?: string): void {
 		this._onChange.next(new StorageEvent("change", {
 			key,
 			newValue,

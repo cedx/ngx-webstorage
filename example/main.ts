@@ -35,6 +35,9 @@ export class MyComponent implements OnInit {
 		console.log(this._storage.getObject("baz")); // {qux: 123}
 		console.log(this._storage.getObject("baz").qux); // 123
 
+		// Iterate the storage.
+		for (const [key, value] of this._storage) console.log(`${key} => ${value}`);
+
 		// Delete from the storage.
 		this._storage.remove("foo");
 		console.log(this._storage.has("foo")); // false
