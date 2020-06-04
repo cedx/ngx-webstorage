@@ -1,11 +1,11 @@
-import {Injectable, OnDestroy, SimpleChange, SimpleChanges} from "@angular/core";
+import {OnDestroy, SimpleChange, SimpleChanges} from "@angular/core";
 import {fromEvent, Observable, Subject, Subscription} from "rxjs";
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
-	/** The handler of "changes" events. */
-	private readonly _onChanges: Subject<SimpleChanges> = new Subject<SimpleChanges>();
+	/** The handler of "change" events. */
+	private readonly _onChange: Subject<SimpleChanges> = new Subject<SimpleChanges>();
 
 	/** The subscription to the storage events. */
 	private readonly _subscription: Subscription;
@@ -17,7 +17,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	protected constructor(private readonly _backend: Storage) {
 		this._subscription = fromEvent<StorageEvent>(window, "storage").subscribe(event => {
 			if (event.key == null || event.storageArea != this._backend) return;
-			this._onChanges.next({
+			this._onChange.next({
 				[event.key]: new SimpleChange(event.oldValue ?? undefined, event.newValue ?? undefined, false)
 			});
 		});
@@ -38,9 +38,9 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 		return this._backend.length;
 	}
 
-	/** The stream of "changes" events. */
-	get onChanges(): Observable<SimpleChanges> {
-		return this._onChanges.asObservable();
+	/** The stream of "change" events. */
+	get onChange(): Observable<SimpleChanges> {
+		return this._onChange.asObservable();
 	}
 
 	/**
@@ -56,7 +56,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 		const changes: SimpleChanges = {};
 		for (const [key, value] of this) changes[key] = new SimpleChange(value, undefined, false);
 		this._backend.clear();
-		this._onChanges.next(changes);
+		this._onChange.next(changes);
 	}
 
 	/**
@@ -98,7 +98,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	/** Method invoked before the service is destroyed. */
 	ngOnDestroy(): void {
 		this._subscription.unsubscribe();
-		this._onChanges.complete();
+		this._onChange.complete();
 	}
 
 	/**
@@ -139,7 +139,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	remove(key: string): string|undefined {
 		const previousValue = this.get(key);
 		this._backend.removeItem(key);
-		this._onChanges.next({
+		this._onChange.next({
 			[key]: new SimpleChange(previousValue, undefined, false)
 		});
 
@@ -155,7 +155,7 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 	set(key: string, value: string): this {
 		const previousValue = this.get(key);
 		this._backend.setItem(key, value);
-		this._onChanges.next({
+		this._onChange.next({
 			[key]: new SimpleChange(previousValue, value, false)
 		});
 
@@ -180,25 +180,5 @@ export abstract class WebStorage implements Iterable<[string, string|undefined]>
 		const map: Record<string, any> = {};
 		for (const [key, value] of this) map[key] = value ?? null;
 		return map;
-	}
-}
-
-/** Provides access to the local storage. */
-@Injectable({providedIn: "root"})
-export class LocalStorage extends WebStorage {
-
-	/** Creates a new storage service. */
-	constructor() {
-		super(localStorage);
-	}
-}
-
-/** Provides access to the session storage. */
-@Injectable({providedIn: "root"})
-export class SessionStorage extends WebStorage {
-
-	/** Creates a new storage service. */
-	constructor() {
-		super(sessionStorage);
 	}
 }

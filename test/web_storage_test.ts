@@ -32,7 +32,7 @@ describe("WebStorage", () => {
 	describe(".onChanges", () => {
 		it("should trigger an event when a value is added", done => {
 			const storage = new SessionStorage;
-			const subscription = storage.onChanges.subscribe(changes => {
+			const subscription = storage.onChange.subscribe(changes => {
 				expect(Object.keys(changes)).to.have.members(["foo"]);
 				expect(changes.foo.currentValue).to.equal("bar");
 				expect(changes.foo.previousValue).to.be.undefined;
@@ -47,7 +47,7 @@ describe("WebStorage", () => {
 			const storage = new SessionStorage;
 			sessionStorage.setItem("foo", "bar");
 
-			const subscription = storage.onChanges.subscribe(changes => {
+			const subscription = storage.onChange.subscribe(changes => {
 				expect(Object.keys(changes)).to.have.members(["foo"]);
 				expect(changes.foo.currentValue).to.equal("baz");
 				expect(changes.foo.previousValue).to.equal("bar");
@@ -62,7 +62,7 @@ describe("WebStorage", () => {
 			const storage = new SessionStorage;
 			sessionStorage.setItem("foo", "bar");
 
-			const subscription = storage.onChanges.subscribe(changes => {
+			const subscription = storage.onChange.subscribe(changes => {
 				expect(Object.keys(changes)).to.have.members(["foo"]);
 				expect(changes.foo.currentValue).to.be.undefined;
 				expect(changes.foo.previousValue).to.equal("bar");
@@ -78,7 +78,7 @@ describe("WebStorage", () => {
 			sessionStorage.setItem("foo", "bar");
 			sessionStorage.setItem("bar", "baz");
 
-			const subscription = storage.onChanges.subscribe(changes => {
+			const subscription = storage.onChange.subscribe(changes => {
 				expect(Object.keys(changes)).to.have.ordered.members(["foo", "bar"]);
 				expect(changes.foo.currentValue).to.be.undefined;
 				expect(changes.foo.previousValue).to.equal("bar");
