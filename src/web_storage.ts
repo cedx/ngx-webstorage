@@ -1,7 +1,8 @@
-import {OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy} from "@angular/core";
 import {fromEvent, Observable, Subject, Subscription} from "rxjs";
 
 /** Provides access to the [Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). */
+@Injectable()
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
 	/** The handler of "change" events. */

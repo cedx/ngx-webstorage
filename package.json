@@ -77,11 +77,13 @@
 	},
 	"scripts": {
 		"build": "ng build",
+		"clean": "pwsh tool/clean.ps1",
 		"coverage": "coveralls var/lcov.info",
-		"doc": "compodoc --config=etc/compodoc.yaml",
+		"doc": "compodoc --config=etc/compodoc.yaml && mkdocs build --config-file=etc/mkdocs.yaml",
 		"lint": "eslint --config=etc/eslint.yaml src/**/*.ts",
-		"prepack": "pwsh tool/build.ps1",
+		"prepack": "npm run build && pwsh tool/dist.ps1",
 		"prepublishOnly": "npm run clean",
-		"test": "ng test"
+		"test": "ng test",
+		"watch": "pwsh tool/watch.ps1"
 	}
 }
