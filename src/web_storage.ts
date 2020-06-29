@@ -6,7 +6,7 @@ import {fromEvent, Observable, Subject, Subscription} from "rxjs";
 export abstract class WebStorage implements Iterable<[string, string|undefined]>, OnDestroy {
 
 	/** The handler of "change" events. */
-	private readonly _onChange: Subject<StorageEvent> = new Subject<StorageEvent>();
+	private readonly _onChange = new Subject<StorageEvent>();
 
 	/** The subscription to the storage events. */
 	private readonly _subscription: Subscription;
