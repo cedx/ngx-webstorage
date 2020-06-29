@@ -7,7 +7,7 @@
 	"name": "@cedx/ngx-webstorage",
 	"type": "module",
 	"types": "./lib/index.d.ts",
-	"version": "5.0.0",
+	"version": "6.0.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
@@ -66,8 +66,8 @@
 		"storage"
 	],
 	"peerDependencies": {
-		"@angular/common": ">=9.1.0",
-		"@angular/core": ">=9.1.0",
+		"@angular/common": ">=10.0.0",
+		"@angular/core": ">=10.0.0",
 		"rxjs": ">=6.5.0",
 		"zone.js": ">=0.10.0"
 	},

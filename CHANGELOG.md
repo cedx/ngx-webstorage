@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [6.0.0](https://git.belin.io/cedx/ngx-webstorage/compare/v5.0.0...v6.0.0)
+- Breaking change: upgraded [Angular](https://angular.io) to version 10.
+- Updated the package dependencies.
+
 ## Version [5.0.0](https://git.belin.io/cedx/ngx-webstorage/compare/v4.1.0...v5.0.0)
 - Breaking change: renamed the `onChanges` event stream to `onChange`.
 - Breaking change: replaced the map of `SimpleChange` instances by the native `StorageEvent` instance.
