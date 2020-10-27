@@ -43,9 +43,9 @@
 		"karma-mocha": "^2.0.1",
 		"mocha": "^8.2.0",
 		"ng-packagr": "^10.1.2",
-		"rxjs": "^6.6.0",
+		"rxjs": "^6.6.3",
 		"typescript": "^4.0.5",
-		"zone.js": "^0.11.2"
+		"zone.js": "^0.10.3"
 	},
 	"engines": {
 		"node": ">=14.15.0"
@@ -66,10 +66,10 @@
 		"storage"
 	],
 	"peerDependencies": {
-		"@angular/common": ">=10.0.0",
-		"@angular/core": ">=10.0.0",
-		"rxjs": ">=6.6.0",
-		"zone.js": ">=0.11.0"
+		"@angular/common": "^10.2.0",
+		"@angular/core": "^10.2.0",
+		"rxjs": "^6.6.0",
+		"zone.js": "^0.10.0"
 	},
 	"repository": {
 		"type": "git",
